@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title -->
+    <title>Teacher Dashboard || Verbum</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../assets/images/fav.png">
+
+    <!-- CSS HS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+</head>
+<style>
+    .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        /* 7 columns for the days of the week */
+        border-top: 1px solid #ccc;
+
+    }
+
+    .current-day {
+        color: rgb(7, 142, 187);
+        font-weight: bold;
+    }
+
+
+    .calendar-grid div {
+        padding: 5px;
+        text-align: center;
+        border: 1px solid #f0f0f0;
+
+    }
+
+    .calendar-grid .header-cell {
+        font-weight: bold;
+        background-color: #f0f0f0;
+        padding-right: 10px;
+    }
+
+    .calendar-grid .day-cell {
+        background-color: #ffffff;
+        padding-right: 10px;
+        /* White background for day cells */
+    }
+</style>
+
+<body>
+    <!-- ========== HEADER ========== -->
+    <header
+        class="sticky top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-[48] w-full bg-white text-sm lg:ps-[260px]">
+        <nav class="px-4 sm:px-6 flex basis-full items-center w-full mx-auto border-b py-2 border-gray-300 pb-3">
+            <div class="me-5 lg:me-0 lg:hidden">
+                <!-- Logo -->
+                <a class="flex-none rounded-md text-xl inline-block font-semibold focus:outline-none focus:opacity-80"
+                    href="dashboard.html" aria-label="Preline">
+                    <img src="../assets/images/logo.png" alt="logo">
+                </a>
+                <!-- End Logo -->
+            </div>
+
+            <div class="w-full flex items-center justify-end ms-auto md:justify-between gap-x-1 md:gap-x-3">
+                <div class="hidden md:block">
+                    <p class="font-medium text-sm text-gray-600">Home</p>
+                    <h3 class="text-md md:text-xl text-[#007BFF] font-bold">Dashboard</h3>
+                </div>
+
+
+                <div class="flex flex-row items-center justify-end gap-1">
+                    <div class="hidden md:block">
+                        <!-- Search Input -->
+                        <div class="relative">
+                            <div class="absolute inset-y-0 start-0 flex items-center pointer-events-none z-20 ps-3.5">
+                                <svg class="shrink-0 size-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24"
+                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="8" />
+                                    <path d="m21 21-4.3-4.3" />
+                                </svg>
+                            </div>
+                            <input type="text"
+                                class="py-2 ps-10 pe-16 block w-full bg-white border-gray-200 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                                placeholder="Search">
+                            <div
+                                class="hidden absolute inset-y-0 end-0 flex items-center pointer-events-none z-20 pe-1">
+                                <button type="button"
+                                    class="inline-flex shrink-0 justify-center items-center size-6 rounded-full text-gray-500 hover:text-blue-600 focus:outline-none focus:text-blue-600"
+                                    aria-label="Close">
+                                    <span class="sr-only">Close</span>
+                                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10" />
+                                        <path d="m15 9-6 6" />
+                                        <path d="m9 9 6 6" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- End Search Input -->
+                    </div>
+
+                    <!-- Dropdown -->
+                    <div class="hs-dropdown [--placement:bottom-right] pl-3 relative inline-flex">
+                        <button id="hs-dropdown-account" type="button"
+                            class="size-[38px] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 focus:outline-none disabled:opacity-50 disabled:pointer-events-none dark:text-white"
+                            aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+                            <img class="shrink-0 size-[38px] rounded-full" src="" alt="Avatar">
+                        </button>
+
+                        <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg mt-2 after:h-4 after:absolute after:-bottom-4 after:start-0 after:w-full before:h-4 before:absolute before:-top-4 before:start-0 before:w-full"
+                            role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-account">
+                            <div class="py-3 px-5 bg-gray-100 rounded-t-lg dark:bg-neutral-700">
+                                <p class="text-sm text-gray-500 dark:text-neutral-500">Signed in as</p>
+                                <p class="text-sm font-medium text-gray-800 dark:text-neutral-200"></p>
+                            </div>
+                            <div class="p-1.5 space-y-0.5">
+                                <a id="logout"
+                                    class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                    href="#">
+                                    Logout
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- ========== END HEADER ========== -->
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <div class="-mt-px">
+        <!-- Breadcrumb -->
+        <div class="sticky top-0 inset-x-0 z-20 bg-white border-y px-4 sm:px-6 lg:px-8 lg:hidden">
+            <div class="flex items-center py-2">
+                <!-- Navigation Toggle -->
+                <button type="button"
+                    class="size-8 flex justify-center items-center gap-x-2 border border-gray-200 text-gray-800 hover:text-gray-500 rounded-lg focus:outline-none focus:text-gray-500 disabled:opacity-50 disabled:pointer-events-none"
+                    aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-application-sidebar"
+                    aria-label="Toggle navigation" data-hs-overlay="#hs-application-sidebar">
+                    <span class="sr-only">Toggle</span>
+                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <rect width="18" height="18" x="3" y="3" rx="2" />
+                        <path d="M15 3v18" />
+                        <path d="m8 9 3 3-3 3" />
+                    </svg>
+                </button>
+                <!-- End Navigation Toggle -->
+
+                <!-- Breadcrumb -->
+                <ol class="ms-3 flex items-center whitespace-nowrap">
+                    <li class="flex items-center text-sm text-gray-800">
+
+                        <svg class="shrink-0 mx-3 overflow-visible size-2.5 text-gray-400" width="16" height="16"
+                            viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 1L10.6869 7.16086C10.8637 7.35239 10.8637 7.64761 10.6869 7.83914L5 14"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                    </li>
+                    <li class="text-sm font-semibold text-gray-800 truncate flex items-center" aria-current="page">
+                        Dashboard
+
+                        <svg class="shrink-0 mx-3 overflow-visible size-2.5 text-gray-400" width="16" height="16"
+                            viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 1L10.6869 7.16086C10.8637 7.35239 10.8637 7.64761 10.6869 7.83914L5 14"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                    </li>
+                    <!-- <li class="text-sm font-semibold text-gray-800 truncate" aria-current="page"></li>
+                    Students
+                    </li> -->
+                </ol>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="hs-application-sidebar" class="hs-overlay [--auto-close:lg]
+    hs-overlay-open:translate-x-0
+    -translate-x-full transition-all duration-300 transform
+    w-[260px] h-full
+    hidden
+    fixed inset-y-0 start-0 z-[50]
+    bg-white border-e border-gray-200
+    lg:block lg:translate-x-0 lg:end-auto lg:bottom-0" role="dialog" tabindex="-1" aria-label="Sidebar">
+        <div class="relative flex flex-col h-full max-h-full">
+            <div class="px-6 pt-4 border-b border-gray-300">
+                <!-- Logo -->
+                <a class="flex-none rounded-md text-xl inline-block font-semibold focus:outline-none focus:opacity-80"
+                    href="dashboard.html" aria-label="Preline">
+                    <img src="../assets/images/logo.png" alt="logo">
+                </a>
+                <!-- End Logo -->
+            </div>
+
+            <!-- Content -->
+            <div
+                class="h-full flex flex-col justify-between overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300">
+                <div>
+
+                    <!-- Nav Links -->
+                    <nav class="hs-accordion-group p-3 py-10 w-full flex flex-col flex-wrap"
+                        data-hs-accordion-always-open>
+                        <ul class="flex flex-col space-y-2">
+                            <li>
+                                <a class="flex items-center gap-x-3.5 font-medium py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 rounded-lg focus:outline-none"
+                                    href="index.html">
+                                    <i class="fa fa-home text-gray-500"></i>
+                                    <span>Home</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
+                                    href="class.html">
+                                    <i class="fa fa-chalkboard-user text-gray-500"></i>
+                                    <span>Class</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
+                                    href="attendance.html">
+                                    <i class="fa  fa-graduation-cap text-gray-500"></i>
+                                    Attendance
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="flex items-center gap-x-3.5 py-2 font-medium px-2.5 bg-blue-600 text-sm text-white rounded-lg focus:outline-none"
+                                    href="subjects.html">
+                                    <i class="fa fa-money-bill text-white"></i>
+                                    Subjects
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
+                                    href="#">
+                                    <i class="fa fa-pen text-gray-500"></i>
+                                    Assessment
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
+                                    href="#">
+                                    <i class="fa fa-sitemap text-gray-500"></i>
+                                    Results and Reports
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div class="mt-6">
+
+                    <hr class="mb-2" />
+                </div>
+            </div>
+        </div>
+        <!-- End Content -->
+    </div>
+
+    <!-- Content -->
+    <div class="w-full lg:ps-64">
+        <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
+            <!-- your content goes here ... -->
+
+            <!-- <div class="flex items-center justify-end">
+                <div>
+                    <button class='bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 font-medium text-sm rounded-lg'>Add Subject</button>
+                </div>
+            </div> -->
+
+            <div class="overflow-x-auto bg-white shadow-md rounded-lg p-4 mt-4">
+                <h3 class="font-semibold text-lg mb-2">Assigned Subjects</h3>
+                <table class="w-full border-collapse text-left text-sm text-gray-700 mt-3">
+                    <thead>
+                        <tr class="bg-gray-100">
+                            <th class="py-3 px-4 font-semibold">Subjects</th>
+                            <th class="py-3 px-4 font-semibold">Class</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="py-3 px-4">Mathematics</td>
+                            <td class="py-3 px-4">JSS1</td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="py-3 px-4">CRK</td>
+                            <td class="py-3 px-4">JSS3</td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="py-3 px-4">Civic Education</td>
+                            <td class="py-3 px-4">JJS2</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <script type="module" src="../assets/js/auth.js"></script>
+        <script type="module" src="../assets/js/index.js"></script>
+        <script type="module" src="../assets/js/index2.js"></script>
+        <script type="module" src="../assets/js/dashboard.js"></script>
+        <script src="../assets/js/logout.js"></script>
+        
+</body>
+
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Candidate Test || Verbum</title>
+
+    <link rel="shortcut icon" href="../assets/images/fav.png">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script> -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.min.js"></script> -->
+</head>
+
+<body class="bg-gradient-to-br from-gray-50 to-gray-100">
+    <div class="min-h-screen py-12 px-4 flex flex-col items-center justify-center">
+        <!-- Logo or Title Area -->
+        <div class="mb-8 text-center">
+            <h1 class="text-4xl font-bold text-gray-800 mb-2">Online Examination</h1>
+            <p class="text-gray-600">Please enter your credentials to begin the exam</p>
+        </div>
+
+        <!-- Main Entry Card -->
+        <div class="w-full max-w-md bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+            <!-- Form -->
+            <form class="space-y-6">
+                <!-- Username Field -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Username
+                    </label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 top-1 pl-3 flex items-center pointer-events-none">
+                            <i class="h-5 w-5 text-gray-400 fa fa-user"></i>
+                        </div>
+                        <input type="text"
+                            class="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 text-gray-900 placeholder-gray-400"
+                            placeholder="Enter your username">
+                    </div>
+                </div>
+
+                <!-- Exam Code Field -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Exam Code
+                    </label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 top-1 pl-3 flex items-center pointer-events-none">
+                            <i class="h-5 w-5 text-gray-400 fa fa-computer-mouse"></i>
+                        </div>
+                        <input type="text"
+                            class="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 text-gray-900 placeholder-gray-400"
+                            placeholder="Enter exam code">
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit"
+                    class="w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700 transition-colors duration-200 font-semibold shadow-lg shadow-blue-200 mt-8">
+                    Start Exam
+                </button>
+            </form>
+
+            <!-- Information Box -->
+            <div class="mt-8 p-4 bg-blue-50 rounded-xl border border-blue-100">
+                <div class="flex items-start space-x-3">
+                    <i data-lucide="info" class="h-5 w-5 text-blue-500 mt-0.5"></i>
+                    <div class="text-sm text-gray-600">
+                        <p class="font-semibold text-blue-600 mb-1">Important Instructions</p>
+                        <ul class="list-disc pl-4 space-y-1">
+                            <li>Make sure you have a stable internet connection</li>
+                            <li>Keep your exam code handy</li>
+                            <li>Do not refresh the page during exam</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Text -->
+        <div class="mt-8 text-center text-sm text-gray-500">
+            Need help? Contact your exam administrator or support
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

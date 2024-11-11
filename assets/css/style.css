@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: "Inter", sans-serif !important;
+}
+body {
+  /* background: #fff !important; */
+  background: #f5f9fc;
+}
+img {
+  max-width: 100%;
+}
+
+/* AUTH */
+.auth-bg {
+  background: url('../images/auth-bg.png') no-repeat;
+  background-size: cover;
+  background-position: center center;
+  width: 100%;
+  height: 100vh;
+}
+
+.form-box {
+  background: #ffffffe5;
+}
+
+/* Others */
+.transform-up {
+  transform: translateY(-60px);
+}
+
+/* CALENDAR */
+
