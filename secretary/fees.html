@@ -198,43 +198,63 @@ foreignObject {
                 <div>
 
                     <!-- Nav Links -->
-                    <nav class="hs-accordion-group p-3 py-10 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
+                    <nav class="hs-accordion-group p-3 py-10 w-full flex flex-col flex-wrap"
+                        data-hs-accordion-always-open>
                         <ul class="flex flex-col space-y-2">
                             <li>
-                                <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
-                                    href="/account /index.html">
+                                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                    href="dashboard.html">
                                     <i class="fa fa-home text-gray-500"></i>
                                     <span>Home</span>
                                 </a>
                             </li>
-                    
+
+                            <li>
+                                <a class="flex items-center gap-x-3.5 py-2 px-2.5 hover:bg-gray-100 text-sm text-gray-800 rounded-lg focus:outline-none"
+                                    href="students.html">
+                                    <i class="fa fa-graduation-cap text-gray-500"></i>
+                                    <span>Student Management</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
+                                    href="teachers.html">
+                                    <i class="fa fa-chalkboard-user text-gray-500"></i>
+                                    Teachers Management
+                                </a>
+                            </li>
+
                             <li>
                                 <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white rounded-lg bg-blue-600"
-                                    href="/account/fees.html">
+                                    href="fees.html">
                                     <i class="fa fa-money-bill text-white"></i>
                                     Fees and Payments
                                 </a>
                             </li>
+
                             <li>
-                                <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
-                                    href="../account/inventory.html">
-                                    <i class="fa fa-sitemap text-gray-500"></i>
-                                    Inventory Management
+                                <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
+                                    href="classes.html">
+                                    <i class="fa fa-pen text-gray-500"></i>
+                                    Class and Exam
                                 </a>
                             </li>
-                    
-                            <li>
-                                <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
-                                    href="./events.html">
-                                    <i class="fa fa-bell text-gray-500"></i>
-                                    Notification
+
+                            <!-- <li>
+                                <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
+                                    href="library.html">
+                                    <i class="fa fa-book text-gray-500"></i>
+                                    Library Management
                                 </a>
-                            </li>
+                            </li> -->
+
+
                             <li>
-                                <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
-                                    href="./voucher.html">
-                                    <i class="fa fa-sitemap text-gray-500"></i>
-                                    Voucher
+                                <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
+                                    href="events.html">
+                                    <i class="fa fa-school text-gray-500"></i>
+                                    Event Management
                                 </a>
                             </li>
                         </ul>
@@ -384,17 +404,6 @@ foreignObject {
 
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-[1fr, 30rem] gap-4">
-                    <div class="mt-4 px-3 py-8 bg-white border border-gray-300 rounded-lg">
-                        <select class="mb-4 px-2 py-1 bg-gray-50 border border-gray-300 rounded-lg w-[130px] text-sm">
-                            <option value="">This Month</option>
-                            <option value="">This Quarter</option>
-                            <option value="">This Term</option>
-                            <option value="">This Year</option>
-                        </select>
-                        <div id="schoolFees"></div>
-                    </div>
-                </div>
 
                 <div class="bg-white px-3 py-6 rounded-lg border border-gray-300 mt-4">
                     <div class="grid gap-4 grid-cols-1 md:grid-cols-2 items-end">
@@ -411,19 +420,14 @@ foreignObject {
                                 class="py-2 ps-10 pe-16 block w-full bg-gray-50 border-gray-200 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                                 placeholder="Search payment ...">
                         </div>
-
+<!-- 
                         <div class="flex items-center space-x-2 justify-start md:justify-end">
-                            <a href="javascript:void(0)" type="button"
-                                onclick="document.getElementById('class-creation-modal').classList.remove('hidden')"
-                                class="text-center text-sm px-3 py-2 rounded-md border border-blue-600 bg-blue-600 hover:bg-blue-700 hover:border-blue-700 duration-300">
-                                <span class="font-medium text-white text-sm">+ Add new payment</span>
-                            </a>
                             <a href="javascript:void(0)" type="button"
                                 onclick="document.getElementById('create-payment').classList.remove('hidden')"
                                 class="text-center text-sm px-3 py-2 rounded-md border border-blue-600 bg-blue-600 hover:bg-blue-700 hover:border-blue-700 duration-300">
                                 <span class="font-medium text-white text-sm">Create Payment</span>
                             </a>
-                        </div>
+                        </div> -->
                     </div>
 
                     <!-- Payment Table -->

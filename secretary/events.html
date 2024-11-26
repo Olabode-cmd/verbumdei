@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Title -->
-    <title>Inventory Management || Verbum</title>
+    <title>Events Management || Verbum</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="/assets/images/fav.png">
@@ -35,7 +35,7 @@
             <div class="w-full flex items-center justify-end ms-auto md:justify-between gap-x-1 md:gap-x-3">
                 <div class="hidden md:block">
                     <p class="font-medium text-sm text-gray-600">Home / Dashboard</p>
-                    <h3 class="text-md md:text-xl text-blue-600 font-bold">Inventory Management</h3>
+                    <h3 class="text-md md:text-xl text-blue-600 font-bold">Events Management</h3>
                 </div>
 
 
@@ -75,14 +75,14 @@
 
                     <!-- Dropdown -->
                     <div class="hs-dropdown [--placement:bottom-right] pl-3 relative inline-flex">
-                        <button id="hs-dropdown-" type="button"
+                        <button id="hs-dropdown-account" type="button"
                             class="size-[38px] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 focus:outline-none disabled:opacity-50 disabled:pointer-events-none dark:text-white"
                             aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
                             <img class="shrink-0 size-[38px] rounded-full" src="" alt="Avatar">
                         </button>
 
                         <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg mt-2 after:h-4 after:absolute after:-bottom-4 after:start-0 after:w-full before:h-4 before:absolute before:-top-4 before:start-0 before:w-full"
-                            role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-">
+                            role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-account">
                             <div class="py-3 px-5 bg-gray-100 rounded-t-lg dark:bg-neutral-700">
                                 <p class="text-sm text-gray-500 dark:text-neutral-500">Signed in as</p>
                                 <p class="text-sm font-medium text-gray-800 dark:text-neutral-200"></p>
@@ -143,7 +143,7 @@
                         </svg>
                     </li>
                     <li class="text-sm font-semibold text-gray-800 truncate" aria-current="page"></li>
-                    Inventory
+                    Events
                     </li>
                 </ol>
                 <!-- End Breadcrumb -->
@@ -165,7 +165,7 @@
             <div class="px-6 pt-4 border-b border-gray-300">
                 <!-- Logo -->
                 <a class="flex-none rounded-md text-xl inline-block font-semibold focus:outline-none focus:opacity-80"
-                    href="index.html" aria-label="Preline">
+                    href="dashboard.html" aria-label="Preline">
                     <img src="/assets/images/logo.png" alt="logo">
                 </a>
                 <!-- End Logo -->
@@ -177,43 +177,62 @@
                 <div>
 
                     <!-- Nav Links -->
-                    <nav class="hs-accordion-group p-3 py-10 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
+                    <nav class="hs-accordion-group p-3 py-10 w-full flex flex-col flex-wrap"
+                        data-hs-accordion-always-open>
                         <ul class="flex flex-col space-y-2">
                             <li>
                                 <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
-                                    href="/account/index.html">
+                                    href="dashboard.html">
                                     <i class="fa fa-home text-gray-500"></i>
                                     <span>Home</span>
                                 </a>
                             </li>
-                    
+
                             <li>
                                 <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
-                                    href="/account/fees.html">
+                                    href="students.html">
+                                    <i class="fa fa-graduation-cap text-gray-500"></i>
+                                    <span>Student Management</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
+                                    href="teachers.html">
+                                    <i class="fa fa-chalkboard-user text-gray-500"></i>
+                                    Teacher Management
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
+                                    href="fees.html">
                                     <i class="fa fa-money-bill text-gray-500"></i>
                                     Fees and Payments
                                 </a>
                             </li>
-                            <li>
-                                <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white rounded-lg bg-blue-600"
-                                    href="/account/inventory.html">
-                                    <i class="fa fa-sitemap text-white"></i>
-                                    Inventory Management
-                                </a>
-                            </li>
-                    
+
                             <li>
                                 <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
-                                    href="/account/events.html">
-                                    <i class="fa fa-bell text-gray-500"></i>
-                                    Notification
+                                    href="classes.html">
+                                    <i class="fa fa-pen text-gray-500"></i>
+                                    Class and Exam
                                 </a>
                             </li>
-                            <li>
+
+                            <!-- <li>
                                 <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
-                                    href="/account/voucher.html">
-                                    <i class="fa fa-sitemap text-gray-500"></i>
-                                    Voucher
+                                    href="library.html">
+                                    <i class="fa fa-book text-gray-500"></i>
+                                    Library Management
+                                </a>
+                            </li> -->
+
+                            <li>
+                                <a class="flex items-center gap-x-3.5 font-medium py-2 px-2.5 text-sm text-white rounded-lg bg-[#007BFF] focus:outline-none focus:bg-gray-100"
+                                    href="events.html">
+                                    <i class="fa fa-school text-white"></i>
+                                    Event Management
                                 </a>
                             </li>
                         </ul>
@@ -250,16 +269,16 @@
                         placeholder="Search events list...">
                 </div>
 
-                <div class="flex items-center space-x-2">
+                <div>
                     <button type="button"
-                        class="inline-flex items-center gap-x-2 text-sm px-3 py-2 rounded-md border border-blue-600 bg-transparent hover:bg-blue-100 duration-300"
-                        data-hs-overlay="#add-category-modal">
-                        <span class="font-medium text-blue-600 text-sm">Add Category</span>
+                        class="items-center text-sm px-3 py-2 rounded-md border border-blue-600 bg-blue-600 hover:bg-blue-700 hover:border-blue-700 duration-300"
+                        data-hs-overlay="#create-event-modal">
+                        <span class="font-medium text-white text-sm">Create event</span>
                     </button>
                     <button type="button"
                         class="inline-flex items-center gap-x-2 text-sm px-3 py-2 rounded-md border border-blue-600 bg-blue-600 hover:bg-blue-700 hover:border-blue-700 duration-300"
-                        data-hs-overlay="#create-event-modal">
-                        <span class="font-medium text-white text-sm">Create Inventory</span>
+                        data-hs-overlay="#create-annoucement-modal">
+                        <span class="font-medium text-white text-sm">Create annoucement</span>
                     </button>
                 </div>
 
@@ -268,7 +287,7 @@
             <div id="no-results" class="no-results" style="display: none;">
                 <div class="bg-white w-[95%] md:w-[70%] text-center my-3 px-3 py-6 rounded-lg mx-auto">
                     <img src="/assets/images/sleepy.png" alt="sleepy icon" class="w-95% md:w-[55%] lg:w-[45%] mx-auto">
-                    <h3 class="mt-8 font-semibold text-lg md:text-xl">No inventory at this time</h3>
+                    <h3 class="mt-8 font-semibold text-lg md:text-xl">No event at this time</h3>
                     <p class="font-medium text-sm mb-4">Students will appear after they are enrolled.</p>
                     <a href="enroll-student.html"
                         class="mt-4 bg-blue-600 text-white text-sm px-4 py-3 rounded-lg font-medium hover:bg-blue-700 duration-150">Enroll
@@ -276,254 +295,126 @@
                 </div>
             </div>
 
+            <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
+                <!-- your content goes here ... -->
 
-            <div class="flex flex-col bg-white rounded-lg px-3 py-6">
-                <div class="overflow-x-auto ">
-                    <div class="min-w-full inline-block align-middle">
-                        <div data-hs-datatable='{
-                    "pageLength": 10,
-                    "pagingOptions": {
-                      "pageBtnClasses": "min-w-[40px] flex justify-center items-center text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 py-2.5 text-sm rounded-full disabled:opacity-50 disabled:pointer-events-none"
-                    },
-                    "selecting": true,
-                    "rowSelectingOptions": {
-                      "selectAllSelector": "#hs-table-search-checkbox-all"
-                    },
-                    "language": {
-                      "zeroRecords": "<div class=\"py-10 px-5 flex flex-col justify-center items-center text-center\"><svg class=\"shrink-0 size-6 text-gray-500" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"11\" cy=\"11\" r=\"8\"/><path d=\"m21 21-4.3-4.3\"/></svg><div class=\"max-w-sm mx-auto\"><p class=\"mt-2 text-sm text-gray-600">No search results</p></div></div>"
-                    }
-                  }'>
-                            <div class="py-3">
-                                <div class="relative max-w-xs">
-                                    <label for="hs-table-input-search" class="sr-only">Search</label>
-                                    <input type="text" name="hs-table-search" id="hs-table-input-search"
-                                        class="py-2 px-3 ps-9 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-                                        placeholder="Search for inventory" data-hs-datatable-search="">
-                                    <div class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-3">
-                                        <svg class="size-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24"
-                                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <circle cx="11" cy="11" r="8"></circle>
-                                            <path d="m21 21-4.3-4.3"></path>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="overflow-hidden">
-                                <table class="min-w-full">
-                                    <thead class="border-y border-gray-200">
-                                        <tr>
-                                            <th scope="col" class="py-1 px-3 pe-0 --exclude-from-ordering">
-                                                <div class="flex items-center h-5">
-                                                    <input id="hs-table-search-checkbox-all" type="checkbox"
-                                                        class="border-gray-300 rounded text-blue-600 focus:ring-blue-500">
-                                                    <label for="hs-table-search-checkbox-all"
-                                                        class="sr-only">Checkbox</label>
-                                                </div>
-                                            </th>
-                                            <th scope="col"
-                                                class="py-1 group text-start text-sm font-semibold focus:outline-none">
-                                                Product name
-                                            </th>
-                                            <th scope="col"
-                                                class="py-1 group text-start text-sm font-semibold focus:outline-none">
-                                                Category
-                                            </th>
-                                            <th scope="col"
-                                                class="py-1 group text-start text-sm font-semibold focus:outline-none">
-                                                Quantity
-                                            </th>
-                                            <th scope="col"
-                                                class="py-1 group text-start text-sm font-semibold focus:outline-none">
-                                                Unit cost
-                                            </th>
-                                            <th scope="col"
-                                                class="py-1 group text-start text-sm font-semibold focus:outline-none">
-                                                Total cost
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="inventory-body" class="divide-y divide-gray-200">
-                                        <!-- Data will be inserted here -->
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-                    </div>
+                <div class="py-1 px-5 sm:px-6">
+                    <h3 class="text-lg font-medium leading-6 text-gray-900">Notifications</h3>
+                </div>
+                <div class="border-t border-gray-200">
+                    <ul class="divide-y divide-gray-200" id="events-body"></ul>
+                    <ul class="divide-y divide-gray-200" id="announcements-body"></ul>
                 </div>
 
-
-                <div class="flex items-center justify-between mt-6">
-                    <p class="text-sm font-medium">Showing 1-3 of 300</p>
-                    <div class="pagination inline-flex items-center space-x-1">
-                        <a href="#"
-                            class="px-3 py-2 text-sm text-gray-500 bg-white border border-gray-200 rounded hover:bg-gray-100 hover:text-gray-700">
-                            <i class="fa fa-chevron-left"></i>
-                        </a>
-
-                        <a href="#" aria-current="page"
-                            class="px-3 py-2 text-sm text-white bg-blue-600 border border-blue-600 rounded hover:bg-blue-700">
-                            1
-                        </a>
-                        <a href="#"
-                            class="px-3 py-2 text-sm text-gray-500 bg-white border border-gray-200 rounded hover:bg-gray-100 hover:text-gray-700">
-                            2
-                        </a>
-                        <span class="px-3 py-2 text-sm text-gray-500">...</span>
-                        <a href="#"
-                            class="px-3 py-2 text-sm text-gray-500 bg-white border border-gray-200 rounded hover:bg-gray-100 hover:text-gray-700">
-                            10
-                        </a>
-
-                        <a href="#"
-                            class="px-3 py-2 text-sm text-gray-500 bg-white border border-gray-200 rounded hover:bg-gray-100 hover:text-gray-700">
-                            <i class="fa fa-chevron-right"></i>
-                        </a>
-                    </div>
-                </div>
             </div>
 
         </div>
 
         <!-- Modals -->
-        <div id="create-event-modal" class="hs-overlay hidden fixed inset-0 z-50 overflow-y-auto"
-            aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <!-- Announcement Modal -->
+        <div id="create-annoucement-modal" class="hs-overlay hidden fixed inset-0 z-50 overflow-y-auto" role="dialog"
+            aria-modal="true">
             <div class="min-h-screen px-4 text-center">
-                <!-- Background overlay -->
                 <div class="fixed inset-0 bg-black bg-opacity-50 transition-opacity"></div>
-
-                <!-- Modal Dialog -->
                 <div
                     class="inline-block align-middle bg-white rounded-lg text-left shadow-xl transform transition-all my-8 max-w-lg w-full">
-                    <!-- Modal Content -->
                     <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-6 rounded-lg">
                         <div class="text-center sm:text-left">
-                            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Create New
-                                Inventory
-                            </h3>
-                            <form class="mt-4" id="invent">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900">Create annoucement</h3>
+                            <form class="mt-4" id="annoucementForm">
                                 <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">Inventory type</label>
-                                    <select id="inventory-type"
+                                    <label for="event-name" class="block text-sm font-medium text-gray-700">Title</label>
+                                    <input type="text" id="title" name="event-name"
+                                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                        placeholder="Enter the title of your message" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="event-date" class="block text-sm font-medium text-gray-700">Content</label>
+                                    <textarea name="content" id="content" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm resize-none h-[140px]"></textarea>
+                                </div>
+                                <div class="mt-4">
+                                    <button type="submit"
+                                        class="w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                        post
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse rounded-b-lg">
+                        <button type="button"
+                            class="w-full inline-flex justify-center rounded-md border px-4 py-2 bg-white text-gray-700 hover:bg-gray-50"
+                            data-hs-overlay="#create-annoucement-modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Event Modal -->
+        <div id="create-event-modal" class="hs-overlay hidden fixed inset-0 z-50 overflow-y-auto" role="dialog"
+            aria-modal="true">
+            <div class="min-h-screen px-4 text-center">
+                <div class="fixed inset-0 bg-black bg-opacity-50 transition-opacity"></div>
+                <div
+                    class="inline-block align-middle bg-white rounded-lg text-left shadow-xl transform transition-all my-8 max-w-lg w-full">
+                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-6 rounded-lg">
+                        <div class="text-center sm:text-left">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900">Create New Event</h3>
+                            <form class="mt-4" id="eventForm">
+                                <div class="mb-4">
+                                    <label for="event-name" class="block text-sm font-medium text-gray-700">Event
+                                        Name</label>
+                                    <input type="text" id="event-name" name="event-name"
                                         class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                         placeholder="Enter event name" required>
-                                        <option>select inventory type</option>
-
-                                    </select>
                                 </div>
                                 <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">Item name</label>
-                                    <input type="text" id="item-name"
+                                    <label for="event-date" class="block text-sm font-medium text-gray-700">Event
+                                        Date</label>
+                                    <input type="datetime-local" id="event-date" name="event-date"
                                         class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                         required>
                                 </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">Quantity</label>
-                                    <input type="text" id="quantity"
-                                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                                        required>
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">Unit cost</label>
-                                    <input type="text" id="unit_cost"
-                                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                                        required>
-                                </div>
-                                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse rounded-b-lg">
+                                <div class="mt-4">
                                     <button type="submit"
-                                        class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">Create</button>
-                                    <button type="button"
-                                        class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none sm:mt-0 sm:w-auto sm:text-sm"
-                                        data-hs-overlay="#create-event-modal">Cancel</button>
+                                        class="w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                        Create Event
+                                    </button>
                                 </div>
                             </form>
                         </div>
                     </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div id="add-category-modal" class="hs-overlay hidden fixed inset-0 z-50 overflow-y-auto"
-            aria-labelledby="modal-title" role="dialog" aria-modal="true">
-            <div class="min-h-screen px-4 text-center">
-                <!-- Background overlay -->
-                <div class="fixed inset-0 bg-black bg-opacity-50 transition-opacity"></div>
-
-                <!-- Modal Dialog -->
-                <div
-                    class="inline-block align-middle bg-white rounded-lg text-left shadow-xl transform transition-all my-8 max-w-lg w-full">
-                    <!-- Modal Content -->
-                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-6 rounded-lg">
-                        <div class="text-center sm:text-left">
-                            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Add New Category
-                            </h3>
-                            <form class="mt-4" id="category">
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">Category name</label>
-                                    <input type="text" id="name"
-                                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                                        required>
-                                </div>
-                                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse rounded-b-lg">
-                                    <button type="submit"
-                                        class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">Create</button>
-                                    <button type="button"
-                                        class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none sm:mt-0 sm:w-auto sm:text-sm"
-                                        data-hs-overlay="#add-category-modal">Cancel</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div id="add-category-modal" class="hs-overlay hidden fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title"
-            role="dialog" aria-modal="true">
-            <div class="min-h-screen px-4 text-center">
-                <!-- Background overlay -->
-                <div class="fixed inset-0 bg-black bg-opacity-50 transition-opacity"></div>
-        
-                <!-- Modal Dialog -->
-                <div
-                    class="inline-block align-middle bg-white rounded-lg text-left shadow-xl transform transition-all my-8 max-w-lg w-full">
-                    <!-- Modal Content -->
-                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-6 rounded-lg">
-                        <div class="text-center sm:text-left">
-                            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Add New Category
-                            </h3>
-                            <form class="mt-4">
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">Category name</label>
-                                    <input type="text"
-                                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                                        required>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse rounded-b-lg">
+                    <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse rounded-b-lg">
                         <button type="button"
-                            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">Create</button>
-                        <button type="button"
-                            class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none sm:mt-0 sm:w-auto sm:text-sm"
-                            data-hs-overlay="#add-category-modal">Cancel</button>
+                            class="w-full inline-flex justify-center rounded-md border px-4 py-2 bg-white text-gray-700 hover:bg-gray-50"
+                            data-hs-overlay="#create-event-modal">Cancel</button>
                     </div>
                 </div>
             </div>
         </div>
+
 
     </div>
+    <script>
+        document.querySelectorAll('[data-hs-overlay]').forEach(button => {
+            button.addEventListener('click', function () {
+                const modalId = this.getAttribute('data-hs-overlay');
+                const modal = document.querySelector(modalId);
+                modal.classList.toggle('hidden');
+            });
+        });
+
+    </script>
     <script src="/assets/js/logout.js"></script>
     <script type="module" src="/assets/js/auth.js"></script>
     <script type="module" src="/assets/js/index.js"></script>
     <script type="module" src="/assets/js/getstudent.js"></script>
     <script type="module" src="/assets/js/dashboard.js"></script>
-    <script type="module" src="/assets/js/inventory.js"></script>
+    <script type="module" src="/assets/js/event.js"></script>
+    <script type="module" src="/assets/js/allevent.js"></script>
+    <script type="module" src="../assets/js/pnotification.js"></script>
+    <script type="module" src="../assets/js/createannoucement.js"></script>
+    
 </body>
 
 </html>
