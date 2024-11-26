@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Title -->
-    <title>Teacher Dashboard || Verbum</title>
+    <title>View Results || Verbum</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="../assets/images/fav.png">
+    <link rel="shortcut icon" href="/assets/images/fav.png">
 
     <!-- CSS HS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
@@ -17,59 +17,25 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
-<style>
-    .calendar-grid {
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        /* 7 columns for the days of the week */
-        border-top: 1px solid #ccc;
-
-    }
-
-    .current-day {
-        color: rgb(7, 142, 187);
-        font-weight: bold;
-    }
-
-
-    .calendar-grid div {
-        padding: 5px;
-        text-align: center;
-        border: 1px solid #f0f0f0;
-
-    }
-
-    .calendar-grid .header-cell {
-        font-weight: bold;
-        background-color: #f0f0f0;
-        padding-right: 10px;
-    }
-
-    .calendar-grid .day-cell {
-        background-color: #ffffff;
-        padding-right: 10px;
-        /* White background for day cells */
-    }
-</style>
 
 <body>
     <!-- ========== HEADER ========== -->
     <header
-        class="sticky top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-[48] w-full bg-white text-sm lg:ps-[260px]">
-        <nav class="px-4 sm:px-6 flex basis-full items-center w-full mx-auto border-b py-2 border-gray-300 pb-3">
+        class="sticky top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-[48] w-full bg-white text-sm py-2.5 lg:ps-[260px]">
+        <nav class="px-4 sm:px-6 flex basis-full items-center w-full mx-auto border-b border-gray-300 pb-3">
             <div class="me-5 lg:me-0 lg:hidden">
                 <!-- Logo -->
                 <a class="flex-none rounded-md text-xl inline-block font-semibold focus:outline-none focus:opacity-80"
-                    href="dashboard.html" aria-label="Preline">
-                    <img src="../assets/images/logo.png" alt="logo">
+                    href="index.html" aria-label="Preline">
+                    <img src="/assets/images/logo.png" alt="logo">
                 </a>
                 <!-- End Logo -->
             </div>
 
             <div class="w-full flex items-center justify-end ms-auto md:justify-between gap-x-1 md:gap-x-3">
                 <div class="hidden md:block">
-                    <p class="font-medium text-sm text-gray-600">Home</p>
-                    <h3 class="text-md md:text-xl text-[#007BFF] font-bold">Dashboard</h3>
+                    <p class="font-medium text-sm text-gray-600">Home / Dashboard</p>
+                    <h3 class="text-md md:text-xl text-blue-600 font-bold">Class and Exam</h3>
                 </div>
 
 
@@ -114,7 +80,7 @@
                             aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
                             <img class="shrink-0 size-[38px] rounded-full" src="" alt="Avatar">
                         </button>
-
+                    
                         <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg mt-2 after:h-4 after:absolute after:-bottom-4 after:start-0 after:w-full before:h-4 before:absolute before:-top-4 before:start-0 before:w-full"
                             role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-account">
                             <div class="py-3 px-5 bg-gray-100 rounded-t-lg dark:bg-neutral-700">
@@ -176,15 +142,17 @@
                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                         </svg>
                     </li>
-                    <!-- <li class="text-sm font-semibold text-gray-800 truncate" aria-current="page"></li>
-                    Students
-                    </li> -->
+                    <li class="text-sm font-semibold text-gray-800 truncate" aria-current="page"></li>
+                    View Results
+                    </li>
                 </ol>
-
+                <!-- End Breadcrumb -->
             </div>
         </div>
+        <!-- End Breadcrumb -->
     </div>
 
+    <!-- Sidebar -->
     <div id="hs-application-sidebar" class="hs-overlay [--auto-close:lg]
     hs-overlay-open:translate-x-0
     -translate-x-full transition-all duration-300 transform
@@ -194,11 +162,11 @@
     bg-white border-e border-gray-200
     lg:block lg:translate-x-0 lg:end-auto lg:bottom-0" role="dialog" tabindex="-1" aria-label="Sidebar">
         <div class="relative flex flex-col h-full max-h-full">
-            <div class="px-6 pt-4 border-b border-gray-300">
+            <div class="px-6 pt-4">
                 <!-- Logo -->
                 <a class="flex-none rounded-md text-xl inline-block font-semibold focus:outline-none focus:opacity-80"
-                    href="dashboard.html" aria-label="Preline">
-                    <img src="../assets/images/logo.png" alt="logo">
+                    href="#" aria-label="Preline">
+                    <img src="/assets/images/logo.png" alt="logo">
                 </a>
                 <!-- End Logo -->
             </div>
@@ -209,25 +177,24 @@
                 <div>
 
                     <!-- Nav Links -->
-                    <nav class="hs-accordion-group p-3 py-10 w-full flex flex-col flex-wrap"
-                        data-hs-accordion-always-open>
+                    <nav class="hs-accordion-group p-3 py-10 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
                         <ul class="flex flex-col space-y-2">
                             <li>
-                                <a class="flex items-center gap-x-3.5 font-medium py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 rounded-lg focus:outline-none"
+                                <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
                                     href="index.html">
                                     <i class="fa fa-home text-gray-500"></i>
                                     <span>Home</span>
                                 </a>
                             </li>
-
+                    
                             <li>
-                                <a class="flex items-center gap-x-3.5 py-2 font-medium px-2.5 bg-blue-600 text-sm text-white rounded-lg focus:outline-none"
+                                <a class="flex items-center gap-x-3.5 py-2 font-medium px-2.5 hover:bg-gray-100 text-sm text-gray-800 rounded-lg focus:outline-none"
                                     href="class.html">
-                                    <i class="fa fa-chalkboard-user text-white"></i>
+                                    <i class="fa fa-chalkboard-user text-gray-500"></i>
                                     <span>Class</span>
                                 </a>
                             </li>
-
+                    
                             <li>
                                 <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
                                     href="attendance.html">
@@ -235,7 +202,7 @@
                                     Attendance
                                 </a>
                             </li>
-
+                    
                             <li>
                                 <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
                                     href="subjects.html">
@@ -243,7 +210,7 @@
                                     Subjects
                                 </a>
                             </li>
-
+                    
                             <li>
                                 <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
                                     href="#">
@@ -251,11 +218,11 @@
                                     Assessment
                                 </a>
                             </li>
-
+                    
                             <li>
-                                <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
+                                <a class="flex items-center gap-x-3.5 font-medium py-2 px-2.5 text-sm text-white rounded-lg bg-[#007BFF] focus:outline-none focus:bg-gray-100"
                                     href="results.html">
-                                    <i class="fa fa-sitemap text-gray-500"></i>
+                                    <i class="fa fa-sitemap text-white"></i>
                                     Results and Reports
                                 </a>
                             </li>
@@ -266,91 +233,158 @@
                 <div class="mt-6">
 
                     <hr class="mb-2" />
+
+                    <!-- <div class="px-3 flex justify-between mb-3">
+                        <a href="#" class="flex items-center">
+                            <img class="shrink-0 size-[30px] rounded-full mr-2"
+                                src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80"
+                                alt="Avatar">
+
+                            <div>
+                                <h3 class="text-sm font-medium">Victor Akinode</h3>
+                                <p class="text-xs font-medium text-gray-800">victor@telneting.com</p>
+                            </div>
+                        </a>
+
+                        <img src="/assets/images/logout.png" alt="logout">
+                    </div> -->
                 </div>
             </div>
         </div>
         <!-- End Content -->
     </div>
+    <!-- End Sidebar -->
 
     <!-- Content -->
     <div class="w-full lg:ps-64">
         <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
             <!-- your content goes here ... -->
+            <!-- <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+                <div class="bg-white px-3 py-6 rounded-lg border border-gray-300">
+                    <h3 class="font-semibold text-md text-blue-600 mb-4">1st Term Examination Result</h3>
 
-            <div class="grid gap-4 grid-cols-1 md:grid-cols-3">
-                <div class="bg-white px-3 py-4 rounded-lg">
-                    <p class="text-gray-700 font-medium text-sm">Total Subjects</p>
-                    <h1 class="text-black text-2xl font-bold mt-3">17</h1>
+                    <p class="font-medium mb-2 text-sm">Class assigned: <strong>JSS3</strong></p>
+                    <p class="font-medium mb-2 text-sm">Total student: <strong>50</strong></p>
+                    <p class="font-medium mb-2 text-sm">Exam Date: <strong>23RD SEPTEMBER, 2023</strong></p>
+                    <p class="font-medium mb-2 text-sm">Duration: <strong>2 HOURS</strong></p>
+                    <p class="font-medium mb-2 text-sm">Avg Score: <strong>66%</strong></p>
+                    <p class="font-medium mb-2 text-sm">Pass Rate: <strong>80%</strong></p>
                 </div>
 
-                <div class="bg-white px-3 py-4 rounded-lg">
-                    <p class="text-gray-700 font-medium text-sm">Total Students</p>
-                    <h1 class="text-black text-2xl font-bold mt-3">3,520</h1>
+                <div class="flex justify-end">
+                    <button href="enroll-student.html"
+                        class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg font-medium hover:bg-blue-700 duration-150">Export Data</button>
                 </div>
+            </div> -->
 
-                <div class="bg-white px-3 py-4 rounded-lg">
-                    <p class="text-gray-700 font-medium text-sm">Assigned Class</p>
-                    <h1 class="text-black text-2xl font-bold mt-3">JSS2</h1>
+            <div class="flex justify-end">
+                <a href='upload-result.html' class="mt-4 bg-blue-600 text-white text-sm px-4 py-3 rounded-lg font-medium hover:bg-blue-700 duration-150">Upload results</a>
+            </div>
+
+            <div class="bg-white px-3 py-4 rounded-lg border border-gray-300">
+                <h3 class="font-semibold text-lg text-blue-600 mb-4">Results</h3>
+
+                <div class="overflow-x-auto bg-white">
+                    <table class="min-w-full divide-y divide-gray-200 table-fixed">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Student name
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Student ID
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Score
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Grade
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Status
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Remark
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <!-- Rows will be dynamically populated here -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
-            <div class="overflow-x-auto bg-white shadow-md rounded-lg p-4 mt-4">
-                <h3 class="font-semibold text-lg mb-2">Class Timetable</h3>
-                <table class="w-full border-collapse text-left text-sm text-gray-700">
-                    <thead>
-                        <tr class="bg-gray-100">
-                            <th class="py-3 px-4 font-semibold">Day</th>
-                            <th class="py-3 px-4 font-semibold">9am - 11am</th>
-                            <th class="py-3 px-4 font-semibold">Break</th>
-                            <th class="py-3 px-4 font-semibold">12pm - 2pm</th>
-                            <th class="py-3 px-4 font-semibold">2pm - 4pm</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="border-b hover:bg-gray-50">
-                            <td class="py-3 px-4">Monday</td>
-                            <td class="py-3 px-4">Mathematics</td>
-                            <td class="py-3 px-4">-</td>
-                            <td class="py-3 px-4">English Language</td>
-                            <td class="py-3 px-4">CRK</td>
-                        </tr>
-                        <tr class="border-b hover:bg-gray-50">
-                            <td class="py-3 px-4">Tuesday</td>
-                            <td class="py-3 px-4">CRK</td>
-                            <td class="py-3 px-4">-</td>
-                            <td class="py-3 px-4">Computer Science</td>
-                            <td class="py-3 px-4">Home Economics</td>
-                        </tr>
-                        <tr class="border-b hover:bg-gray-50">
-                            <td class="py-3 px-4">Wednesday</td>
-                            <td class="py-3 px-4">Civic Education</td>
-                            <td class="py-3 px-4">-</td>
-                            <td class="py-3 px-4">IRK</td>
-                            <td class="py-3 px-4">Social Studies</td>
-                        </tr>
-                        <tr class="border-b hover:bg-gray-50">
-                            <td class="py-3 px-4">Thursday</td>
-                            <td class="py-3 px-4">Mathematics</td>
-                            <td class="py-3 px-4">-</td>
-                            <td class="py-3 px-4">Introductory Technology</td>
-                            <td class="py-3 px-4">Computer Science</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50">
-                            <td class="py-3 px-4">Friday</td>
-                            <td class="py-3 px-4">Mathematics</td>
-                            <td class="py-3 px-4">-</td>
-                            <td class="py-3 px-4">-</td>
-                            <td class="py-3 px-4">-</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+
+
         </div>
-        <script type="module" src="../assets/js/auth.js"></script>
+
+    </div>
+    <!-- End Content -->
+    <!-- ========== END MAIN CONTENT ========== -->
+
+    <!-- JS Implementing Plugins -->
+    <!-- Required plugins -->
+    <script type="module" src="../assets/js/auth.js"></script>
         <script type="module" src="../assets/js/index.js"></script>
         <script type="module" src="../assets/js/index2.js"></script>
         <script type="module" src="../assets/js/dashboard.js"></script>
         <script src="../assets/js/logout.js"></script>
-</body>
 
+        <script>
+            async function fetchAndRenderTable() {
+                const endpoint = "https://genetic-corry-emekadefirst-de6c1c6f.koyeb.app/result/";
+
+                try {
+                    // Fetch the data from the API
+                    const response = await fetch(endpoint);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+
+                    // Reference the table body
+                    const tbody = document.querySelector("tbody");
+
+                    // Clear existing rows
+                    tbody.innerHTML = "";
+
+                    // Populate the table with the fetched data
+                    data.forEach((item) => {
+                        const studentName = `${item.student.first_name} ${item.student.last_name}`;
+                        const studentID = item.student.registration_id;
+                        const score = `${item.total_marks}%`;
+                        const grade = item.grade.name || "N/A";
+                        const status = item.total_marks >= 50 ? "Pass" : "Fail";
+                        const statusClass = status === "Pass" ? "text-green-600 bg-green-100" : "text-red-600 bg-red-100";
+                        const remark = item.remark || "No Remark";
+
+                        // Create a table row
+                        const row = `
+                                <tr>
+                                    <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">${studentName}</td>
+                                    <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">${studentID}</td>
+                                    <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">${score}</td>
+                                    <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">${grade}</td>
+                                    <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">
+                                        <span class="${statusClass} text-sm font-medium px-2 py-1 rounded-lg">${status}</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-green-600 whitespace-nowrap">${remark}</td>
+                                </tr>
+                            `;
+
+                        // Append the row to the table body
+                        tbody.innerHTML += row;
+                    });
+                } catch (error) {
+                    console.error("Error fetching data:", error);
+                }
+            }
+
+            // Fetch and render the table on page load
+            window.onload = fetchAndRenderTable;
+        </script>
+
+</body>
 </html>
