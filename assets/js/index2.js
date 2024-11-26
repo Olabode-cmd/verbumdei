@@ -23,7 +23,7 @@ function processPaymentData(payments) {
   const totalPayments = {};
 
   payments.forEach((payment) => {
-    const date = new Date(payment.time).toLocaleDateString(); // Use the date part
+    const date = new Date(payment.time).toLocaleDateString();
     const amountPaid = payment.amount_paid;
 
     if (!totalPayments[date]) {
