@@ -2,6 +2,67 @@ import { api } from "./api.js";
 
 const token = localStorage.getItem("authToken"); // Replace with your actual token
 
+// Render table rows
+function renderTable(data) {
+  const tbody = document.querySelector("tbody");
+  tbody.innerHTML = ""; // Clear existing rows
+
+  if (data.length > 0) {
+    data.forEach((item) => {
+      const status = item.total_marks >= 50 ? "Pass" : "Fail";
+      const statusClass =
+        status === "Pass"
+          ? "text-green-600 bg-green-100"
+          : "text-red-600 bg-red-100";
+
+      const row = `
+        <tr>
+          <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">${
+            item.student_full_name || "Unknown"
+          }</td>
+          <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">${
+            item.subject || "N/A"
+          }</td>
+        <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">${
+                item.first_ca || 0
+        }</td>
+        <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">${
+            item.second_ca || 0
+          }</td>
+        <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">${
+              item.third_ca || 0
+          }</td>
+          <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">${
+            item.continous_assessment || 0
+          }</td>
+          <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">${
+            item.examination || 0
+          }</td>
+          <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">${
+            item.total_marks || 0
+          }%</td>
+          <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">${
+            item.grade || "N/A"
+          }</td>
+          <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">
+            <span class="${statusClass} text-sm font-medium px-2 py-1 rounded-lg">${status}</span>
+          </td>
+          <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">${
+            item.remark || "No Remark"
+          }</td>
+        </tr>
+      `;
+      tbody.insertAdjacentHTML("beforeend", row);
+    });
+  } else {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="8" class="text-center py-4 text-sm text-gray-500">No results found.</td>
+      </tr>
+    `;
+  }
+}
+
 // Fetch and populate student dropdown
 async function fetchStudent() {
   const studentSelect = document.querySelector('select[name="Student"]');
@@ -92,65 +153,14 @@ async function fetchAndRenderTable() {
   }
 }
 
-// Render table rows
-function renderTable(data) {
-  const tbody = document.querySelector("tbody");
-  tbody.innerHTML = ""; // Clear existing rows
-
-  if (data.length > 0) {
-    data.forEach((item) => {
-      const status = item.total_marks >= 50 ? "Pass" : "Fail";
-      const statusClass =
-        status === "Pass"
-          ? "text-green-600 bg-green-100"
-          : "text-red-600 bg-red-100";
-
-      const row = `
-        <tr>
-          <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">${
-            item.student_full_name || "Unknown"
-          }</td>
-          <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">${
-            item.subject || "N/A"
-          }</td>
-          <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">${
-            item.continous_assessment || 0
-          }</td>
-          <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">${
-            item.examination || 0
-          }</td>
-          <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">${
-            item.total_marks || 0
-          }%</td>
-          <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">${
-            item.grade || "N/A"
-          }</td>
-          <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">
-            <span class="${statusClass} text-sm font-medium px-2 py-1 rounded-lg">${status}</span>
-          </td>
-          <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">${
-            item.remark || "No Remark"
-          }</td>
-        </tr>
-      `;
-      tbody.insertAdjacentHTML("beforeend", row);
-    });
-  } else {
-    tbody.innerHTML = `
-      <tr>
-        <td colspan="8" class="text-center py-4 text-sm text-gray-500">No results found.</td>
-      </tr>
-    `;
-  }
-}
-
+// rendered filter result
 async function filterResults() {
   const studentID = document.getElementById("student").value;
   const termName = document.getElementById("term").value;
 
- 
   try {
-    const response = fetch(
+    // Use await to resolve the fetch promise
+    const response = await fetch(
       `${api}/result/${studentID}/?term=${encodeURIComponent(termName)}`,
       {
         method: "GET",
@@ -162,7 +172,10 @@ async function filterResults() {
     );
 
     if (response.ok) {
-        renderTable(data);
+      // Use await to resolve the JSON parsing
+      const data = await response.json();
+      console.log(data);
+      renderTable(data);
     } else {
       console.error("Failed to fetch filtered results:", response.status);
     }
@@ -171,13 +184,11 @@ async function filterResults() {
   }
 }
 
-
 // Event listeners
 document.querySelector(".filter-button").addEventListener("click", (event) => {
   event.preventDefault(); // Prevent default form submission
   filterResults();
 });
-
 
 // Load data on page load
 window.onload = () => {

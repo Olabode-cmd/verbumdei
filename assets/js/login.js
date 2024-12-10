@@ -75,6 +75,8 @@ loginForm.addEventListener("submit", async function (event) {
         window.location.href = "/account";
       } else if (role === "MANAGER") {
         window.location.href = "/facility_manager";
+      } else if (role === "SECRETARY") {
+        window.location.href = "secretary/dashboard.html";
       } else {
         alert("Role not recognized. Redirecting to the home page.");
         window.location.href = "/";

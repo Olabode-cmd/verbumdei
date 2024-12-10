@@ -5,26 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Title -->
-    <title>Upload Results || Verbum</title>
+    <title>View Results || Verbum</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="/assets/images/fav.png">
 
     <!-- CSS HS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/preline/dist/preline.css" rel="stylesheet">
-    <link rel="stylesheet" href="asset/s/css/main.css">
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
 
 <body>
     <!-- ========== HEADER ========== -->
-    <style>
-        #studentDropdown.hidden {
-            display: none;
-        }
-    </style>
     <header
         class="sticky top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-[48] w-full bg-white text-sm py-2.5 lg:ps-[260px]">
         <nav class="px-4 sm:px-6 flex basis-full items-center w-full mx-auto border-b border-gray-300 pb-3">
@@ -83,61 +78,20 @@
                         <button id="hs-dropdown-account" type="button"
                             class="size-[38px] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 focus:outline-none disabled:opacity-50 disabled:pointer-events-none dark:text-white"
                             aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
-                            <img class="shrink-0 size-[38px] rounded-full"
-                                src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80"
-                                alt="Avatar">
+                            <img class="shrink-0 size-[38px] rounded-full" src="" alt="Avatar">
                         </button>
 
                         <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg mt-2 after:h-4 after:absolute after:-bottom-4 after:start-0 after:w-full before:h-4 before:absolute before:-top-4 before:start-0 before:w-full"
                             role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-account">
                             <div class="py-3 px-5 bg-gray-100 rounded-t-lg dark:bg-neutral-700">
                                 <p class="text-sm text-gray-500 dark:text-neutral-500">Signed in as</p>
-                                <p class="text-sm font-medium text-gray-800 dark:text-neutral-200">james@site.com</p>
+                                <p class="text-sm font-medium text-gray-800 dark:text-neutral-200"></p>
                             </div>
                             <div class="p-1.5 space-y-0.5">
-                                <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                <a id="logout"
+                                    class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                                     href="#">
-                                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
-                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
-                                        <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
-                                    </svg>
-                                    Newsletter
-                                </a>
-                                <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                                    href="#">
-                                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
-                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
-                                        <path d="M3 6h18" />
-                                        <path d="M16 10a4 4 0 0 1-8 0" />
-                                    </svg>
-                                    Purchases
-                                </a>
-                                <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                                    href="#">
-                                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
-                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" />
-                                        <path d="M12 12v9" />
-                                        <path d="m8 17 4 4 4-4" />
-                                    </svg>
-                                    Downloads
-                                </a>
-                                <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300"
-                                    href="#">
-                                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
-                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                        <circle cx="9" cy="7" r="4" />
-                                        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                                    </svg>
-                                    Team Account
+                                    Logout
                                 </a>
                             </div>
                         </div>
@@ -223,54 +177,60 @@
                 <div>
 
                     <!-- Nav Links -->
-                    <nav class="hs-accordion-group p-3 py-10 w-full flex flex-col flex-wrap"
-                        data-hs-accordion-always-open>
+                    <nav class="hs-accordion-group p-3 py-10 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
                         <ul class="flex flex-col space-y-2">
                             <li>
-                                <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
-                                    href="index.html">
+                                <a class="flex items-center gap-x-3.5 py-2 font-medium px-2.5 hover:bg-gray-100 text-sm text-gray-500 rounded-lg focus:outline-none"
+                                    href="dashboard.html">
                                     <i class="fa fa-home text-gray-500"></i>
                                     <span>Home</span>
                                 </a>
                             </li>
-
+                    
                             <li>
-                                <a class="flex items-center gap-x-3.5 py-2 font-medium px-2.5 hover:bg-gray-100 text-sm text-gray-800 rounded-lg focus:outline-none"
-                                    href="class.html">
+                                <a class="flex items-center gap-x-3.5 py-2 font-medium px-2.5 hover:bg-gray-100 text-sm text-gray-500 rounded-lg focus:outline-none"
+                                    href="students.html">
+                                    <i class="fa fa-graduation-cap text-gray-500"></i>
+                                    <span>Student Management</span>
+                                </a>
+                            </li>
+                    
+                            <li>
+                                <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
+                                    href="teachers.html">
                                     <i class="fa fa-chalkboard-user text-gray-500"></i>
-                                    <span>Class</span>
+                                    Teacher Management
                                 </a>
                             </li>
-
+                    
                             <li>
                                 <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
-                                    href="attendance.html">
-                                    <i class="fa  fa-graduation-cap text-gray-500"></i>
-                                    Attendance
-                                </a>
-                            </li>
-
-                            <li>
-                                <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
-                                    href="subjects.html">
+                                    href="fees.html">
                                     <i class="fa fa-money-bill text-gray-500"></i>
-                                    Subjects
+                                    Fees and Payments
                                 </a>
                             </li>
-
+                    
+                            <li>
+                                <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white rounded-lg bg-blue-600"
+                                    href="classes.html">
+                                    <i class="fa fa-pen text-white"></i>
+                                    Class and Exam
+                                </a>
+                            </li>
+                    
+                            <!-- <li>
+                                                    <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
+                                                        href="library.html">
+                                                        <i class="fa fa-book text-gray-500"></i>
+                                                        Library Management
+                                                    </a>
+                                                </li> -->
                             <li>
                                 <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
-                                    href="#">
-                                    <i class="fa fa-pen text-gray-500"></i>
-                                    Assessment
-                                </a>
-                            </li>
-
-                            <li>
-                                <a class="flex items-center gap-x-3.5 font-medium py-2 px-2.5 text-sm text-white rounded-lg bg-[#007BFF] focus:outline-none focus:bg-gray-100"
-                                    href="results.html">
-                                    <i class="fa fa-sitemap text-white"></i>
-                                    Results and Reports
+                                    href="events.html">
+                                    <i class="fa fa-school text-gray-500"></i>
+                                    Event Management
                                 </a>
                             </li>
                         </ul>
@@ -305,113 +265,98 @@
     <!-- Content -->
     <div class="w-full lg:ps-64">
         <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
-            <!-- your content goes here ... -->
-            <div id="alertContainer" class="mb-4"></div>
+            <!-- Filter Options -->
+            <div class="flex flex-wrap items-center gap-5 bg-gray-100 p-4 rounded-lg">
+                <select name="Student" id="student"
+                    class="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring focus:ring-blue-500 focus:outline-none">
+                    <option value="">Select Student</option>
+                    <!-- Student options will be appended here dynamically -->
+                </select>
 
-            <div class="bg-white rounded-lg overflow-hidden">
-                <div class="bg-gray-100 px-3 py-2">
-                    <p class="text-md lg:text-lg font-semibold">Upload results</p>
-                </div>
+                <select name="Term" id="term"
+                    class="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring focus:ring-blue-500 focus:outline-none">
+                    <option value="">Term</option>
+                    <!-- Add term options here -->
+                </select>
 
-                <form action="#" method="POST">
-                    <div class="px-3 py-6">
-                        <div class="grid gap-4 grid-cols-1 md:grid-cols-3 mt-4">
-                
-                            <!-- Student ID -->
-                            <div class="relative w-full">
-                                <label for="studentSearch" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Enter Student ID
-                                </label>
-                                <input type="text" id="studentSearch" required
-                                    class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none disabled:opacity-50 disabled:pointer-events-none">
-                            </div>
-                
-                            <!-- Subject -->
-                            <div>
-                                <label class="block text-sm font-medium mb-2">Subject</label>
-                                <select id="subjectSelect" name="class" required
-                                    class="py-3 px-4 block w-full border-gray-200 border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
-                                    <option value="">Select subject</option>
-                                    <!-- Options will be populated dynamically -->
-                                </select>
-                            </div>
-                
-                            <!-- Class Select -->
-                            <div>
-                                <label class="block text-sm font-medium mb-2">Class</label>
-                                <select id="classSelect" name="class" required
-                                    class="py-3 px-4 block w-full border-gray-200 border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
-                                    <option value="">Select class</option>
-                                    <!-- Options will be populated dynamically -->
-                                </select>
-                            </div>
-                
-                            <!-- Term Select -->
-                            <div>
-                                <label class="block text-sm font-medium mb-2">Term</label>
-                                <select id="termSelect" name="term" required
-                                    class="py-3 px-4 block w-full border-gray-200 border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
-                                    <option value="">Select term</option>
-                                    <!-- Options will be populated dynamically -->
-                                </select>
-                            </div>
-                            <!-- 1st Continuous Assessment -->
-                            <div>
-                                <label class="block text-sm font-medium mb-2">1st Continuous Assessment</label>
-                                <input type="number" id="first_ca" name="first_ca" required
-                                    class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none">
-                            </div>
+                <button
+                    class="filter-button px-4 py-2 bg-blue-600 text-white text-sm rounded-lg font-medium hover:bg-blue-700 duration-150 focus:ring focus:ring-blue-500 focus:outline-none">
+                    Filter
+                </button>
 
-                            <!-- 2nd Continuous Assessment -->
-                            <div>
-                                <label class="block text-sm font-medium mb-2">2nd Continuous Assessment</label>
-                                <input type="number" id="second_ca" name="second_ca" required
-                                    class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none">
-                            </div>
-
-                            <!-- 3rd Continuous Assessment -->
-                            <div>
-                                <label class="block text-sm font-medium mb-2">3rd Continuous Assessment</label>
-                                <input type="number" id="third_ca" name="third_ca" required
-                                    class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none">
-                            </div>
-
-                
-                            <!-- Exam -->
-                            <div>
-                                <label class="block text-sm font-medium mb-2">Exam</label>
-                                <input type="text" id="exam" required
-                                    class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none disabled:opacity-50 disabled:pointer-events-none">
-                            </div>
-                        </div>
-                
-                        <div class="flex md:justify-end">
-                            <button type="submit"
-                                class="mt-4 bg-blue-600 text-white text-sm px-4 py-3 rounded-lg font-medium hover:bg-blue-700 duration-150 w-full md:w-auto">Upload</button>
-                        </div>
-                    </div>
-                </form>
-
+                <a href="upload-result.html"
+                    class="px-4 py-2 bg-green-600 text-white text-sm rounded-lg font-medium hover:bg-green-700 duration-150 focus:ring focus:ring-green-500 focus:outline-none">
+                    Upload Results
+                </a>
             </div>
 
+            <!-- Results Table -->
+            <div class="bg-white px-3 py-4 rounded-lg border border-gray-300">
+                <h3 class="font-semibold text-lg text-blue-600 mb-4">Results</h3>
 
-
+                <div class="overflow-x-auto bg-white">
+                    <table class="min-w-full divide-y divide-gray-200 table-fixed">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Student name
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Subject
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    1st C/A
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                   2nd C/A
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                   3rd C/A
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    C/A
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Examination
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Score
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Grade
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Status
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Remark
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <!-- Rows will be dynamically populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-
     </div>
-    <!-- End Content -->
-    <!-- ========== END MAIN CONTENT ========== -->
 
-    <!-- JS Implementing Plugins -->
-    <!-- Required plugins -->
+
     <script type="module" src="../assets/js/auth.js"></script>
     <script type="module" src="../assets/js/index.js"></script>
     <script type="module" src="../assets/js/index2.js"></script>
-    <!-- <script type="module" src="../assets/js/dashboard.js"></script> -->
-    <script type="module" src="../assets/js/upload.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/preline/dist/preline.js"></script> -->
+    <script type="module" src="../assets/js/dashboard.js"></script>
     <script src="../assets/js/logout.js"></script>
-
+    <script type="module" src="../assets/js/fetchresult.js"></script>
 </body>
 
 </html>

@@ -1,71 +1,96 @@
 import { api } from "./api.js";
-const token = localStorage.getItem("authToken");
 
+// Fetch classes and populate the dropdown
+document.addEventListener("DOMContentLoaded", function () {
+  const classSelect = document.getElementById("class-add");
+  const apiUrl = `${api}/class/classes/`;
+
+  async function fetchClasses() {
+    try {
+      const response = await fetch(apiUrl);
+      if (!response.ok)
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      const data = await response.json();
+
+      // Populate dropdown
+      data.forEach((classItem) => {
+        const option = document.createElement("option");
+        option.value = classItem.id; // Class ID
+        option.textContent = classItem.name; // Class name
+        classSelect.appendChild(option);
+      });
+    } catch (error) {
+      console.error("Error fetching class data:", error);
+      alert("Failed to fetch classes. Please try again later.");
+    }
+  }
+
+  fetchClasses();
+});
+
+// Handle image upload functionality
 document.addEventListener("DOMContentLoaded", function () {
   const container = document.getElementById("imageUploadContainer");
   const fileInput = document.getElementById("fileInput");
   const imagePreview = document.getElementById("imagePreview");
   const uploadIcon = document.getElementById("uploadIcon");
 
-  // Function to handle file selection
   function handleFileSelect(file) {
-    if (file && file.type.startsWith("image/")) {
-      if (file.size <= 10 * 1024 * 1024) {
-        // 10MB limit
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          imagePreview.src = e.target.result;
-          imagePreview.classList.remove("hidden");
-          uploadIcon.classList.add("hidden");
-        };
-        reader.readAsDataURL(file);
-      } else {
-        alert("File is too large. Please select an image under 2MB.");
-      }
-    } else {
+    if (!file || !file.type.startsWith("image/")) {
       alert("Please select a valid image file.");
+      return;
     }
+    if (file.size > 10 * 1024 * 1024) {
+      alert("File is too large. Please select an image under 10MB.");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      imagePreview.src = e.target.result;
+      imagePreview.classList.remove("hidden");
+      uploadIcon.classList.add("hidden");
+    };
+    reader.readAsDataURL(file);
   }
 
-  // Click to upload
-  container.addEventListener("click", function () {
-    fileInput.click();
-  });
+  container.addEventListener("click", () => fileInput.click());
 
-  fileInput.addEventListener("change", function (e) {
-    handleFileSelect(e.target.files[0]);
-  });
+  fileInput.addEventListener("change", (e) =>
+    handleFileSelect(e.target.files[0])
+  );
 
-  // Drag and drop functionality
-  container.addEventListener("dragover", function (e) {
+  container.addEventListener("dragover", (e) => {
     e.preventDefault();
-    e.stopPropagation();
-    this.classList.add("border-blue-500");
+    container.classList.add("border-blue-500");
   });
 
-  container.addEventListener("dragleave", function (e) {
-    e.preventDefault();
-    e.stopPropagation();
-    this.classList.remove("border-blue-500");
-  });
+  container.addEventListener("dragleave", () =>
+    container.classList.remove("border-blue-500")
+  );
 
-  container.addEventListener("drop", function (e) {
+  container.addEventListener("drop", (e) => {
     e.preventDefault();
-    e.stopPropagation();
-    this.classList.remove("border-blue-500");
+    container.classList.remove("border-blue-500");
     handleFileSelect(e.dataTransfer.files[0]);
   });
 });
 
+// Handle student enrollment form submission
 document
   .getElementById("studentEnrollmentForm")
   .addEventListener("submit", async function (event) {
     event.preventDefault();
+
     const token = localStorage.getItem("authToken");
+    if (!token) {
+      alert("Authentication token missing. Please log in again.");
+      return;
+    }
 
     const fileInput = document.getElementById("fileInput").files[0];
     if (fileInput && fileInput.size > 10 * 1024 * 1024) {
-      alert("Profile photo must be less than 2MB.");
+      alert("Profile photo must be less than 10MB.");
       return;
     }
 
@@ -103,21 +128,50 @@ document
       const response = await fetch(`${api}/student/students/`, {
         method: "POST",
         body: formData,
+        headers: { Authorization: `Token ${token}` },
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(`Enrollment failed: ${JSON.stringify(errorData)}`);
+      }
+
+      const studentData = await response.json();
+      alert("Student enrolled successfully!");
+      alert("Now adding student to class, hold on.");
+
+      // Add student to class
+      const classId = document.getElementById("class-add").value;
+      if (!classId) {
+        alert("Please select a class.");
+        return;
+      }
+
+      const payload = { students: [studentData.id] };
+
+      const classResponse = await fetch(`${api}/class/patch/${classId}/`, {
+        method: "PATCH",
+        body: JSON.stringify(payload),
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Token ${token}`,
         },
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        alert("Student enrolled successfully!");
-        document.getElementById("studentEnrollmentForm").reset();
-      } else {
-        const errorData = await response.json();
-        alert("Failed to enroll student. Error: " + JSON.stringify(errorData));
+      if (!classResponse.ok) {
+        const errorData = await classResponse.json();
+        throw new Error(
+          `Failed to add student to class: ${
+            errorData.detail || "Unknown error"
+          }`
+        );
       }
+
+      alert("Class updated successfully!");
+      document.getElementById("studentEnrollmentForm").reset();
+      location.reload(); // Refresh page
     } catch (error) {
       console.error("Error:", error);
-      alert("An error occurred. Please try again later.");
+      alert(error.message || "An error occurred. Please try again later.");
     }
   });

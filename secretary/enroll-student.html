@@ -79,7 +79,7 @@
                             aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
                             <img class="shrink-0 size-[38px] rounded-full" src="" alt="Avatar">
                         </button>
-                    
+
                         <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg mt-2 after:h-4 after:absolute after:-bottom-4 after:start-0 after:w-full before:h-4 before:absolute before:-top-4 before:start-0 before:w-full"
                             role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-account">
                             <div class="py-3 px-5 bg-gray-100 rounded-t-lg dark:bg-neutral-700">
@@ -169,14 +169,15 @@
                 </a>
                 <!-- End Logo -->
             </div>
-    
+
             <!-- Content -->
             <div
                 class="h-full flex flex-col justify-between overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300">
                 <div>
-    
+
                     <!-- Nav Links -->
-                    <nav class="hs-accordion-group p-3 py-10 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
+                    <nav class="hs-accordion-group p-3 py-10 w-full flex flex-col flex-wrap"
+                        data-hs-accordion-always-open>
                         <ul class="flex flex-col space-y-2">
                             <li>
                                 <a class="flex items-center gap-x-3.5 font-medium py-2 px-2.5 text-sm text-white rounded-lg bg-[#007BFF] focus:outline-none focus:bg-gray-100"
@@ -185,7 +186,7 @@
                                     <span>Home</span>
                                 </a>
                             </li>
-    
+
                             <li>
                                 <a class="flex items-center gap-x-3.5 py-2 font-medium px-2.5 hover:bg-gray-100 text-sm text-gray-500 rounded-lg focus:outline-none"
                                     href="students.html">
@@ -193,7 +194,7 @@
                                     <span>Student Management</span>
                                 </a>
                             </li>
-    
+
                             <li>
                                 <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
                                     href="teachers.html">
@@ -201,7 +202,7 @@
                                     Teacher Management
                                 </a>
                             </li>
-    
+
                             <li>
                                 <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
                                     href="fees.html">
@@ -209,7 +210,7 @@
                                     Fees and Payments
                                 </a>
                             </li>
-    
+
                             <li>
                                 <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
                                     href="classes.html">
@@ -217,7 +218,7 @@
                                     Class and Exam
                                 </a>
                             </li>
-    
+
                             <li>
                                 <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
                                     href="library.html">
@@ -225,7 +226,7 @@
                                     Library Management
                                 </a>
                             </li>
-    
+
                             <li>
                                 <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
                                     href="inventory.html">
@@ -233,7 +234,7 @@
                                     Inventory Management
                                 </a>
                             </li>
-    
+
                             <li>
                                 <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
                                     href="events.html">
@@ -244,7 +245,7 @@
                         </ul>
                     </nav>
                 </div>
-    
+
                 <div class="mt-6">
                     <hr class="mb-2" />
                 </div>
@@ -262,7 +263,7 @@
                 <div class="bg-gray-100 px-3 py-2">
                     <p class="text-md lg:text-lg font-semibold">Student details</p>
                 </div>
-                 
+
                 <!-- student enrollment -->
                 <div class="px-3 py-6">
                     <form id="studentEnrollmentForm">
@@ -355,6 +356,13 @@
                                     (LGA)</label>
                                 <input type="text" id="lga" name="lga"
                                     class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                            </div>
+                            <div>
+                                <label for="parent_select" class="block text-sm font-medium mb-2">Class</label>
+                                <select id="class-add" name="parent_id" required
+                                    class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                    <option value="">Select Class</option>
+                                </select>
                             </div>
                             <div>
                                 <label for="stateOfOrigin" class="block text-sm font-medium mb-2">State of
