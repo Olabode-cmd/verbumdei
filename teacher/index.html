@@ -221,34 +221,10 @@
                             </li>
 
                             <li>
-                                <a class="flex items-center gap-x-3.5 py-2 font-medium px-2.5 hover:bg-gray-100 text-sm text-gray-800 rounded-lg focus:outline-none"
-                                    href="class.html">
-                                    <i class="fa fa-chalkboard-user text-gray-500"></i>
-                                    <span>Class</span>
-                                </a>
-                            </li>
-
-                            <li>
                                 <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
                                     href="attendance.html">
                                     <i class="fa  fa-graduation-cap text-gray-500"></i>
                                     Attendance
-                                </a>
-                            </li>
-
-                            <li>
-                                <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
-                                    href="subjects.html">
-                                    <i class="fa fa-money-bill text-gray-500"></i>
-                                    Subjects
-                                </a>
-                            </li>
-
-                            <li>
-                                <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
-                                    href="#">
-                                    <i class="fa fa-pen text-gray-500"></i>
-                                    Assessment
                                 </a>
                             </li>
 
@@ -306,50 +282,26 @@
                         <img src="../assets/images/card-user.png" class="w-[85px]">
                     </div>
 
-                    <div class="border border-gray-300 rounded-lg bg-white px-3 py-4 flex justify-between items-center">
-                        <div class="flex items-center space-x-3">
-                            <div>
-                                <span class="text-xs text-gray-400 font-medium uppercase">present</span>
-                                <h3 class="text-xl md:text-2xl font-bold" id="staff-count">0</h3>
-
-                                <!-- <div class="flex items-center space-x-3 mt-2">
-                                                    <div class="flex items-center space-x-2">
-                                                        <span class="rounded-full p-1 bg-[#233255]"></span>
-                                                        <span class="text-xs">Male</span>
-                                                    </div>
-            
-                                                    <div class="flex items-center space-x-2">
-                                                        <span class="rounded-full p-1 bg-blue-500"></span>
-                                                        <span class="text-xs">Female</span>
-                                                    </div> 
-                                                </div>-->
+                    <div class="bg-white border border-gray-300 rounded-lg px-3 py-6 col-span-2">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-semibold text-md md:text-lg">Attendance</h3>
+                    
+                            <div class="flex items-center space-x-2">
+                                <select class="px-3 py-1 text-sm border border-gray-300 rounded-lg bg-blue-100">
+                                    <option value="" selected>Weekly</option>
+                                    <option value="">Monthly</option>
+                                    <option value="">This quarter</option>
+                                    <option value="">Yearly</option>
+                                </select>
+                    
+                                <select class="px-3 py-1 pr-6 text-sm border border-gray-300 rounded-lg bg-blue-100">
+                                    <option value="" selected>Students</option>
+                                    <option value="">Staffs</option>
+                                </select>
                             </div>
                         </div>
-
-                        <img src="../assets/images/green-hand-coin.png" class="w-[85px]">
-                    </div>
-
-                    <div class="border border-gray-300 rounded-lg bg-white px-3 py-4 flex justify-between items-center">
-                        <div class="flex items-center space-x-3">
-                            <div>
-                                <span class="text-xs text-gray-400 font-medium uppercase">absent</span>
-                                <h3 class="text-xl md:text-2xl font-bold" id="subject-count">0</h3>
-
-                                <!-- <div class="flex items-center space-x-3 mt-2">
-                                                    <div class="flex items-center space-x-2">
-                                                        <span class="rounded-full p-1 bg-[#233255]"></span>
-                                                        <span class="text-xs">Male</span>
-                                                    </div>
-            
-                                                    <div class="flex items-center space-x-2">
-                                                        <span class="rounded-full p-1 bg-blue-500"></span>
-                                                        <span class="text-xs">Female</span>
-                                                    </div>
-                                                </div> -->
-                            </div>
-                        </div>
-
-                        <img src="../assets/images/red-hand-coin.png" class="w-[85px]">
+                    
+                        <div id="attendance-chart" class="mt-3"></div>
                     </div>
                 </div>
             </div>
@@ -399,33 +351,33 @@
                             <div class="calendar-grid" id="calendar"></div>
                         </div>
                     </div>
-
-                    <!-- Task -->
-                    <div
-                        class="border border-gray-300 rounded-lg mt-8 p-3 bg-white block overflow-y-scroll [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-semibold text-lg">Upcoming events</h3>
-                            <a href="events.html" class="font-medium text-xs cursor-pointer text-blue-700 underline">See
-                                more</a>
-                        </div>
-
-                        <div class="flex items-center space-x-3 mt-4">
-                            <span id="all-button"
-                                class="filter-button cursor-pointer bg-blue-100 border border-blue-100 text-blue-600 px-4 text-xs py-1 rounded-full">All</span>
-                            <span id="today-button"
-                                class="filter-button cursor-pointer bg-transparent border border-blue-600 text-blue-600 px-4 text-xs py-1 rounded-full">Today</span>
-                            <span id="weekly-button"
-                                class="filter-button cursor-pointer bg-transparent border border-blue-600 text-blue-600 px-4 text-xs py-1 rounded-full">Weekly</span>
-                            <span id="monthly-button"
-                                class="filter-button cursor-pointer bg-transparent border border-blue-600 text-blue-600 px-4 text-xs py-1 rounded-full">Monthly</span>
-                        </div>
-
-                        <!-- actual event -->
-                        <div id="events-container" class="space-y-3 mt-4"></div>
-                    </div>
                 </div>
 
-                <div class="bg-white border border-gray-300 rounded-lg px-3 py-6">
+                <!-- Task -->
+                <div
+                    class="border border-gray-300 rounded-lg p-3 bg-white block overflow-y-scroll [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300">
+                    <div class="flex items-center justify-between">
+                        <h3 class="font-semibold text-lg">Upcoming events</h3>
+                        <a href="events.html" class="font-medium text-xs cursor-pointer text-blue-700 underline">See
+                            more</a>
+                    </div>
+                
+                    <div class="flex items-center space-x-3 mt-4">
+                        <span id="all-button"
+                            class="filter-button cursor-pointer bg-blue-100 border border-blue-100 text-blue-600 px-4 text-xs py-1 rounded-full">All</span>
+                        <span id="today-button"
+                            class="filter-button cursor-pointer bg-transparent border border-blue-600 text-blue-600 px-4 text-xs py-1 rounded-full">Today</span>
+                        <span id="weekly-button"
+                            class="filter-button cursor-pointer bg-transparent border border-blue-600 text-blue-600 px-4 text-xs py-1 rounded-full">Weekly</span>
+                        <span id="monthly-button"
+                            class="filter-button cursor-pointer bg-transparent border border-blue-600 text-blue-600 px-4 text-xs py-1 rounded-full">Monthly</span>
+                    </div>
+                
+                    <!-- actual event -->
+                    <div id="events-container" class="space-y-3 mt-4"></div>
+                </div>
+
+                <!-- <div class="bg-white border border-gray-300 rounded-lg px-3 py-6">
                     <div class="flex items-center justify-between">
                         <h3 class="font-semibold text-md md:text-lg">Attendance</h3>
 
@@ -445,7 +397,7 @@
                     </div>
 
                     <div id="attendance-chart" class="mt-3"></div>
-                </div>
+                </div> -->
             </div>
         </div>
 
