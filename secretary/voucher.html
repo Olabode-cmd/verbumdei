@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Title -->
-    <title>Teachers Profile || Verbum</title>
+    <title>Voucher|| Verbum Dei MS</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="/assets/images/fav.png">
@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <body>
@@ -34,7 +35,7 @@
             <div class="w-full flex items-center justify-end ms-auto md:justify-between gap-x-1 md:gap-x-3">
                 <div class="hidden md:block">
                     <p class="font-medium text-sm text-gray-600">Home / Dashboard</p>
-                    <h3 class="text-md md:text-xl text-blue-600 font-bold">Student Management</h3>
+                    <h3 class="text-md md:text-xl text-blue-600 font-bold">Voucher</h3>
                 </div>
 
 
@@ -79,7 +80,7 @@
                             aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
                             <img class="shrink-0 size-[38px] rounded-full" src="" alt="Avatar">
                         </button>
-                    
+
                         <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg mt-2 after:h-4 after:absolute after:-bottom-4 after:start-0 after:w-full before:h-4 before:absolute before:-top-4 before:start-0 before:w-full"
                             role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-account">
                             <div class="py-3 px-5 bg-gray-100 rounded-t-lg dark:bg-neutral-700">
@@ -142,7 +143,7 @@
                         </svg>
                     </li>
                     <li class="text-sm font-semibold text-gray-800 truncate" aria-current="page"></li>
-                    Students
+                    Inventory
                     </li>
                 </ol>
                 <!-- End Breadcrumb -->
@@ -169,31 +170,32 @@
                 </a>
                 <!-- End Logo -->
             </div>
-    
+
             <!-- Content -->
             <div
                 class="h-full flex flex-col justify-between overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300">
                 <div>
-    
+
                     <!-- Nav Links -->
-                    <nav class="hs-accordion-group p-3 py-10 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
+                    <nav class="hs-accordion-group p-3 py-10 w-full flex flex-col flex-wrap"
+                        data-hs-accordion-always-open>
                         <ul class="flex flex-col space-y-2">
                             <li>
-                                <a class="flex items-center gap-x-3.5 font-medium py-2 px-2.5 text-sm text-white rounded-lg bg-[#007BFF] focus:outline-none focus:bg-gray-100"
+                                <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
                                     href="index.html">
-                                    <i class="fa fa-home text-white"></i>
+                                    <i class="fa fa-home text-gray-500"></i>
                                     <span>Home</span>
                                 </a>
                             </li>
-    
+
                             <li>
-                                <a class="flex items-center gap-x-3.5 py-2 font-medium px-2.5 hover:bg-gray-100 text-sm text-gray-500 rounded-lg focus:outline-none"
+                                <a class="flex items-center gap-x-3.5 py-2 font-medium px-2.5 hover:bg-gray-100 text-sm text-gray-800 rounded-lg focus:outline-none"
                                     href="students.html">
                                     <i class="fa fa-graduation-cap text-gray-500"></i>
                                     <span>Student Management</span>
                                 </a>
                             </li>
-    
+                            
                             <li>
                                 <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
                                     href="teachers.html">
@@ -201,7 +203,7 @@
                                     Teacher Management
                                 </a>
                             </li>
-    
+                            
                             <li>
                                 <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
                                     href="fees.html">
@@ -209,7 +211,7 @@
                                     Fees and Payments
                                 </a>
                             </li>
-    
+                            
                             <li>
                                 <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
                                     href="classes.html">
@@ -219,14 +221,13 @@
                             </li>
 
                             <li>
-                                <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
+                                <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white rounded-lg bg-blue-600"
                                     href="voucher.html">
-                                    <i class="fa fa-pen text-gray-500"></i>
+                                    <i class="fa fa-sitemap text-white"></i>
                                     Voucher
                                 </a>
                             </li>
 
-    
                             <li>
                                 <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
                                     href="events.html">
@@ -234,14 +235,15 @@
                                     Event Management
                                 </a>
                             </li>
+
                         </ul>
                     </nav>
                 </div>
-    
+
                 <div class="mt-6">
-    
+
                     <hr class="mb-2" />
-    
+
                 </div>
             </div>
         </div>
@@ -253,117 +255,153 @@
     <div class="w-full lg:ps-64">
         <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
             <!-- your content goes here ... -->
+            <div class="flex items-center justify-between">
+                <div class="relative">
+                    <div class="flex justify-between mb-4">
+                        <h2 class="text-xl font-semibold">Voucher List</h2>
 
-            <!-- <div class="w-full flex items-center justify-end ms-auto md:justify-between gap-x-1 md:gap-x-3">
-                <a class='flex items-center space-x-0 md:space-x-2 px-2 py-2 md:px-3 md:py-2 rounded-md border border-gray-300 bg-white hover:bg-gray-100 duration-300'
-                    href='teachers.html'>
-                    <i class="fa fa-chevron-left"></i>
-                    <span class="font-medium text-sm me-2 md:me-0">Back</span>
-                </a>
-            </div> -->
+                    </div>
+                </div>
 
-        <div class="bg-white px-6 py-10 rounded-lg">
-            <div class="flex items-start justify-between">
-                <div
-                    class="w-[95px] h-[95px] md:w-[125px] md:h-[125px] rounded-full overflow-hidden border border-blue-600 border-4">
-                    <img src="" alt="pfp"
-                        class="teacher-profile-image w-full h-full object-cover">
+                <div class="flex items-center space-x-2">
+                    <button type="button"
+                        class="inline-flex items-center gap-x-2 text-sm px-3 py-2 rounded-md border border-blue-600 bg-transparent hover:bg-blue-100 duration-300"
+                        data-hs-overlay="#create-event-modal">
+                        <span class="font-medium text-blue-600 text-sm">Raise Voucher</span>
+                    </button>
+
                 </div>
-                <div>
-                    <img src="/assets/images/dots.svg" alt="dots">
-                </div>
+
             </div>
 
-            <div class="flex items-end justify-between">
-                <div class="pl-2 mt-3">
-                    <div class="flex items-center space-x-2">
-                        <h1 class="text-xl md:text-2xl font-bold teacher-name"></h1>
-                        <span class="bg-green-100 text-green-600 font-medium text-xs px-2 py-1 rounded-full status"></span>
-                    </div>
-                    <div class="flex items-center space-x-2 cursor-pointer mt-1">
-                        <p class="text-gray-800 font-medium text-sm teacher-id"></p>
-                    </div>
-                    <p class="mt-2 text-gray-500 font-bold text-sm uppercase position"></p>
-                </div>
-            </div>
 
-            <div class="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-4">
-                <div>
-                    <p class="text-gray-500 font-medium text-md mb-2">Gender</p>
-                    <div class="flex items-center space-x-2">
-                        <i class="fa fa-user bg-blue-600 text-white px-3 py-2.5 rounded-full"></i>
-                        <p class="text-md font-semibold gender"></p>
-                    </div>
-                </div>
-                <div>
-                    <p class="text-gray-500 font-medium text-md mb-2">Type</p>
-                    <div class="flex items-center space-x-2">
-                        <i class="fa fa-calendar-days bg-blue-600 text-white px-3 py-3 rounded-full"></i>
-                        <p class="text-md font-semibold employment-type"></p>
-                    </div>
-                </div>
-                <div>
-                    <p class="text-gray-500 font-medium text-md mb-2">Date of employment</p>
-                    <div class="flex items-center space-x-2">
-                        <i class="fa fa-calendar bg-blue-600 text-white px-3 py-3 rounded-full"></i>
-                        <p class="text-md font-semibold employment-date"></p>
-                    </div>
-                </div>
-                <div>
-                    <p class="text-gray-500 font-medium text-md mb-2">NIN</p>
-                    <div class="flex items-center space-x-2">
-                        <i class="fa fa-book bg-blue-600 text-white px-3 py-3 rounded-full"></i>
-                        <p class="text-md font-semibold nin"></p>
-                    </div>
-                </div>
-                <div>
-                    <p class="text-gray-500 font-medium text-md mb-2">Address</p>
-                    <div class="flex items-center space-x-2">
-                        <i class="fa fa-house bg-blue-600 text-white px-3 py-3 rounded-full"></i>
-                        <p class="text-md font-semibold address"></p>
-                    </div>
-                </div>
-                <div>
-                    <p class="text-gray-500 font-medium text-md mb-2">Phone number 1</p>
-                    <div class="flex items-center space-x-2">
-                        <i class="fa fa-phone bg-blue-600 text-white px-3 py-3 rounded-full"></i>
-                        <p class="text-md font-semibold phone-1"></p>
-                    </div>
-                </div>
-                <div>
-                    <p class="text-gray-500 font-medium text-md mb-2">Phone number 2</p>
-                    <div class="flex items-center space-x-2">
-                        <i class="fa fa-phone bg-blue-600 text-white px-3 py-3 rounded-full"></i>
-                        <p class="text-md font-semibold phone-2"></p>
-                    </div>
-                </div>
-                <div>
-                    <p class="text-gray-500 font-medium text-md mb-2">Email</p>
-                    <div class="flex items-center space-x-2">
-                        <i class="fa fa-envelope bg-blue-600 text-white px-3 py-3 rounded-full"></i>
-                        <p class="text-md font-semibold email"></p>
-                    </div>
-                </div>
-            </div>
-        </div>
+            <div class="flex flex-col bg-white rounded-lg px-3 py-6">
+                <div class="overflow-x-auto ">
+                    <div class="min-w-full inline-block align-middle">
+                        <div data-hs-datatable='{
+                    "pageLength": 10,
+                    "pagingOptions": {
+                      "pageBtnClasses": "min-w-[40px] flex justify-center items-center text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 py-2.5 text-sm rounded-full disabled:opacity-50 disabled:pointer-events-none"
+                    },
+                    "selecting": true,
+                    "rowSelectingOptions": {
+                      "selectAllSelector": "#hs-table-search-checkbox-all"
+                    },
+                    "language": {
+                      "zeroRecords": "<div class=\"py-10 px-5 flex flex-col justify-center items-center text-center\"><svg class=\"shrink-0 size-6 text-gray-500" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"11\" cy=\"11\" r=\"8\"/><path d=\"m21 21-4.3-4.3\"/></svg><div class=\"max-w-sm mx-auto\"><p class=\"mt-2 text-sm text-gray-600">No search results</p></div></div>"
+                    }
+                  }'>
 
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full bg-white border border-gray-200 shadow-sm rounded-lg">
+                                    <thead class="bg-gray-50">
+                                        <tr>
+                                            <th
+                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Voucher No
+                                            </th>
+                                            <th
+                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Type
+                                            </th>
+                                            <th
+                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Name
+                                            </th>
+                                            <th
+                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Unit Cost
+                                            </th>
+                                            <th
+                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Quantity
+                                            </th>
+                                            <th
+                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Date
+                                            </th>
+                                            <th
+                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Status
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="voucher-table-body" class="divide-y divide-gray-200"></tbody>
+                                </table>
+                            </div>
 
+                        </div>
 
+                    </div>
 
-        </div>
+                    <!-- Modals -->
+                    <div id="create-event-modal" class="hs-overlay  hidden fixed inset-0 z-50 overflow-y-auto"
+                        aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                        <div class="min-h-screen mt-8 px-4 text-center">
+                            <!-- Background overlay -->
+                            <div class="fixed inset-0 bg-black bg-opacity-50 transition-opacity"></div>
 
-    </div>
-<script>
+                            <!-- Modal Dialog -->
+                            <div
+                                class="inline-block align-middle bg-white rounded-lg text-left shadow-xl transform transition-all my-8 max-w-lg w-full">
+                                <!-- Modal Content -->
+                                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-6 rounded-lg">
+                                    <div class="text-center sm:text-left">
+                                        <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Raise
+                                            Voucher
+                                        </h3>
+                                        <form class="mt-4" id="voucher">
+                                            <div class="mb-4">
+                                                <label class="block text-sm font-medium text-gray-700">Type</label>
+                                                <select id="inventory-type"
+                                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                                    placeholder="Enter event name" required>
+                                                    <option>select type</option>
 
-</script>
-    <script type="module" src="/assets/js/teacher-detail.js"></script>
-    <script src="/assets/js/logout.js"></script>
-    <script type="module" src="/assets/js/auth.js"></script>
-    <script type="module" src="/assets/js/index.js"></script>
-    <script type="module" src="/assets/js/dashboard.js"></script>
-    
-    
+                                                </select>
+                                            </div>
+                                            <div class="mb-4">
+                                                <label class="block text-sm font-medium text-gray-700">Name</label>
+                                                <input type="text" id="name"
+                                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                                    required>
+                                            </div>
+                                            <div class="mb-4">
+                                                <label class="block text-sm font-medium text-gray-700">Quantity</label>
+                                                <input type="text" id="quantity"
+                                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                                    required>
+                                            </div>
+                                            <div class="mb-4">
+                                                <label class="block text-sm font-medium text-gray-700">Unit cost</label>
+                                                <input type="text" id="unit_cost"
+                                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                                    required>
+                                            </div>
+                                            <div
+                                                class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse rounded-b-lg">
+                                                <button type="submit"
+                                                    class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">Create</button>
+                                                <button type="button"
+                                                    class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none sm:mt-0 sm:w-auto sm:text-sm"
+                                                    data-hs-overlay="#create-event-modal">Cancel</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
 
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <script src="/assets/js/logout.js"></script>
+                <script type="module" src="/assets/js/auth.js"></script>
+                <script type="module" src="/assets/js/index.js"></script>
+                <script type="module" src="/assets/js/getstudent.js"></script>
+                <script type="module" src="/assets/js/dashboard.js"></script>
+                <script type="module" src="/assets/js/inventory.js"></script>
+                <script type="module" src="/assets/js/voucher.js"></script>
 </body>
 
 </html>
