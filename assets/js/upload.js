@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     classData.forEach((item) => {
       const option = document.createElement("option");
       option.dataset.id = item.id;
-      option.value = item.id;
+      option.value = item.name;
       option.textContent = item.name;
       classSelect.appendChild(option);
     });
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     termData.forEach((item) => {
       const option = document.createElement("option");
       option.dataset.id = item.id;
-      option.value = item.id;
+      option.value = item.name;
       option.textContent = item.name;
       termSelect.appendChild(option);
     });
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     subjectData.forEach((item) => {
       const option = document.createElement("option");
       option.dataset.id = item.id;
-      option.value = item.id;
+      option.value = item.name;
       option.textContent = item.name;
       subjectSelect.appendChild(option);
     });
@@ -78,56 +78,58 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // Handle form submission
-  const form = document.querySelector("form");
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
+const form = document.getElementById("academic");
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
 
-    const formData = new FormData();
-    formData.append("student", document.getElementById("registrationId").value);
-    formData.append("subject", document.getElementById("subjectSelect").value);
-    formData.append("grade", document.getElementById("classSelect").value);
-    formData.append("term", document.getElementById("termSelect").value);
-    formData.append("first_ca", document.getElementById("first_ca").value);
-    formData.append("second_ca", document.getElementById("second_ca").value);
-    formData.append("third_ca", document.getElementById("third_ca").value);
-    formData.append("examination", document.getElementById("exam").value);
-    formData.append("comment", document.getElementById("comment").value);
+  const formData = new FormData();
+  formData.append("student", document.getElementById("registrationId").value);
+  formData.append("subject", document.getElementById("subjectSelect").value);
+  formData.append("grade", document.getElementById("classSelect").value);
+  formData.append("term", document.getElementById("termSelect").value);
+  formData.append("first_ca", document.getElementById("first_ca").value);
+  formData.append("second_ca", document.getElementById("second_ca").value);
+  formData.append("third_ca", document.getElementById("third_ca").value);
+  formData.append("examination", document.getElementById("exam").value);
+  formData.append("comment", document.getElementById("comment").value);
 
-    try {
-      const response = await fetch(`${api}/result/upload/`, {
-        method: "POST",
-        headers: {
-          Authorization: `Token ${token}`,
-        },
-        body: formData,
-      });
-
-      const alertContainer = document.getElementById("alertContainer");
-      if (response.ok) {
-        alertContainer.innerHTML = `
-          <div class="flex items-center p-4 mb-4 border-l-4 bg-green-100 border-green-500 text-green-700" role="alert">
-            <span class="font-medium">Success:</span> Result uploaded successfully!
-          </div>`;
-        setTimeout(() => (alertContainer.innerHTML = ""), 5000);
-        form.reset(); // Clear the form
-      } else {
-        const errorResponse = await response.json();
-        alertContainer.innerHTML = `
-          <div class="flex items-center p-4 mb-4 border-l-4 bg-red-100 border-red-500 text-red-700" role="alert">
-            <span class="font-medium">Error:</span> ${
-              errorResponse.message || "Failed to upload results."
-            }
-          </div>`;
-        setTimeout(() => (alertContainer.innerHTML = ""), 5000);
-      }
-    } catch (error) {
-      console.error("Error uploading results:", error);
-      const alertContainer = document.getElementById("alertContainer");
-      alertContainer.innerHTML = `
-        <div class="flex items-center p-4 mb-4 border-l-4 bg-red-100 border-red-500 text-red-700" role="alert">
-          <span class="font-medium">Error:</span> An unexpected error occurred.
-        </div>`;
-      setTimeout(() => (alertContainer.innerHTML = ""), 5000);
-    }
+try {
+  const response = await fetch(`${api}/result/upload/`, {
+    method: "POST",
+    headers: {
+      Authorization: `Token ${token}`,
+    },
+    body: formData,
   });
+
+  const alertContainer = document.getElementById("alertContainer");
+  if (response.ok) {
+    alertContainer.innerHTML = `
+      <div class="flex items-center p-4 mb-4 border-l-4 bg-green-100 border-green-500 text-green-700" role="alert">
+        <span class="font-medium">Success:</span> Result uploaded successfully!
+      </div>`;
+    setTimeout(() => (alertContainer.innerHTML = ""), 5000);
+    form.reset(); // Clear the form
+  } else {
+    const errorResponse = await response.json();
+    console.error("Server response:", errorResponse);
+    alertContainer.innerHTML = `
+      <div class="flex items-center p-4 mb-4 border-l-4 bg-red-100 border-red-500 text-red-700" role="alert">
+        <span class="font-medium">Error:</span> ${
+          errorResponse.message || JSON.stringify(errorResponse)
+        }
+      </div>`;
+    setTimeout(() => (alertContainer.innerHTML = ""), 5000);
+  }
+} catch (error) {
+  console.error("Error uploading results:", error);
+  const alertContainer = document.getElementById("alertContainer");
+  alertContainer.innerHTML = `
+    <div class="flex items-center p-4 mb-4 border-l-4 bg-red-100 border-red-500 text-red-700" role="alert">
+      <span class="font-medium">Error:</span> An unexpected error occurred.
+    </div>`;
+  setTimeout(() => (alertContainer.innerHTML = ""), 5000);
+}
+
+});
 });

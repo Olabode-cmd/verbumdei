@@ -1,7 +1,7 @@
 import { api } from "./api.js";
 
 const token = localStorage.getItem("authToken");
-
+// all students
 document.addEventListener("DOMContentLoaded", function () {
   const token = localStorage.getItem("authToken");
   fetch(`${api}/student/students/`, {
@@ -75,13 +75,15 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+
 document.addEventListener("DOMContentLoaded", function () {
   const urlParams = new URLSearchParams(window.location.search);
   const token = localStorage.getItem("authToken");
   const studentID = urlParams.get("studentID");
   const studentApiUrl = `${api}/student/student/${studentID}`;
   const paymentApiUrl = `${api}/payment/student-payment/`;
-
+  const termName = document.getElementById('term').value;
+  
   if (studentID) {
     fetch(studentApiUrl, {
       method: "GET",
@@ -94,7 +96,8 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((student) => {
         renderStudentDetails(student);
         // Fetch payment history using the student's registration_id
-        fetchPaymentHistory(student.registration_id);
+        const studentRegID = student.registration_id;
+        fetchPaymentHistory(studentRegID);
       })
       .catch((error) =>
         console.error("Error fetching student details:", error)
@@ -117,8 +120,18 @@ document.addEventListener("DOMContentLoaded", function () {
     ).toLocaleDateString();
     document.querySelector(".parent").textContent = student.parent;
     document.querySelector(".home-address").textContent = student.home_address;
-  }
 
+    // for the report sheet
+    document.querySelector(
+      ".fullname"
+    ).textContent = `NAME: ${student.first_name} ${student.other_name} ${student.last_name}`;
+    document.querySelector(".studentid").textContent = `REGISTRATION ID: ${student.registration_id}`;
+    document.querySelector(".dob").textContent = `AGE: ${new Date().getFullYear() - new Date(student.date_of_birth).getFullYear()
+    }`;
+    document.querySelector(".sex").textContent = `GENDER: ${student.gender}`;
+  
+  }
+  
   function fetchPaymentHistory(registrationID) {
     if (!registrationID) {
       console.error("Registration ID is missing.");
@@ -186,3 +199,26 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 });
+
+
+// fetch terms as dropdown
+const termSelect = document.getElementById("term");
+const termResponse = await fetch(`${api}/term/all/`, {
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Token ${token}`,
+  },
+});
+if (!termResponse.ok) throw new Error("Failed to fetch term data");
+const termData = await termResponse.json();
+
+// Clear existing options and add default option
+termSelect.innerHTML = `<option value="">Select a term</option>`;
+termData.forEach((item) => {
+  const option = document.createElement("option");
+  option.dataset.id = item.id;
+  option.value = item.name;
+  option.textContent = item.name;
+  termSelect.appendChild(option);
+});
+

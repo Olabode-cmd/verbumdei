@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verbum Dei Academy - Student Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<style>
+    #download-button {
+  position: fixed; /* Fixes the button in place */
+  bottom: 20px; /* Distance from the bottom of the screen */
+  right: 20px; /* Distance from the right of the screen */
+  z-index: 1000; /* Makes sure it is on top of other elements */
+}
+
+</style>
+<body class="bg-gray-100 p-6">
+    <button class="px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded hover:bg-blue-700"
+        onclick="downloadAsPDF()">
+        Download as PDF
+    </button>
+    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6" id="page-content">
+        <div class="text-center mb-6">
+            <img src="../assets/images/logo.png" alt="logo" class="mx-auto mb-4">
+            <h1 class="text-2xl font-extrabold text-gray-800">Verbum Dei Academy</h1>
+            <p class="text-gray-600">Verbum Dei Academy Close, Owerri North L.G.A. Imo State.</p>
+            <p class="font-semibold text-lg text-gray-800 term-tile">END OF: 2023/2024 Academic Session, 3rd Term</p>
+        </div>
+
+        <!-- Student Information -->
+        <div class="grid grid-cols-2 gap-4 mb-6">
+            <div>
+                <p><strong class="text-gray-700 name">NAME OF STUDENT:</strong></p>
+                <p><strong class="text-gray-700 reg-id">REGISTRATION ID:</strong></p>
+            
+            </div>
+            <div class="text-right">
+                <!-- <p class="font-semibold grand-total">Grand Total: 0</p>
+                <p class="font-semibold weighted-average">Weighted Average: 0%</p> -->
+            </div>
+        </div>
+
+
+        <!-- Academic Performance Table -->
+        <div class="mb-6">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800">Academic Performance</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 text-left text-sm">
+                    <thead>
+                        <tr class="bg-gray-200 text-gray-700">
+                            <th class="border border-gray-300 px-4 py-2">Subject</th>
+                            <th class="border border-gray-300 px-4 py-2">1st Test (10)</th>
+                            <th class="border border-gray-300 px-4 py-2">2nd Test (10)</th>
+                            <th class="border border-gray-300 px-4 py-2">3rd Test (20)</th>
+                            <th class="border border-gray-300 px-4 py-2">Exam (60)</th>
+                            <th class="border border-gray-300 px-4 py-2">Total (100)</th>
+                            <th class="border border-gray-300 px-4 py-2">Grade</th>
+                        </tr>
+                    </thead>
+                    <tbody id="academic-data">
+                        <div id="loading-spinner" class="hidden">Loading...</div>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Skills Development -->
+        <div class="border-2 border-gray-200 p-4 rounded personal-development">
+            <h3 class="font-semibold mb-2 text-gray-700">Personal Development</h3>
+            <!-- Dynamically populated here -->
+        </div>
+
+        <div class="border-2 border-gray-200 p-4 rounded social-development">
+            <h3 class="font-semibold mb-2 text-gray-700">Social Development</h3>
+            <!-- Dynamically populated here -->
+        </div>
+        <div class="border-2 border-gray-200 p-4 rounded psychomotor-development">
+            <h3 class="font-semibold mb-2 text-gray-700">Psychomotor Development</h3>
+            <!-- Dynamically populated here -->
+        </div>
+        <div class="border-2 border-gray-200 p-4 rounded sense-of-responsibility">
+            <h3 class="font-semibold mb-2 text-gray-700">Sense of Responsibility</h3>
+            <!-- Dynamically populated here -->
+        </div>
+        <div class="border-2 border-gray-200 p-4 rounded">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800">Remarks</h2>
+            <div class="mb-4 teacher-remarks">
+                <p class="font-semibold text-gray-700">Class Teacher's remarks:</p>
+                <!-- Dynamically populated here -->
+            </div>
+            <div class="head-teacher-remarks">
+                <p class="font-semibold text-gray-700">Principal's comment:</p>
+                <!-- Dynamically populated here -->
+            </div>
+        </div>
+
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+    async function downloadAsPDF() {
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF("p", "mm", "a4");
+
+        const modalContent = document.getElementById("page-content");
+
+        // Use html2canvas to render the full modal content as a canvas
+        html2canvas(modalContent, {
+            scale: 2, // Increase quality
+            useCORS: true, // Allow cross-origin images
+        }).then((canvas) => {
+            const imgData = canvas.toDataURL("image/png");
+
+            const imgWidth = 210; // A4 width in mm
+            const pageHeight = 297; // A4 height in mm
+            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+            let heightLeft = imgHeight;
+
+            let position = 0;
+
+            // Add content to PDF, handle page breaks
+            pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+
+            while (heightLeft > 0) {
+                position = heightLeft - imgHeight;
+                pdf.addPage();
+                pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+            }
+
+            // Save the generated PDF
+            pdf.save("Report_Card.pdf");
+        });
+    }
+</script>
+
+
+<script type="module" src="/assets/js/print-result.js"></script>
+</html>

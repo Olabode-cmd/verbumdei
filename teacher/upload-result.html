@@ -223,8 +223,7 @@
                 <div>
 
                     <!-- Nav Links -->
-                    <nav class="hs-accordion-group p-3 py-10 w-full flex flex-col flex-wrap"
-                        data-hs-accordion-always-open>
+                    <nav class="hs-accordion-group p-3 py-10 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
                         <ul class="flex flex-col space-y-2">
                             <li>
                                 <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
@@ -233,15 +232,6 @@
                                     <span>Home</span>
                                 </a>
                             </li>
-
-                            <li>
-                                <a class="flex items-center gap-x-3.5 py-2 font-medium px-2.5 hover:bg-gray-100 text-sm text-gray-800 rounded-lg focus:outline-none"
-                                    href="class.html">
-                                    <i class="fa fa-chalkboard-user text-gray-500"></i>
-                                    <span>Class</span>
-                                </a>
-                            </li>
-
                             <li>
                                 <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
                                     href="attendance.html">
@@ -249,23 +239,6 @@
                                     Attendance
                                 </a>
                             </li>
-
-                            <li>
-                                <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
-                                    href="subjects.html">
-                                    <i class="fa fa-money-bill text-gray-500"></i>
-                                    Subjects
-                                </a>
-                            </li>
-
-                            <li>
-                                <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
-                                    href="#">
-                                    <i class="fa fa-pen text-gray-500"></i>
-                                    Assessment
-                                </a>
-                            </li>
-
                             <li>
                                 <a class="flex items-center gap-x-3.5 font-medium py-2 px-2.5 text-sm text-white rounded-lg bg-[#007BFF] focus:outline-none focus:bg-gray-100"
                                     href="results.html">
@@ -303,9 +276,16 @@
     <!-- End Sidebar -->
 
     <!-- Content -->
+    <!-- Academic performance -->
     <div class="w-full lg:ps-64">
         <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
-            <!-- your content goes here ... -->
+            <div class="w-full flex items-center justify-end ms-auto md:justify-between gap-x-1 md:gap-x-3">
+                <a class='flex items-center space-x-0 md:space-x-2 px-2 py-2 md:px-3 md:py-2 rounded-md border border-gray-300 bg-white hover:bg-gray-100 duration-300'
+                    href='results.html'>
+                    <i class="fa fa-chevron-left"></i>
+                    <span class="font-medium text-sm me-2 md:me-0">Back</span>
+                </a>
+            </div>
             <div id="alertContainer" class="mb-4"></div>
 
             <div class="bg-white rounded-lg overflow-hidden">
@@ -313,29 +293,30 @@
                     <p class="text-md lg:text-lg font-semibold">Upload results</p>
                 </div>
 
-                <form action="#" method="POST">
+                <form action="#" id="academic" method="POST">
                     <div class="px-3 py-6">
                         <div class="grid gap-4 grid-cols-1 md:grid-cols-3 mt-4">
-                
+
                             <!-- Student ID -->
-                            <div class="relative w-full">
-                                <label for="studentSearch" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Enter Student ID
+                            <div>
+                                <label for="registrationId" class="block text-sm font-medium mb-2 text-left">
+                                    Search by Registration ID
                                 </label>
-                                <input type="text" id="studentSearch" required
-                                    class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none disabled:opacity-50 disabled:pointer-events-none">
+                                <input type="text" id="registrationId"
+                                    class="py-3 px-4 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500"
+                                    placeholder="Enter Registration ID or Name">
                             </div>
-                
+
                             <!-- Subject -->
                             <div>
                                 <label class="block text-sm font-medium mb-2">Subject</label>
-                                <select id="subjectSelect" name="class" required
+                                <select id="subjectSelect" name="subject" required
                                     class="py-3 px-4 block w-full border-gray-200 border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
                                     <option value="">Select subject</option>
                                     <!-- Options will be populated dynamically -->
                                 </select>
                             </div>
-                
+
                             <!-- Class Select -->
                             <div>
                                 <label class="block text-sm font-medium mb-2">Class</label>
@@ -345,7 +326,7 @@
                                     <!-- Options will be populated dynamically -->
                                 </select>
                             </div>
-                
+
                             <!-- Term Select -->
                             <div>
                                 <label class="block text-sm font-medium mb-2">Term</label>
@@ -355,36 +336,150 @@
                                     <!-- Options will be populated dynamically -->
                                 </select>
                             </div>
+
                             <!-- 1st Continuous Assessment -->
                             <div>
                                 <label class="block text-sm font-medium mb-2">1st Continuous Assessment</label>
-                                <input type="number" id="first_ca" name="first_ca" required
-                                    class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none">
+                                <select id="first_ca" name="score" required
+                                    class="py-3 px-4 block w-full border-gray-200 border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                    <option value="">Select point</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
                             </div>
 
                             <!-- 2nd Continuous Assessment -->
                             <div>
                                 <label class="block text-sm font-medium mb-2">2nd Continuous Assessment</label>
-                                <input type="number" id="second_ca" name="second_ca" required
-                                    class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none">
+                                <select id="second_ca" name="score" required
+                                    class="py-3 px-4 block w-full border-gray-200 border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                    <option value="">Select point</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
                             </div>
 
                             <!-- 3rd Continuous Assessment -->
                             <div>
                                 <label class="block text-sm font-medium mb-2">3rd Continuous Assessment</label>
-                                <input type="number" id="third_ca" name="third_ca" required
-                                    class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none">
+                                <select id="third_ca" name="score" required
+                                    class="py-3 px-4 block w-full border-gray-200 border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                    <option value="">Select point</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                </select>
                             </div>
 
-                
                             <!-- Exam -->
                             <div>
                                 <label class="block text-sm font-medium mb-2">Exam</label>
-                                <input type="text" id="exam" required
-                                    class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none disabled:opacity-50 disabled:pointer-events-none">
+                                <select id="exam" name="exam" required
+                                    class="py-3 px-4 block w-full border-gray-200 border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                    <option value="">Select point</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>
+                                    <option value="32">32</option>
+                                    <option value="33">33</option>
+                                    <option value="34">34</option>
+                                    <option value="35">35</option>
+                                    <option value="36">36</option>
+                                    <option value="37">37</option>
+                                    <option value="38">38</option>
+                                    <option value="39">39</option>
+                                    <option value="30">40</option>
+                                    <option value="41">41</option>
+                                    <option value="42">42</option>
+                                    <option value="43">43</option>
+                                    <option value="44">44</option>
+                                    <option value="45">45</option>
+                                    <option value="46">46</option>
+                                    <option value="47">47</option>
+                                    <option value="48">48</option>
+                                    <option value="49">49</option>
+                                    <option value="50">50</option>
+                                    <option value="51">51</option>
+                                    <option value="52">52</option>
+                                    <option value="53">53</option>
+                                    <option value="54">54</option>
+                                    <option value="55">55</option>
+                                    <option value="56">56</option>
+                                    <option value="57">57</option>
+                                    <option value="58">58</option>
+                                    <option value="59">59</option>
+                                    <option value="60">60</option>
+                                </select>
                             </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Comment</label>
+                                <input type="text" id="comment" name="exam" required
+                                    class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none">
+                            </div>
+
                         </div>
-                
+
                         <div class="flex md:justify-end">
                             <button type="submit"
                                 class="mt-4 bg-blue-600 text-white text-sm px-4 py-3 rounded-lg font-medium hover:bg-blue-700 duration-150 w-full md:w-auto">Upload</button>
@@ -392,12 +487,389 @@
                     </div>
                 </form>
 
+
             </div>
 
 
 
         </div>
 
+
+    </div>
+
+    <!--  Personal Development -->
+    <div class="w-full lg:ps-64">
+        <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
+            <div id="alertContainer" class="mb-4"></div>
+            <div class="bg-gray-100 px-4 py-3 border-b">
+                <p class="text-md lg:text-lg font-semibold text-gray-800">FOR STUDENTS IN YOUR CLASS</p>
+            </div>
+            <div class="bg-white rounded-lg overflow-hidden">
+                <div class="bg-gray-100 px-3 py-2">
+                    <p class="text-md lg:text-lg font-semibold">Personal Development</p>
+                </div>
+
+                <form action="#" id="personal-dev" method="POST">
+                    <div class="px-3 py-6">
+                        <div class="grid gap-4 grid-cols-1 md:grid-cols-3 mt-4">
+
+                            <!-- Student ID -->
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Student</label>
+                                <select id="pStudent" name="student" required
+                                    class="py-3 px-4 block w-full border-gray-200 border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                    <option value="">Select student</option>
+                                    <!-- Options will be populated dynamically -->
+                                </select>
+                            </div>
+
+                            <!-- Term Select -->
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Term</label>
+                                <select id="termPersonal" name="term" required
+                                    class="py-3 px-4 block w-full border-gray-200 border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                    <option value="">Select term</option>
+                                    <!-- Options will be populated dynamically -->
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Title</label>
+                                <select id="ptitle" name="term" required
+                                    class="py-3 px-4 block w-full border-gray-200 border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                    <option value="">select </option>
+                                    <option value="Obedience">Obedience</option>
+                                    <option value="Honesty">Honesty</option>
+                                    <option value="Self Control">Self Control</option>
+                                    <option value="Self Reliance<">Self Reliance</option>
+                                    <option value="Use of Initiative">Use of Initiative</option>
+
+                                </select>
+                            </div>
+
+                            <!-- score -->
+                            <div>
+                                <select id="pscore" name="score" required
+                                    class="py-3 px-4 block w-full border-gray-200 border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                    <option value="">Select point</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="flex md:justify-end">
+                            <button type="submit"
+                                class="mt-4 bg-blue-600 text-white text-sm px-4 py-3 rounded-lg font-medium hover:bg-blue-700 duration-150 w-full md:w-auto">save</button>
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+    <!--  Social Development -->
+    <div class="w-full lg:ps-64">
+        <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
+            <div id="alertContainer" class="mb-4"></div>
+
+            <div class="bg-white rounded-lg overflow-hidden">
+                <div class="bg-gray-100 px-3 py-2">
+                    <p class="text-md lg:text-lg font-semibold">Sense of Responsibilty</p>
+                </div>
+
+                <form action="#" id="social-dev" method="POST">
+                    <div class="px-3 py-6">
+                        <div class="grid gap-4 grid-cols-1 md:grid-cols-3 mt-4">
+
+                            
+                            <!-- Student ID -->
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Student</label>
+                                <select id="sDStudent" name="student" required
+                                    class="py-3 px-4 block w-full border-gray-200 border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                    <option value="">Select student</option>
+                                    <!-- Options will be populated dynamically -->
+                                </select>
+                            </div>
+
+                            <!-- Term Select -->
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Term</label>
+                                <select id="termSkill" name="term" required
+                                    class="py-3 px-4 block w-full border-gray-200 border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                    <option value="">Select term</option>
+                                    <!-- Options will be populated dynamically -->
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Title</label>
+                                <select id="titleSocial" name="term" required
+                                    class="py-3 px-4 block w-full border-gray-200 border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                    <option value="Punctuality">Punctuality</option>
+                                    <option value="Neatness">Neatness</option>
+                                    <option value="Perserverance">Perserverance</option>
+                                    <option value="Attendance">Attendance</option>
+                                    <option value="Attentiveness">Attentiveness</option>
+                                </select>
+                            </div>
+
+                            <!-- score -->
+                            <div>
+                                <select id="socscore" name="score" required
+                                    class="py-3 px-4 block w-full border-gray-200 border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                    <option value="">Select point</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="flex md:justify-end">
+                            <button type="submit"
+                                class="mt-4 bg-blue-600 text-white text-sm px-4 py-3 rounded-lg font-medium hover:bg-blue-700 duration-150 w-full md:w-auto">save</button>
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+    <!--  Sense of responsiblity -->
+    <div class="w-full lg:ps-64">
+        <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
+            <div id="alertContainer" class="mb-4"></div>
+
+            <div class="bg-white rounded-lg overflow-hidden">
+                <div class="bg-gray-100 px-3 py-2">
+                    <p class="text-md lg:text-lg font-semibold">Social Development</p>
+                </div>
+
+                <form action="#" id="sense-of-dev" method="POST">
+                    <div class="px-3 py-6">
+                        <div class="grid gap-4 grid-cols-1 md:grid-cols-3 mt-4">
+
+                         
+                            <!-- Student ID -->
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Student</label>
+                                <select id="sRStudent" name="student" required
+                                    class="py-3 px-4 block w-full border-gray-200 border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                    <option value="">Select student</option>
+                                    <!-- Options will be populated dynamically -->
+                                </select>
+                            </div>
+
+                            <!-- Term Select -->
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Term</label>
+                                <select id="termSense" name="term" required
+                                    class="py-3 px-4 block w-full border-gray-200 border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                    <option value="">Select term</option>
+                                    <!-- Options will be populated dynamically -->
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Title</label>
+                                <select id="termSensR" name="term" required
+                                    class="py-3 px-4 block w-full border-gray-200 border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                    <option value="">Select option</option>
+                                    <option value="Courtesy/Politeness">Courtesy/Politeness</option>
+                                    <option value="Consideration for other">Consideration for others</option>
+                                    <option value="Socialilty/Team Player">Socialilty/Team Player</option>
+                                    <option value="Promptness to doing work">Promptness to doing work</option>
+                                    <option value="Accepts Responsiblities">Accepts Responsiblities</option>
+                                    <!-- Options will be populated dynamically -->
+                                </select>
+                            </div>
+
+                            <!-- score -->
+                            <div>
+                                <select id="SRscore" name="score" required
+                                    class="py-3 px-4 block w-full border-gray-200 border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                    <option value="">Select point</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="flex md:justify-end">
+                            <button type="submit"
+                                class="mt-4 bg-blue-600 text-white text-sm px-4 py-3 rounded-lg font-medium hover:bg-blue-700 duration-150 w-full md:w-auto">save</button>
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+    <!--  Pyschomotot -->
+    <div class="w-full lg:ps-64">
+        <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
+            <div id="alertContainer" class="mb-4"></div>
+
+            <div class="bg-white rounded-lg overflow-hidden">
+                <div class="bg-gray-100 px-3 py-2">
+                    <p class="text-md lg:text-lg font-semibold">Pyschomotor(Skill) Development</p>
+                </div>
+
+                <form action="#" id="psycho-motor" method="POST">
+                    <div class="px-3 py-6">
+                        <div class="grid gap-4 grid-cols-1 md:grid-cols-3 mt-4">
+
+                            <!-- Student ID -->
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Student</label>
+                                <select id="PyStudent" name="student" required
+                                    class="py-3 px-4 block w-full border-gray-200 border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                    <option value="">Select student</option>
+                                    <!-- Options will be populated dynamically -->
+                                </select>
+                            </div>
+
+                            <!-- Term Select -->
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Term</label>
+                                <select id="termPys" name="term" required
+                                    class="py-3 px-4 block w-full border-gray-200 border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                    <option value="">Select term</option>
+                                    <!-- Options will be populated dynamically -->
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Title</label>
+                                <select id="psySelect" name="term" required
+                                    class="py-3 px-4 block w-full border-gray-200 border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                    <option value="">Select option</option>
+                                    <option value="Reading/Writing Skill">Reading/Writing Skill</option>
+                                    <option value="Verbal Communications">Verbal Communications</option>
+                                    <option value="Sports and Games">Sports and Games</option>
+                                    <option value="Inquisitiveness">Inquisitiveness</option>
+                                    <option value="Dexterity (Music & Art)">Dexterity (Music & Art)</option>
+                                    <!-- Options will be populated dynamically -->
+                                </select>
+                            </div>
+
+                            <!-- score -->
+                            <div>
+                                <select id="pychscore" name="score" required
+                                    class="py-3 px-4 block w-full border-gray-200 border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                    <option value="">Select point</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="flex md:justify-end">
+                            <button type="submit"
+                                class="mt-4 bg-blue-600 text-white text-sm px-4 py-3 rounded-lg font-medium hover:bg-blue-700 duration-150 w-full md:w-auto">save</button>
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+    <!-- Commentary  -->
+    <div class="w-full lg:ps-64">
+        <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
+            <div id="alertContainer" class="mb-4"></div>
+
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="bg-gray-100 px-4 py-3 border-b">
+                    <p class="text-md lg:text-lg font-semibold text-gray-800">Teacher's Comment</p>
+                </div>
+
+                <form action="#" id="teacher-comment" method="POST" class="p-6">
+                    <div class="grid gap-6 grid-cols-1 md:grid-cols-3 mt-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Student</label>
+                                <select id="CoStudent" name="student" required
+                                    class="py-3 px-4 block w-full border-gray-200 border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                    <option value="">Select student</option>
+                                    <!-- Options will be populated dynamically -->
+                                </select>
+                            </div>
+
+                        <!-- Term Select -->
+                        <div>
+                            <label for="termSelect" class="block text-sm font-medium mb-2 text-gray-700">Term</label>
+                            <select id="termComment" name="term" required
+                                class="py-3 px-4 block w-full border border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 transition duration-200 disabled:opacity-50 disabled:pointer-events-none">
+                                <option value="">Select term</option>
+                                <!-- Options will be populated dynamically -->
+                            </select>
+                        </div>
+
+                        <!-- Signature Upload -->
+                        <div>
+                            <label for="signature" class="block text-sm font-medium mb-2 text-gray-700">Upload
+                                Signature</label>
+                            <input type="file" id="tcsignature"
+                                class="py-3 px-4 block w-full border border-gray-300 rounded-lg text-sm file:mr-4 file:rounded-lg file:border-0 file:text-sm file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50"
+                                accept="image/*" />
+                        </div>
+
+                        <!-- Comment Section -->
+                        <div class="col-span-full">
+                            <label for="comment" class="block text-sm font-medium mb-2 text-gray-700">Comment</label>
+                            <textarea id="tcomment"
+                                class="py-3 px-4 block w-full border border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 transition duration-200"
+                                rows="4" placeholder="Enter any additional comments or observations"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Save Button -->
+                    <div class="flex md:justify-end mt-6">
+                        <button type="submit"
+                            class="bg-blue-600 text-white text-sm px-6 py-3 rounded-lg font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200 w-full md:w-auto">
+                            Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
     <!-- End Content -->
     <!-- ========== END MAIN CONTENT ========== -->
@@ -409,8 +881,10 @@
     <script type="module" src="../assets/js/index2.js"></script>
     <!-- <script type="module" src="../assets/js/dashboard.js"></script> -->
     <script type="module" src="../assets/js/upload.js"></script>
+    <script type="module" src="../assets/js/result.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/preline/dist/preline.js"></script> -->
     <script src="../assets/js/logout.js"></script>
+    <script type="module" src="../assets/js/nonacademicresult.js"></script>
 
 </body>
 

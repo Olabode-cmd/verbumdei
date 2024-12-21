@@ -211,45 +211,46 @@
     <div class="w-full lg:ps-64">
         <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
             <!-- your content goes here ... -->
-
-            <div class="w-full flex items-center justify-end ms-auto md:justify-between gap-x-1 md:gap-x-3">
-                <a class='flex items-center space-x-0 md:space-x-2 px-2 py-2 md:px-3 md:py-2 rounded-md border border-gray-300 bg-white hover:bg-gray-100 duration-300'
-                    href='index.html'>
-                    <i class="fa fa-chevron-left"></i>
-                    <span class="font-medium text-sm me-2 md:me-0">Back</span>
-                </a>
-            </div>
-
+    
+            <!-- <div class="w-full flex items-center justify-end ms-auto md:justify-between gap-x-1 md:gap-x-3">
+                    <a class='flex items-center space-x-0 md:space-x-2 px-2 py-2 md:px-3 md:py-2 rounded-md border border-gray-300 bg-white hover:bg-gray-100 duration-300'
+                        href='/admin/transactions'>
+                        <i class="fa fa-chevron-left"></i>
+                        <span class="font-medium text-sm me-2 md:me-0">Back</span>
+                    </a>
+                </div> -->
+    
             <div class="bg-white px-6 py-10 rounded-lg">
                 <div class="flex items-start justify-between">
                     <div
                         class="w-[95px] h-[95px] md:w-[125px] md:h-[125px] rounded-full overflow-hidden border border-blue-600 border-4">
                         <img src="" alt="pfp" class="w-full h-full object-cover student-profile-image">
                     </div>
-
+    
                     <div>
                         <img src="/assets/images/dots.svg" alt="dots">
                     </div>
                 </div>
-
+    
                 <div class="flex items-end justify-between">
                     <div class="pl-2 mt-3">
                         <div class="flex items-center space-x-2">
                             <h1 class="text-xl md:text-2xl font-bold student-name"> </h1>
-
+    
                         </div>
                         <div class="flex items-center space-x-2 cursor-pointer mt-1">
                             <p class="text-gray-800 font-medium text-sm student-id"></p>
                         </div>
                         <p class="mt-2 text-gray-500 font-bold text-sm uppercase status"></p>
                     </div>
-
+    
                     <button
                         class="mt-4 bg-blue-600 text-white text-sm px-4 py-2 rounded-lg font-medium hover:bg-blue-700 duration-150 flex space-x-2 items-center">
-                        <span>Download Report</span>
+                        <i class="fa fa-pencil"></i>
+                        <span>Edit data</span>
                     </button>
                 </div>
-
+    
                 <div class="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-4">
                     <div>
                         <p class="text-gray-500 font-medium text-md mb-2">Age</p>
@@ -258,7 +259,7 @@
                             <p class="text-md font-semibold age"></p>
                         </div>
                     </div>
-
+    
                     <div>
                         <p class="text-gray-500 font-medium text-md mb-2">Gender</p>
                         <div class="flex items-center space-x-2">
@@ -266,7 +267,7 @@
                             <p class="text-md font-semibold gender"></p>
                         </div>
                     </div>
-
+    
                     <div>
                         <p class="text-gray-500 font-medium text-md mb-2">Date of registration</p>
                         <div class="flex items-center space-x-2">
@@ -281,7 +282,7 @@
                             <p class="text-md font-semibold parent"></p>
                         </div>
                     </div>
-
+    
                     <div>
                         <p class="text-gray-500 font-medium text-md mb-2">Address</p>
                         <div class="flex items-center space-x-2">
@@ -289,11 +290,34 @@
                             <p class="text-md font-semibold home-address"></p>
                         </div>
                     </div>
-
+    
                 </div>
             </div>
-
-
+    
+            <div class="bg-white px-6 py-8 rounded-lg">
+                <h3 class="mb-4 font-semibold text-lg">
+                    Result
+                </h3>
+                <div class="flex flex-col">
+                    <div class="-m-1.5 overflow-x-auto">
+                        <div class="flex flex-wrap items-center gap-5 bg-gray-100 p-4 rounded-lg">
+                            <select name="Term" id="term"
+                                class="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring focus:ring-blue-500 focus:outline-none">
+                                <option value="">Term</option>
+                                <!-- Add term options here -->
+                            </select>
+    
+                            <a id="resultLink"
+                                class="filter-button px-4 py-2 bg-blue-600 text-white text-sm rounded-lg font-medium hover:bg-blue-700 duration-150 focus:ring focus:ring-blue-500 focus:outline-none">
+                                View and Download Result
+                            </a>
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+    
             <div class="bg-white px-6 py-8 rounded-lg">
                 <h3 class="mb-4 font-semibold text-lg">
                     Payment history
@@ -332,11 +356,47 @@
                     </div>
                 </div>
             </div>
-
-
+    
+    
         </div>
-
+    
     </div>
+    
+    <script>
+        document.getElementById('resultLink').addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent the default link behavior
+            generateLink(); // Call the function to generate the link and redirect
+        });
+
+        function generateLink() {
+            const studentID = getQueryParam('studentID'); // Get studentID from URL
+            const termSelect = document.getElementById("term");
+            const term = termSelect.value;
+
+            if (!term) {
+                alert("Please select a term.");
+                return;
+            }
+
+            if (!studentID) {
+                alert("Student ID not found in the URL.");
+                return;
+            }
+
+            const encodedTerm = encodeURIComponent(term);
+            const link = `print-result.html?studentID=${studentID}&term=${encodedTerm}`;
+
+            // Redirect to the generated link
+            window.location.href = link;
+        }
+
+        // Function to get query parameter by name from the URL
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+    </script>
+
     <script src="/assets/js/logout.js"></script>
     <script type="module" src="/assets/js/auth.js"></script>
     <script type="module" src="/assets/js/index.js"></script>

@@ -219,15 +219,6 @@
                                     <span>Home</span>
                                 </a>
                             </li>
-
-                            <li>
-                                <a class="flex items-center gap-x-3.5 py-2 font-medium px-2.5 hover:bg-gray-100 text-sm text-gray-800 rounded-lg focus:outline-none"
-                                    href="class.html">
-                                    <i class="fa fa-chalkboard-user text-gray-500"></i>
-                                    <span>Class</span>
-                                </a>
-                            </li>
-
                             <li>
                                 <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
                                     href="attendance.html">
@@ -235,23 +226,6 @@
                                     Attendance
                                 </a>
                             </li>
-
-                            <li>
-                                <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
-                                    href="subjects.html">
-                                    <i class="fa fa-money-bill text-gray-500"></i>
-                                    Subjects
-                                </a>
-                            </li>
-
-                            <li>
-                                <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
-                                    href="#">
-                                    <i class="fa fa-pen text-gray-500"></i>
-                                    Assessment
-                                </a>
-                            </li>
-
                             <li>
                                 <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
                                     href="results.html">
@@ -279,81 +253,6 @@
             <h1 class="text-lg md:text-xl lg:text-2xl font-semibold">Hi, <span class="text-[#007BFF] text-name"
                 id="user-fullname"></span>
             </h1>
-
-
-            <div class="space-y-4">
-                <div class="grid gap-4 grid-cols-1 md:grid-cols-3">
-                    <div class="border border-gray-300 rounded-lg bg-white px-3 py-4 flex justify-between items-center">
-                        <div class="flex items-center space-x-3">
-                            <div>
-                                <span class="text-xs text-gray-400 font-medium uppercase">my students</span>
-                                <h3 class="text-xl md:text-2xl font-bold" id="total-students-display">0</h3>
-
-                                <div class="flex items-center space-x-3 mt-2">
-                                    <div class="flex items-center space-x-2">
-                                        <span class="rounded-full p-1 bg-[#233255]"></span>
-                                        <span class="text-xs">Male</span>
-                                    </div>
-
-                                    <div class="flex items-center space-x-2">
-                                        <span class="rounded-full p-1 bg-blue-500"></span>
-                                        <span class="text-xs">Female</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <img src="../assets/images/card-user.png" class="w-[85px]">
-                    </div>
-
-                    <div class="border border-gray-300 rounded-lg bg-white px-3 py-4 flex justify-between items-center">
-                        <div class="flex items-center space-x-3">
-                            <div>
-                                <span class="text-xs text-gray-400 font-medium uppercase">present</span>
-                                <h3 class="text-xl md:text-2xl font-bold" id="staff-count">0</h3>
-
-                                <!-- <div class="flex items-center space-x-3 mt-2">
-                                                    <div class="flex items-center space-x-2">
-                                                        <span class="rounded-full p-1 bg-[#233255]"></span>
-                                                        <span class="text-xs">Male</span>
-                                                    </div>
-            
-                                                    <div class="flex items-center space-x-2">
-                                                        <span class="rounded-full p-1 bg-blue-500"></span>
-                                                        <span class="text-xs">Female</span>
-                                                    </div> 
-                                                </div>-->
-                            </div>
-                        </div>
-
-                        <img src="../assets/images/green-hand-coin.png" class="w-[85px]">
-                    </div>
-
-                    <div class="border border-gray-300 rounded-lg bg-white px-3 py-4 flex justify-between items-center">
-                        <div class="flex items-center space-x-3">
-                            <div>
-                                <span class="text-xs text-gray-400 font-medium uppercase">absent</span>
-                                <h3 class="text-xl md:text-2xl font-bold" id="subject-count">0</h3>
-
-                                <!-- <div class="flex items-center space-x-3 mt-2">
-                                                    <div class="flex items-center space-x-2">
-                                                        <span class="rounded-full p-1 bg-[#233255]"></span>
-                                                        <span class="text-xs">Male</span>
-                                                    </div>
-            
-                                                    <div class="flex items-center space-x-2">
-                                                        <span class="rounded-full p-1 bg-blue-500"></span>
-                                                        <span class="text-xs">Female</span>
-                                                    </div>
-                                                </div> -->
-                            </div>
-                        </div>
-
-                        <img src="../assets/images/red-hand-coin.png" class="w-[85px]">
-                    </div>
-                </div>
-            </div>
-
             <div class="grid gap-4 grid-cols-1 md:grid-cols-[1fr,26rem] items-start">
                 <div class="w-full flex flex-col space-y-4 overflow-hidden">
                     <!-- Calendar -->
@@ -445,6 +344,7 @@
                     </div>
 
                     <div id="attendance-chart" class="mt-3"></div>
+                    
                 </div>
             </div>
         </div>
