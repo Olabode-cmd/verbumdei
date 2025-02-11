@@ -9,11 +9,40 @@
 </head>
 <style>
     #download-button {
-  position: fixed; /* Fixes the button in place */
-  bottom: 20px; /* Distance from the bottom of the screen */
-  right: 20px; /* Distance from the right of the screen */
-  z-index: 1000; /* Makes sure it is on top of other elements */
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
 }
+
+#page-content {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.bg-result {
+    position: relative;
+    background: #fff; 
+    overflow: hidden;
+}
+
+.bg-result::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../assets/images/logo.png') repeat;
+    background-size: 100px; /* Adjusts logo size */
+    opacity: .1; /* Keep it fully visible */
+    
+    /* Create a faded effect */
+    background-color: rgba(255, 255, 255, 0.3); /* White overlay with 80% opacity */
+    
+    z-index: -1; /* Keeps it behind content */
+}
+
 
 </style>
 <body class="bg-gray-100 p-6">
@@ -21,78 +50,234 @@
         onclick="downloadAsPDF()">
         Download as PDF
     </button>
-    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6" id="page-content">
-        <div class="text-center mb-6">
-            <img src="../assets/images/logo.png" alt="logo" class="mx-auto mb-4">
-            <h1 class="text-2xl font-extrabold text-gray-800">Verbum Dei Academy</h1>
+    <div class="w-[98%] md:w-[85%] lg:w-[75%] mx-auto bg-result rounded-lg px-6 py-3" id="page-content">
+        <div class="text-center mb-4">
+            <img src="../assets/images/logo.png" alt="logo" class="mb-2 mx-auto">
+            <h1 class="text-xl font-extrabold text-gray-800">Verbum Dei Academy</h1>
             <p class="text-gray-600">Verbum Dei Academy Close, Owerri North L.G.A. Imo State.</p>
-            <p class="font-semibold text-lg text-gray-800 term-tile">END OF: 2023/2024 Academic Session, 3rd Term</p>
+            <p class="font-semibold text-md text-gray-800 term-tile">2023/2024 Academic Session, 3rd Term</p>
         </div>
 
         <!-- Student Information -->
-        <div class="grid grid-cols-2 gap-4 mb-6">
-            <div>
-                <p><strong class="text-gray-700 name">NAME OF STUDENT:</strong></p>
-                <p><strong class="text-gray-700 reg-id">REGISTRATION ID:</strong></p>
+        <!-- <div class="mb-8">
+            <p><strong class="text-gray-700">NAME OF STUDENT:</strong></p>
+            <p><strong class="text-gray-700 ">REGISTRATION ID:</strong></p>
+        
+        </div> -->
+
+        <div class="border border-gray-300">
+            <div class="grid grid-cols-2">
+                <div>
+                    <div class="container mx-auto bg-white rounded-lg mb-2">
+                        <table class="table-auto border-collapse border border-gray-300 w-full text-left">
+                            <thead>
+                                <tr class="bg-gray-200 text-center">
+                                    <th colspan="2" class="pt-2 pb-2.5 text-base">Student information</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-700 text-xs">
+                                <!-- Name Row -->
+                                <tr class="hover:bg-gray-100">
+                                    <th class="border border-gray-300 px-4 py-2 uppercase">name of student</th>
+                                    <td class="border border-gray-300 px-4 py-2 name font-medium"></td>
+                                </tr>
             
+                                <!-- Registration ID Row -->
+                                <tr class="hover:bg-gray-100">
+                                    <th class="border border-gray-300 px-4 py-2 uppercase">Registration ID</th>
+                                    <td class="border border-gray-300 px-4 py-2 reg-id font-medium"></td>
+                                </tr>
+            
+                                <!-- Gender Row -->
+                                <tr class="hover:bg-gray-100">
+                                    <th class="border border-gray-300 px-4 py-2 uppercase">Gender</th>
+                                    <td class="border border-gray-300 px-4 py-2 font-medium" id="gender"></td>
+                                </tr>
+            
+                                <!-- Class Row -->
+                                <tr class="hover:bg-gray-100">
+                                    <th class="border border-gray-300 px-4 py-2 uppercase">Class</th>
+                                    <td class="border border-gray-300 px-4 py-2 font-medium" id="studentClass"></td>
+                                </tr>
+            
+                                <!-- Age Row -->
+                                <tr class="hover:bg-gray-100">
+                                    <th class="border border-gray-300 px-4 py-2 uppercase">Age</th>
+                                    <td class="border border-gray-300 px-4 py-2 font-medium" id="age"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            
+                <div class="">
+                    <div class="container mx-auto bg-white rounded-lg">
+                        <table class="table-auto border-collapse border border-gray-300 w-full text-left">
+                            <thead>
+                                <tr class="bg-gray-200 text-center">
+                                    <th colspan="2" class="py-2 text-base">Attendance</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-700 text-xs">
+                                <tr class="hover:bg-gray-100">
+                                    <th class="border border-gray-300 px-4 py-2 uppercase">no of times school opened</th>
+                                    <td class="border border-gray-300 px-4 py-2 name font-medium">70</td>
+                                </tr>
+            
+                                <tr class="hover:bg-gray-100">
+                                    <th class="border border-gray-300 px-4 py-2 uppercase">no of times present</th>
+                                    <td class="border border-gray-300 px-4 py-2 reg-id font-medium" id="attendanceCount"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            
+                    <div class="container mx-auto bg-white rounded-lg">
+                        <table class="table-auto border-collapse border border-gray-300 w-full text-left">
+                            <thead>
+                                <tr class="bg-gray-200 text-center">
+                                    <th colspan="2" class="py-2 text-base">Term Details</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-700 text-xs">
+                                <tr class="hover:bg-gray-100">
+                                    <th class="border border-gray-300 px-4 py-2 uppercase">term</th>
+                                    <td class="border border-gray-300 px-4 py-2 name font-medium" id="termName"></td>
+                                </tr>
+            
+                                <!-- <tr class="hover:bg-gray-100">
+                                            <th class="border border-gray-300 px-4 py-2 uppercase">term ends</th>
+                                            <td class="border border-gray-300 px-4 py-2 reg-id font-medium">13th December, 2024</td>
+                                        </tr>
+            
+                                        <tr class="hover:bg-gray-100">
+                                            <th class="border border-gray-300 px-4 py-2 uppercase">school reopens</th>
+                                            <td class="border border-gray-300 px-4 py-2 reg-id italic">null</td>
+                                        </tr> -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-            <div class="text-right">
-                <!-- <p class="font-semibold grand-total">Grand Total: 0</p>
-                <p class="font-semibold weighted-average">Weighted Average: 0%</p> -->
+            
+            
+            <!-- Academic Performance Table -->
+            <div class="">
+                <div class="bg-gray-200 w-full text-center px-4 py-2 font-medium text-gray-700">
+                    <p>Academic Performance</p>
+                </div>
+                <div class="overflow-x-auto">
+            
+                    <table class="w-full border-collapse border border-gray-300 text-left bg-white text-sm">
+            
+                        <thead>
+                            <tr class="bg-gray-100 text-gray-700">
+                                <th class="border border-gray-300 px-3 py-2">Subject</th>
+                                <th class="border border-gray-300 px-3 py-2">1st CA(20)</th>
+                                <th class="border border-gray-300 px-3 py-2">2nd CA(20)</th>
+                                <th class="border border-gray-300 px-3 py-2">Summative(40)</th>
+                                <th class="border border-gray-300 px-3 py-2">Exam(60)</th>
+                                <th class="border border-gray-300 px-3 py-2">Total</th>
+                                <th class="border border-gray-300 px-3 py-2">Total %</th>
+                                <th class="border border-gray-300 px-3 py-2">Grade</th>
+                                <th class="border border-gray-300 px-3 py-2">Remark</th>
+                            </tr>
+                        </thead>
+                        <tbody id="academic-data">
+                            <div id="loading-spinner" class="hidden">Loading...</div>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-5 bg-white">
+                <div>
+                    <h3 class="font-medium border-r border-gray-300 text-slate-700 text-sm bg-slate-50 py-2 px-1.5">Personal Development</h3>
+                    <div class="personal-development">
+                        <!-- Dynamically populated here -->
+                    </div>
+                </div>
+            
+                <div>
+                    <h3 class="font-medium border-r border-gray-300 text-slate-700 text-sm bg-slate-50 py-2 px-1.5">Social Development</h3>
+                    <div class="social-development">
+                        <!-- Dynamically populated here -->
+                    </div>
+                </div>
+            
+                <div>
+                    <h3 class="font-medium border-r border-gray-300 text-slate-700 text-sm bg-slate-50 py-2 px-1.5">Psychomotor Development</h3>
+                    <div class="psychomotor-development">
+                    </div>
+                </div>
+            
+                <div>
+                    <h3 class="font-medium border-r border-gray-300 text-slate-700 text-sm bg-slate-50 py-2 px-1.5">Sense of Responsibility</h3>
+                    <div class="sense-of-responsibility">
+                    </div>
+                </div>
 
+                <div>
+                    <h3 class="font-medium text-slate-700 text-sm bg-slate-50 py-2 px-1.5">Grading System</h3>
+                    <table class="table-auto border-collapse border border-gray-300 w-full">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="border border-gray-300 px-2 py-2 uppercase text-xs">Remark</th>
+                                <th class="border border-gray-300 px-2 py-2 uppercase text-xs">Grade</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-700 text-sm">
+                            <tr class="hover:bg-gray-100 text-left">
+                                <th class="border border-gray-300 pl-4 py-2 uppercase text-[9px]">Poor</th>
+                                <td class="border border-gray-300 px-2 py-2 font-medium text-[13px]">E (0-49)</td>
+                            </tr>
+                            <tr class="hover:bg-gray-100 text-left">
+                                <th class="border border-gray-300 pl-4 py-2 uppercase text-[9px]">Fair</th>
+                                <td class="border border-gray-300 px-2 py-2 font-medium text-[13px]">D (50-59)</td>
+                            </tr>
 
-        <!-- Academic Performance Table -->
-        <div class="mb-6">
-            <h2 class="text-xl font-semibold mb-4 text-gray-800">Academic Performance</h2>
-            <div class="overflow-x-auto">
-                <table class="w-full border-collapse border border-gray-300 text-left text-sm">
-                    <thead>
-                        <tr class="bg-gray-200 text-gray-700">
-                            <th class="border border-gray-300 px-4 py-2">Subject</th>
-                            <th class="border border-gray-300 px-4 py-2">1st Test (10)</th>
-                            <th class="border border-gray-300 px-4 py-2">2nd Test (10)</th>
-                            <th class="border border-gray-300 px-4 py-2">3rd Test (20)</th>
-                            <th class="border border-gray-300 px-4 py-2">Exam (60)</th>
-                            <th class="border border-gray-300 px-4 py-2">Total (100)</th>
-                            <th class="border border-gray-300 px-4 py-2">Grade</th>
-                        </tr>
-                    </thead>
-                    <tbody id="academic-data">
-                        <div id="loading-spinner" class="hidden">Loading...</div>
-                    </tbody>
-                </table>
+                            <tr class="hover:bg-gray-100 text-left">
+                                <th class="border border-gray-300 pl-4 py-2 uppercase text-[9px]">Fairly Good</th>
+                                <td class="border border-gray-300 px-2 py-2 font-medium text-[13px]">C (60-69)</td>
+                            </tr>
+
+                            <tr class="hover:bg-gray-100 text-left">
+                                <th class="border border-gray-300 pl-4 py-2 uppercase text-[9px]">Good</th>
+                                <td class="border border-gray-300 px-2 py-2 font-medium text-[13px]">B (70-79)</td>
+                            </tr>
+
+                            <tr class="hover:bg-gray-100 text-left">
+                                <th class="border border-gray-300 pl-4 py-2 uppercase text-[9px]">Very Good</th>
+                                <td class="border border-gray-300 px-2 py-2 font-medium text-[13px]">A (80-89)</td>
+                            </tr>
+
+                            <tr class="hover:bg-gray-100 text-left">
+                                <th class="border border-gray-300 pl-4 py-2 uppercase text-[9px]">Excellent</th>
+                                <td class="border border-gray-300 px-2 py-2 font-medium text-[13px]">A+ (90-100)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-
-        <!-- Skills Development -->
-        <div class="border-2 border-gray-200 p-4 rounded personal-development">
-            <h3 class="font-semibold mb-2 text-gray-700">Personal Development</h3>
-            <!-- Dynamically populated here -->
-        </div>
-
-        <div class="border-2 border-gray-200 p-4 rounded social-development">
-            <h3 class="font-semibold mb-2 text-gray-700">Social Development</h3>
-            <!-- Dynamically populated here -->
-        </div>
-        <div class="border-2 border-gray-200 p-4 rounded psychomotor-development">
-            <h3 class="font-semibold mb-2 text-gray-700">Psychomotor Development</h3>
-            <!-- Dynamically populated here -->
-        </div>
-        <div class="border-2 border-gray-200 p-4 rounded sense-of-responsibility">
-            <h3 class="font-semibold mb-2 text-gray-700">Sense of Responsibility</h3>
-            <!-- Dynamically populated here -->
-        </div>
-        <div class="border-2 border-gray-200 p-4 rounded">
-            <h2 class="text-xl font-semibold mb-4 text-gray-800">Remarks</h2>
-            <div class="mb-4 teacher-remarks">
-                <p class="font-semibold text-gray-700">Class Teacher's remarks:</p>
-                <!-- Dynamically populated here -->
-            </div>
-            <div class="head-teacher-remarks">
-                <p class="font-semibold text-gray-700">Principal's comment:</p>
-                <!-- Dynamically populated here -->
+            
+            <div class="border-2 border-gray-200 p-4 bg-white">
+                <h2 class="text-xl text-black font-semibold">Remarks and Conclusion</h2>
+            
+                <div class='grid grid-cols-1 md:grid-cols-2'>
+                    <div>
+                        <p class="font-semibold text-gray-700">Class Teacher's remarks:</p>
+                        <div class="mb-4 teacher-remarks">
+                            <!-- Dynamically populated here -->
+                        </div>
+                    </div>
+            
+                    <div>
+                        <p class="font-semibold text-gray-700">Head of School's comment:</p>
+                        <div class="head-teacher-remarks">
+                            <!-- Dynamically populated here -->
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -103,40 +288,50 @@
 
 <script>
     async function downloadAsPDF() {
-        const { jsPDF } = window.jspdf;
-        const pdf = new jsPDF("p", "mm", "a4");
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF("p", "mm", [297, 420]); // Set page size to A3 (297mm x 420mm)
 
-        const modalContent = document.getElementById("page-content");
+            const modalContent = document.getElementById("page-content");
 
-        // Use html2canvas to render the full modal content as a canvas
-        html2canvas(modalContent, {
-            scale: 2, // Increase quality
-            useCORS: true, // Allow cross-origin images
-        }).then((canvas) => {
-            const imgData = canvas.toDataURL("image/png");
+            // Save original style to revert after generating the PDF
+            const originalWidth = modalContent.style.width;
 
-            const imgWidth = 210; // A4 width in mm
-            const pageHeight = 297; // A4 height in mm
-            const imgHeight = (canvas.height * imgWidth) / canvas.width;
-            let heightLeft = imgHeight;
+            // Temporarily set the width to mimic a desktop view
+            modalContent.style.width = "1024px";
 
-            let position = 0;
+            // Use html2canvas to render the full modal content as a canvas
+            await html2canvas(modalContent, {
+                scale: 1.5, // Reduce quality slightly to decrease file size
+                useCORS: true, // Allow cross-origin images
+            }).then((canvas) => {
+                const imgData = canvas.toDataURL("image/jpeg", 0.9); // Use JPEG with compression
+                const imgWidth = 297; // A3 width in mm
+                const pageHeight = 420; // A3 height in mm
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                let heightLeft = imgHeight;
 
-            // Add content to PDF, handle page breaks
-            pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-            heightLeft -= pageHeight;
+                let position = 0;
 
-            while (heightLeft > 0) {
-                position = heightLeft - imgHeight;
-                pdf.addPage();
-                pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+                // Add content to PDF, handle page breaks
+                pdf.addImage(imgData, "JPEG", 0, position, imgWidth, imgHeight);
                 heightLeft -= pageHeight;
-            }
 
-            // Save the generated PDF
-            pdf.save("Report_Card.pdf");
-        });
-    }
+                while (heightLeft > 0) {
+                    position = heightLeft - imgHeight;
+                    pdf.addPage();
+                    pdf.addImage(imgData, "JPEG", 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                }
+
+                // Save the generated PDF
+                pdf.save("Report_Card.pdf");
+            });
+
+            // Revert the modal content to its original width
+            modalContent.style.width = originalWidth;
+        }
+
+
 </script>
 
 

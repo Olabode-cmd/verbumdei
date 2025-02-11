@@ -16,13 +16,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
+
 <style>
     .calendar-grid {
         display: grid;
         grid-template-columns: repeat(7, 1fr);
         /* 7 columns for the days of the week */
         border-top: 1px solid #ccc;
-
     }
 
     .current-day {
@@ -30,14 +30,11 @@
         font-weight: bold;
     }
 
-
     .calendar-grid div {
         padding: 5px;
         text-align: center;
         border: 1px solid #f0f0f0;
-
     }
-
     .calendar-grid .header-cell {
         font-weight: bold;
         background-color: #f0f0f0;
@@ -50,14 +47,14 @@
         /* White background for day cells */
     }
     .current-day {
-  background-color: #f0a500;
-  color: white;
-}
+        background-color: #f0a500;
+        color: white;
+    }
 
-.event-day {
-  background-color: #ffeb3b;
-  color: rgb(20, 231, 125);
-}
+    .event-day {
+        background-color: #ffeb3b;
+        color: rgb(20, 231, 125);
+    }
 
 </style>
 
@@ -498,6 +495,8 @@
             </div> -->
 
         </div>
+    </div>
+
         <script type="module" src="/assets/js/auth.js"></script>
         <script type="module" src="/assets/js/index.js"></script>
         <script type="module" src="/assets/js/index2.js"></script>
