@@ -1,5 +1,5 @@
-export function fetchStudentDetails() {
-    const url = 'https://service.verbumdeiportal.com/student/student-by-reg-id/VD20241217111930/';
+export function fetchStudentDetails(id) {
+    const url = `https://service.verbumdeiportal.com/student/student-by-reg-id/${id}/`;
 
     return fetch(url)
         .then((response) => {

@@ -2,6 +2,12 @@ import { api } from "./api.js";
 import { fetchStudentDetails } from './getStudentById.js';
 import { fetchAttendanceData } from "./attendancebyStudent.js";
 
+let student = null;
+
+async function setStudentDetails() {
+  return student;
+}
+
 document.addEventListener("DOMContentLoaded", async function () {
   const token = localStorage.getItem("authToken");
   const urlParams = new URLSearchParams(window.location.search);
@@ -9,8 +15,17 @@ document.addEventListener("DOMContentLoaded", async function () {
   const termName = urlParams.get("term");
   const academicTerm = document.querySelector(".term-tile");
   const termTableName = document.getElementById('termName')
-  academicTerm.textContent = `END OF: ${termName} Academic Session Result sheet`;
+  academicTerm.textContent = `END OF ${termName} Academic Session Result`;
   termTableName.textContent = `${termName} Academic Session`;
+
+  const parts = termName.split(" ");
+  const sessionYear = parts[parts.length - 1];
+  const termCycle = parts.slice(0, parts.length - 1).join(" ");
+
+  const session = document.getElementById('session');
+  const term = document.getElementById('term');
+  session.textContent = `${sessionYear} SESSION`
+  term.textContent = `${termCycle}`
 
 
   if (!studentID || !token || !termName) {
@@ -35,7 +50,10 @@ document.addEventListener("DOMContentLoaded", async function () {
       throw new Error("Failed to fetch student details");
     }
 
-    const student = await studentResponse.json();
+    student = await studentResponse.json();
+    await setStudentDetails();
+    await displayStudentDetails();
+    // console.log(student);
     const registrationID = student.registration_id;
 
     // Fetch and render academic results
@@ -62,7 +80,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     renderDevelopmentSections(academicResults);
     renderRemarks(academicResults);
     renderStudentDetails(student, academicResults);
-    
+
   } catch (error) {
     console.error("Error:", error);
   }
@@ -87,26 +105,39 @@ function calculateAge(birthDateString) {
 }
 
 // Student details
-function displayStudentDetails() {
-  fetchStudentDetails()
-    .then((studentDetails) => {
-      console.log('Student details fetched:', studentDetails);
+async function displayStudentDetails() { 
+  const studentDetails = await setStudentDetails();
+  // console.log(studentDetails);
 
-      if (studentDetails) {
-        const age = calculateAge(studentDetails.date_of_birth);
+  if (studentDetails) {
+    const age = calculateAge(studentDetails.date_of_birth);
 
-        document.getElementById('gender').innerText = `${studentDetails.gender || 'N/A'}`;
-        // document.getElementById('studentClass').innerText = `${studentDetails.class || 'N/A'}`;
-        document.getElementById('age').innerText = `${age}`;
+    // document.getElementById('gender').textContent = `${studentDetails.gender || 'N/A'}`;
+    // document.getElementById('age').textContent = `${age}`;
 
-        // console.log(age)
-      } else {
-        document.getElementById('student-details').innerText = 'Failed to fetch student details.';
-      }
-    });
+    const studentImage = document.getElementById('student-image');
+    studentImage.src = studentDetails.img_url;
+    studentImage.alt = `${studentDetails.first_name} ${studentDetails.last_name}`;
+
+    let dob = document.getElementById('dob')
+    dob.textContent = studentDetails.date_of_birth
+  } else {
+    document.getElementById('student-details').innerText = 'Failed to fetch student details.';
+  }
+  // fetchStudentDetails(id)
+  //   .then((studentDetails) => {
+  //     console.log('Student details fetched:', studentDetails);
+
+  //     if (studentDetails) {
+  //       const age = calculateAge(studentDetails.date_of_birth);
+
+  //       document.getElementById('gender').innerText = `${studentDetails.gender || 'N/A'}`;
+  //       document.getElementById('age').innerText = `${age}`;
+  //     } else {
+  //       document.getElementById('student-details').innerText = 'Failed to fetch student details.';
+  //     }
+  //   });
 }
-
-displayStudentDetails();
 
 function displayAttendanceCount() {
   fetchAttendanceData()
@@ -171,10 +202,10 @@ function renderResultsTable(academicResults) {
           ${item.subject || "N/A"}
         </td>
         <td class="border border-gray-300 px-4 py-2 text-xs text-gray-900 whitespace-nowrap">
-          ${item.first_ca * 2 || 0}
+          ${item.first_ca || 0}
         </td>
         <td class="border border-gray-300 px-4 py-2 text-xs text-gray-900 whitespace-nowrap">
-          ${item.second_ca * 2 || 0}
+          ${item.second_ca || 0}
         </td>
         <td class="border border-gray-300 px-4 py-2 text-xs text-gray-900 whitespace-nowrap">
           ${item.third_ca || 0}
@@ -232,7 +263,7 @@ function renderResultsTable(academicResults) {
   </tr>
 `;
   tbody.insertAdjacentHTML("beforeend", overallPercentageRow);
-  }
+}
 
 
 
@@ -307,10 +338,12 @@ function renderRemarks(remarks) {
     const teacherComment = remarks.teacher_comments[0]; // Assuming only one comment per term
     const teacherCommentHTML = `
       <p>${teacherComment.comment || "No comment provided."}</p>
-      ${
-        teacherComment.img_url
-          ? `<img src="${teacherComment.img_url}" alt="Teacher's signature" style="width: 50px; height: auto; display: block; margin-top: 10px;" />`
-          : ""
+      ${teacherComment.img_url
+      ? `<div class='flex space-x-3 items-end pb-3 border-b border-gray-500'>
+            <h3>Signature: </h3>
+            <img src="${teacherComment.img_url}" alt="Teacher's signature" style="width: 50px; height: auto; display: block; margin-top: 10px;" />
+        </div>`
+        : ""
       }
     `;
     teacherRemarksContainer.innerHTML = teacherCommentHTML;
@@ -318,18 +351,22 @@ function renderRemarks(remarks) {
     teacherRemarksContainer.innerHTML = `<p>No teacher remarks available for this term.</p>`;
   }
 
+  // src="${teacherComment.img_url}
+
   // Render Head Teacher's Comment
   const headTeacherRemarksContainer = document.querySelector(
     ".head-teacher-remarks"
   );
   if (remarks.head_teacher_comments.length > 0) {
-    const headTeacherComment = remarks.head_teacher_comments[0]; // Assuming only one comment per term
+    const headTeacherComment = remarks.head_teacher_comments[0];
     const headTeacherCommentHTML = `
       <p>${headTeacherComment.comment || "No comment provided."}</p>
-      ${
-        headTeacherComment.img_url
-          ? `<img src="${headTeacherComment.img_url}" alt="Head teacher's signature" style="width: 50px; height: auto; display: block; margin-top: 10px;" />`
-          : ""
+      ${headTeacherComment.img_url
+        ? `<div class='flex space-x-3 items-end pb-3 border-b border-gray-400'>
+            <h3>Signature: </h3>
+            <img src="${headTeacherComment.img_url}" alt="Head teacher's signature" style="width: 50px; height: auto; display: block; margin-top: 10px;" />
+        </div>`
+        : ""
       }
     `;
     headTeacherRemarksContainer.innerHTML = headTeacherCommentHTML;
@@ -353,33 +390,32 @@ function renderStudentDetails(student, academicResults) {
   // Adjust according to actual data field
 
   // Calculate Grand Total and Weighted Average
-  const grandTotal = calculateGrandTotal(academicResults);
+  // const grandTotal = calculateGrandTotal(academicResults);
   const weightedAverage = calculateWeightedAverage(academicResults);
 
-  grandTotalElement.textContent = `Grand Total: ${grandTotal}`;
+  // grandTotalElement.textContent = `Grand Total: ${grandTotal}`;
   weightedAverageElement.textContent = `Weighted Average: ${weightedAverage.toFixed(
     2
   )}%`;
 }
 
 // Calculate Grand Total
-function calculateGrandTotal(academicResults) {
-  return academicResults.reduce((total, result) => {
-    // Check if total_marks exists and is a valid number
-    if (result && typeof result.total_marks === "number") {
-      return total + result.total_marks;
-    }
-    return total;
-  }, 0);
-}
+// function calculateGrandTotal(academicResults) {
+//   return academicResults.reduce((total, result) => {
+//     if (result && typeof result.total_marks === "number") {
+//       return total + result.total_marks;
+//     }
+//     return total;
+//   }, 0);
+// }
 
 
 // Calculate Weighted Average
-function calculateWeightedAverage(academicResults) {
-  const totalMarks = academicResults.reduce(
-    (total, result) => total + result.total_marks,
-    0
-  );
-  const maxMarks = academicResults.length * 100;
-  return (totalMarks / maxMarks) * 100;
-}
+// function calculateWeightedAverage(academicResults) {
+//   const totalMarks = academicResults.reduce(
+//     (total, result) => total + result.total_marks,
+//     0
+//   );
+//   const maxMarks = academicResults.length * 100;
+//   return (totalMarks / maxMarks) * 100;
+// }

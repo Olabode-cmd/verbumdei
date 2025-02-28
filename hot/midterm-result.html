@@ -9,42 +9,45 @@
 </head>
 <style>
     #download-button {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000;
-}
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
 
-#page-content {
-  white-space: nowrap;
-  overflow: hidden;
-}
+    #page-content {
+        white-space: nowrap;
+        overflow: hidden;
+    }
 
-.bg-result {
-    position: relative;
-    background: #fff; 
-    overflow: hidden;
-}
+    .bg-result {
+        position: relative;
+        background: #fff;
+        overflow: hidden;
+    }
 
-.bg-result::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('../assets/images/logo.png') repeat;
-    background-size: 100px; /* Adjusts logo size */
-    opacity: .1; /* Keep it fully visible */
-    
-    /* Create a faded effect */
-    background-color: rgba(255, 255, 255, 0.3); /* White overlay with 80% opacity */
-    
-    z-index: -1; /* Keeps it behind content */
-}
+    .bg-result::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('../assets/images/logo.png') repeat;
+        background-size: 100px;
+        /* Adjusts logo size */
+        opacity: .1;
+        /* Keep it fully visible */
 
+        /* Create a faded effect */
+        background-color: rgba(255, 255, 255, 0.3);
+        /* White overlay with 80% opacity */
 
+        z-index: -1;
+        /* Keeps it behind content */
+    }
 </style>
+
 <body class="bg-gray-100 p-6">
     <button class="px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded hover:bg-blue-700"
         onclick="downloadAsPDF()">
@@ -105,15 +108,16 @@
                                 <th class="border border-gray-300 px-4 py-2 uppercase">no of times school opened</th>
                                 <td class="border border-gray-300 px-4 py-2 name font-medium">70</td>
                             </tr>
-                
+
                             <tr class="hover:bg-gray-100">
                                 <th class="border border-gray-300 px-4 py-2 uppercase">no of times present</th>
-                                <td class="border border-gray-300 px-4 py-2 reg-id font-medium" id="attendanceCount"></td>
+                                <td class="border border-gray-300 px-4 py-2 reg-id font-medium" id="attendanceCount">
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                
+
                 <div class="container mx-auto bg-white rounded-lg">
                     <table class="table-auto border-collapse border border-gray-300 w-full text-left">
                         <thead>
@@ -131,38 +135,28 @@
                                 <th class="border border-gray-300 px-4 py-2 uppercase">term ends</th>
                                 <td class="border border-gray-300 px-4 py-2 reg-id font-medium">13th December, 2024</td>
                             </tr>
-                
-                            <!-- <tr class="hover:bg-gray-100">
-                                                            <th class="border border-gray-300 px-4 py-2 uppercase">term ends</th>
-                                                            <td class="border border-gray-300 px-4 py-2 reg-id font-medium">13th December, 2024</td>
-                                                        </tr>
-                            
-                                                        <tr class="hover:bg-gray-100">
-                                                            <th class="border border-gray-300 px-4 py-2 uppercase">school reopens</th>
-                                                            <td class="border border-gray-300 px-4 py-2 reg-id italic">null</td>
-                                                        </tr> -->
+
                         </tbody>
                     </table>
                 </div>
             </div>
-            
-            
+
+
             <!-- Academic Performance Table -->
             <div class="">
                 <div class="bg-gray-200 w-full text-center px-4 py-2 font-medium text-gray-700">
                     <p>Academic Performance</p>
                 </div>
                 <div class="overflow-x-auto">
-            
+
                     <table class="w-full border-collapse border border-gray-300 text-left bg-white text-sm">
-            
+
                         <thead>
                             <tr class="bg-gray-100 text-gray-700">
                                 <th class="border border-gray-300 px-3 py-2">Subject</th>
-                                <th class="border border-gray-300 px-3 py-2">1st CA(10)</th>
-                                <th class="border border-gray-300 px-3 py-2">2nd CA(10)</th>
-                                <th class="border border-gray-300 px-3 py-2">Summative(20)</th>
-                                <th class="border border-gray-300 px-3 py-2">Exam(60)</th>
+                                <th class="border border-gray-300 px-3 py-2">1st CA(20)</th>
+                                <th class="border border-gray-300 px-3 py-2">2nd CA(20)</th>
+                                <th class="border border-gray-300 px-3 py-2">Summative(60)</th>
                                 <th class="border border-gray-300 px-3 py-2">Total</th>
                                 <th class="border border-gray-300 px-3 py-2">Total %</th>
                                 <th class="border border-gray-300 px-3 py-2">Grade</th>
@@ -175,30 +169,34 @@
                     </table>
                 </div>
             </div>
-            
+
             <div class="grid grid-cols-2 md:grid-cols-5 bg-white">
                 <div>
-                    <h3 class="font-medium border-r border-gray-300 text-slate-700 text-sm bg-slate-50 py-2 px-1.5">Personal Development</h3>
+                    <h3 class="font-medium border-r border-gray-300 text-slate-700 text-sm bg-slate-50 py-2 px-1.5">
+                        Personal Development</h3>
                     <div class="personal-development">
                         <!-- Dynamically populated here -->
                     </div>
                 </div>
-            
+
                 <div>
-                    <h3 class="font-medium border-r border-gray-300 text-slate-700 text-sm bg-slate-50 py-2 px-1.5">Social Development</h3>
+                    <h3 class="font-medium border-r border-gray-300 text-slate-700 text-sm bg-slate-50 py-2 px-1.5">
+                        Social Development</h3>
                     <div class="social-development">
                         <!-- Dynamically populated here -->
                     </div>
                 </div>
-            
+
                 <div>
-                    <h3 class="font-medium border-r border-gray-300 text-slate-700 text-sm bg-slate-50 py-2 px-1.5">Psychomotor Development</h3>
+                    <h3 class="font-medium border-r border-gray-300 text-slate-700 text-sm bg-slate-50 py-2 px-1.5">
+                        Psychomotor Development</h3>
                     <div class="psychomotor-development">
                     </div>
                 </div>
-            
+
                 <div>
-                    <h3 class="font-medium border-r border-gray-300 text-slate-700 text-sm bg-slate-50 py-2 px-1.5">Sense of Responsibility</h3>
+                    <h3 class="font-medium border-r border-gray-300 text-slate-700 text-sm bg-slate-50 py-2 px-1.5">
+                        Sense of Responsibility</h3>
                     <div class="sense-of-responsibility">
                     </div>
                 </div>
@@ -245,10 +243,10 @@
                     </table>
                 </div>
             </div>
-            
+
             <div class="border-2 border-gray-200 p-4 bg-white">
                 <h2 class="text-xl text-black font-semibold">Remarks and Conclusion</h2>
-            
+
                 <div class='grid grid-cols-1 md:grid-cols-2'>
                     <div>
                         <p class="font-semibold text-gray-700">Class Teacher's remarks:</p>
@@ -256,7 +254,7 @@
                             <!-- Dynamically populated here -->
                         </div>
                     </div>
-            
+
                     <div>
                         <p class="font-semibold text-gray-700">Head of School's comment:</p>
                         <div class="head-teacher-remarks">
@@ -274,62 +272,61 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-            const dateElement = document.getElementById("date");
-            const today = new Date().toLocaleDateString("en-GB", {
-                day: "2-digit",
-                month: "2-digit",
-                year: "numeric"
-            });
-            dateElement.textContent = today;
+        const dateElement = document.getElementById("date");
+        const today = new Date().toLocaleDateString("en-GB", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric"
         });
+        dateElement.textContent = today;
+    });
 
     async function downloadAsPDF() {
-            const { jsPDF } = window.jspdf;
-            const pdf = new jsPDF("p", "mm", [297, 420]); // Set page size to A3 (297mm x 420mm)
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF("p", "mm", [297, 420]); // Set page size to A3 (297mm x 420mm)
 
-            const modalContent = document.getElementById("page-content");
+        const modalContent = document.getElementById("page-content");
 
-            // Save original style to revert after generating the PDF
-            const originalWidth = modalContent.style.width;
+        // Save original style to revert after generating the PDF
+        const originalWidth = modalContent.style.width;
 
-            // Temporarily set the width to mimic a desktop view
-            modalContent.style.width = "1024px";
+        // Temporarily set the width to mimic a desktop view
+        modalContent.style.width = "1024px";
 
-            // Use html2canvas to render the full modal content as a canvas
-            await html2canvas(modalContent, {
-                scale: 1.5, // Reduce quality slightly to decrease file size
-                useCORS: true, // Allow cross-origin images
-            }).then((canvas) => {
-                const imgData = canvas.toDataURL("image/jpeg", 0.9); // Use JPEG with compression
-                const imgWidth = 297; // A3 width in mm
-                const pageHeight = 420; // A3 height in mm
-                const imgHeight = (canvas.height * imgWidth) / canvas.width;
-                let heightLeft = imgHeight;
+        // Use html2canvas to render the full modal content as a canvas
+        await html2canvas(modalContent, {
+            scale: 1.5, // Reduce quality slightly to decrease file size
+            useCORS: true, // Allow cross-origin images
+        }).then((canvas) => {
+            const imgData = canvas.toDataURL("image/jpeg", 0.9); // Use JPEG with compression
+            const imgWidth = 297; // A3 width in mm
+            const pageHeight = 420; // A3 height in mm
+            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+            let heightLeft = imgHeight;
 
-                let position = 0;
+            let position = 0;
 
-                // Add content to PDF, handle page breaks
+            // Add content to PDF, handle page breaks
+            pdf.addImage(imgData, "JPEG", 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+
+            while (heightLeft > 0) {
+                position = heightLeft - imgHeight;
+                pdf.addPage();
                 pdf.addImage(imgData, "JPEG", 0, position, imgWidth, imgHeight);
                 heightLeft -= pageHeight;
+            }
 
-                while (heightLeft > 0) {
-                    position = heightLeft - imgHeight;
-                    pdf.addPage();
-                    pdf.addImage(imgData, "JPEG", 0, position, imgWidth, imgHeight);
-                    heightLeft -= pageHeight;
-                }
+            // Save the generated PDF
+            pdf.save("Report_Card.pdf");
+        });
 
-                // Save the generated PDF
-                pdf.save("Report_Card.pdf");
-            });
-
-            // Revert the modal content to its original width
-            modalContent.style.width = originalWidth;
-        }
-
-
+        // Revert the modal content to its original width
+        modalContent.style.width = originalWidth;
+    }
 </script>
 
 
-<script type="module" src="/assets/js/print-result.js"></script>
+<script type="module" src="/assets/js/midterm-result.js"></script>
+
 </html>

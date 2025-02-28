@@ -341,7 +341,7 @@
                         </div>
                     </div>
 
-                    <div>
+                    <div class="col-span-2">
                         <p class="text-gray-500 font-medium text-md mb-2">Address</p>
                         <div class="flex items-center space-x-2">
                             <i class="fa fa-graduation-cap bg-blue-600 text-white px-3 py-3 rounded-full"></i>
@@ -354,7 +354,7 @@
 
             <div class="bg-white px-6 py-8 rounded-lg">
                 <h3 class="mb-4 font-semibold text-lg">
-                    Result
+                    View and Download Result
                 </h3>
                 <div class="flex flex-col">
                     <div class="-m-1.5 overflow-x-auto">
@@ -365,10 +365,17 @@
                                 <!-- Add term options here -->
                             </select>
 
-                            <a id="resultLink"
-                                class="filter-button px-4 py-2 bg-blue-600 text-white text-sm rounded-lg font-medium hover:bg-blue-700 duration-150 focus:ring focus:ring-blue-500 focus:outline-none">
-                                View and Download Result
-                            </a>
+                            <div class="flex items-center space-x-3">
+                                <a id="midTermLink"
+                                    class="cursor-pointer filter-button px-4 py-2 bg-blue-600 text-white text-sm rounded-lg font-medium hover:bg-blue-700 duration-150 focus:ring focus:ring-blue-500 focus:outline-none">
+                                    Midterm Result
+                                </a>
+
+                                <a id="resultLink"
+                                    class="cursor-pointer filter-button px-4 py-2 bg-blue-600 text-white text-sm rounded-lg font-medium hover:bg-blue-700 duration-150 focus:ring focus:ring-blue-500 focus:outline-none">
+                                    End of Term Result
+                                </a>
+                            </div>
 
                         </div>
                     </div>
@@ -426,8 +433,35 @@
             generateLink(); // Call the function to generate the link and redirect
         });
 
+        document.getElementById('midTermLink').addEventListener('click', function (event) {
+                event.preventDefault(); // Prevent the default link behavior
+                generateMidTermLink(); // Call the function to generate the link and redirect
+            });
+
+        function generateMidTermLink() {
+                const studentID = getQueryParam('studentID');
+                const termSelect = document.getElementById("term");
+                const term = termSelect.value;
+
+                if (!term) {
+                    alert("Please select a term.");
+                    return;
+                }
+
+                if (!studentID) {
+                    alert("Student ID not found in the URL.");
+                    return;
+                }
+
+                const encodedTerm = encodeURIComponent(term);
+                const link = `midterm-result.html?studentID=${studentID}&term=${encodedTerm}`;
+
+                // Redirect to the generated link
+                window.location.href = link;
+            }
+
         function generateLink() {
-            const studentID = getQueryParam('studentID'); // Get studentID from URL
+            const studentID = getQueryParam('studentID');
             const termSelect = document.getElementById("term");
             const term = termSelect.value;
 
