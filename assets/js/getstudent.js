@@ -1,79 +1,178 @@
 import { api } from "./api.js";
 
 const token = localStorage.getItem("authToken");
-// all students
+
+// GET ALL STUDENTS AND LOAD INTO THE TABLE
 document.addEventListener("DOMContentLoaded", function () {
   const token = localStorage.getItem("authToken");
-  fetch(`${api}/student/students/`, {
-    method: "GET",
-    headers: {
-      Authorization: `Token ${token}`,
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      const tableBody = document.getElementById("student-table-body");
-      const noResultsDiv = document.getElementById("no-results");
+  const studentsPerPage = 10;
+  let currentPage = 1;
+  let studentsData = [];
+  const tableBody = document.getElementById("student-table-body");
+  const searchInput = document.getElementById("hs-table-input-search");
 
-      if (data.length === 0) {
-        noResultsDiv.style.display = "block";
-      } else {
-        noResultsDiv.style.display = "none";
+  function fetchStudents() {
+    tableBody.innerHTML = `
+  <tr>
+    <td colspan="8" class="text-center py-4">
+      <div class="flex items-center justify-center gap-2">
+        <svg class="animate-spin h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 019.293-7.293 1 1 0 01.707 1.707A6 6 0 106 12H4z"></path>
+        </svg>
+        <span class="text-gray-600 animate-pulse">Loading...</span>
+      </div>
+    </td>
+  </tr>`;
 
-        data.forEach((student) => {
-          const row = `
-            <tr>
-                <td class="py-3 ps-3">
-                    <div class="flex items-center h-5">
-                        <input type="checkbox" class="border-gray-300 rounded text-blue-600 focus:ring-blue-500">
-                    </div>
-                </td>
-                <td class="p-3 whitespace-nowrap text-sm font-medium text-gray-800">
-                    <img src="${student.img_url}" alt="${student.first_name} ${
-            student.last_name
-          }" class="w-10 h-10 rounded-full">
-                </td>
-                <td class="p-3 whitespace-nowrap text-sm font-medium text-gray-800">
-                    ${student.first_name} ${student.last_name} ${
-            student.other_name
-          }
-                </td>
-                <td class="py-3 px-1 whitespace-nowrap text-sm text-gray-800">
-                    ${student.registration_id}
-                </td>
-                <td class="py-3 px-1 whitespace-nowrap text-sm text-gray-800">
-                    ${new Date(student.registration_date).toDateString()}
-                </td>
-                <td class="py-3 px-1 whitespace-nowrap text-sm text-gray-800">
-                    ${student.parent}
-                </td>
-                <td class="py-3 px-1 whitespace-nowrap text-sm text-gray-800">
-                    ${student.type}
-                </td>
-                <td class="p-3 whitespace-nowrap text-end text-sm font-medium">
-                    <a id="view-teacher-details-${student.id}" href="#">
-                        <img src="/assets/images/dots.svg" alt="dots" class="cursor-pointer self-end inline-flex">
-                    </a>
-                </td>
-            </tr>
-          `;
-          tableBody.innerHTML += row;
-
-          const viewTeacherDetailsLink = document.getElementById(
-            `view-teacher-details-${student.id}`
-          );
-          viewTeacherDetailsLink.setAttribute(
-            "href",
-            `student-profile.html?studentID=${student.id}`
-          );
-        });
-      }
+    fetch(`${api}/student/students/`, {
+      method: "GET",
+      headers: {
+        Authorization: `Token ${token}`,
+        "Content-Type": "application/json",
+      },
     })
-    .catch((error) => {
-      console.error("Error fetching student data:", error);
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        studentsData = data;
+        renderTable();
+      })
+      .catch((error) => {
+        console.error("Error fetching student data:", error);
+        tableBody.innerHTML = `<tr><td colspan="8" class="text-center py-4 text-red-600">Failed to load students. Please try again.</td></tr>`;
+      });
+  }
+
+  function renderTable(filteredData = studentsData) {
+    tableBody.innerHTML = "";
+    const start = (currentPage - 1) * studentsPerPage;
+    const paginatedData = filteredData.slice(start, start + studentsPerPage);
+
+    if (paginatedData.length === 0) {
+      tableBody.innerHTML = `<tr><td colspan="8" class="text-center py-4">No students found</td></tr>`;
+      return;
+    }
+
+    paginatedData.forEach((student) => {
+      const row = `
+        <tr>
+          <td class="py-3 ps-3">
+            <div class="flex items-center h-5">
+              <input type="checkbox" class="border-gray-300 rounded text-blue-600 focus:ring-blue-500">
+            </div>
+          </td>
+          <td class="p-3 whitespace-nowrap text-sm font-medium text-gray-800">
+            <img src="${student.img_url}" alt="${student.first_name} ${student.last_name}" class="w-10 h-10 rounded-full">
+          </td>
+          <td class="p-3 whitespace-nowrap text-sm font-medium text-gray-800">
+            ${student.first_name} ${student.last_name} ${student.other_name || ""}
+          </td>
+          <td class="py-3 px-1 whitespace-nowrap text-sm text-gray-800">
+            ${student.registration_id}
+          </td>
+          <td class="py-3 px-1 whitespace-nowrap text-sm text-gray-800">
+            ${new Date(student.registration_date).toDateString()}
+          </td>
+          <td class="py-3 px-1 whitespace-nowrap text-sm text-gray-800">
+            ${student.parent}
+          </td>
+          <td class="py-3 px-1 whitespace-nowrap text-sm text-gray-800">
+            ${student.type}
+          </td>
+          <td class="p-3 whitespace-nowrap text-end text-sm font-medium">
+            <a href="student-profile.html?studentID=${student.id}">
+              <img src="/assets/images/dots.svg" alt="dots" class="cursor-pointer">
+            </a>
+          </td>
+        </tr>
+      `;
+      tableBody.innerHTML += row;
     });
+
+    updatePagination(filteredData.length);
+  }
+
+  function updatePagination(totalStudents) {
+    const totalPages = Math.ceil(totalStudents / studentsPerPage);
+    const paginationContainer = document.querySelector(".pagination");
+    paginationContainer.innerHTML = "";
+
+    const createPageButton = (page) => `
+      <a href="#" class="px-3 py-2 text-sm ${page === currentPage ? "text-white bg-blue-600 border-blue-600" : "text-gray-500 bg-white border-gray-200"}
+      rounded hover:bg-gray-100 hover:text-gray-700" data-page="${page}">
+        ${page}
+      </a>
+    `;
+
+    // Previous button
+    // if (currentPage > 1) {
+    //   paginationContainer.innerHTML += `
+    //     <a href="#" class="px-3 py-2 text-sm text-gray-500 bg-white border border-gray-200 rounded hover:bg-gray-100 hover:text-gray-700" data-page="${currentPage - 1}">
+    //       <i class="fa fa-chevron-left"></i>
+    //     </a>
+    //   `;
+    // }
+
+    paginationContainer.innerHTML = "";
+
+    for (let i = 1; i <= totalPages; i++) {
+      if (
+        i === 1 || 
+        i === totalPages ||  // Last page
+        i === totalPages - 1 || // Second to last page
+        (i >= currentPage - 1 && i <= currentPage + 1) // Show current, previous, and next
+      ) {
+        paginationContainer.innerHTML += createPageButton(i);
+      } else if (
+        i === currentPage - 2 || i === currentPage + 2
+      ) {
+        paginationContainer.innerHTML += `<span class="mx-1">...</span>`; // Ellipsis for skipped pages
+      }
+    }
+
+
+    // Next button
+    // if (currentPage < totalPages) {
+    //   paginationContainer.innerHTML += `
+    //     <a href="#" class="px-3 py-2 text-sm text-gray-500 bg-white border border-gray-200 rounded hover:bg-gray-100 hover:text-gray-700" data-page="${currentPage + 1}">
+    //       <i class="fa fa-chevron-right"></i>
+    //     </a>
+    //   `;
+    // }
+
+    document.querySelectorAll(".pagination a[data-page]").forEach((button) => {
+      button.addEventListener("click", (e) => {
+        e.preventDefault();
+        const page = parseInt(e.target.getAttribute("data-page"));
+        if (page > 0 && page <= totalPages) {
+          currentPage = page;
+          renderTable();
+        }
+      });
+    });
+  }
+
+  searchInput.addEventListener("input", function () {
+    const searchTerm = searchInput.value.toLowerCase();
+    const filteredData = studentsData.filter(
+      (student) =>
+        student.first_name.toLowerCase().includes(searchTerm) ||
+        student.last_name.toLowerCase().includes(searchTerm) ||
+        (student.other_name && student.other_name.toLowerCase().includes(searchTerm))
+    );
+    currentPage = 1;
+    renderTable(filteredData);
+  });
+
+  fetchStudents();
 });
+
+
 
 
 document.addEventListener("DOMContentLoaded", function () {

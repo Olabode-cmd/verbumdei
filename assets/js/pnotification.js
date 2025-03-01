@@ -4,15 +4,40 @@ document.addEventListener("DOMContentLoaded", function () {
   const eventsUrl = `${api}/program/events/`;
   const announcementsUrl = `${api}/announcement/`;
 
-  // Fetch event data from API
+  const eventsBody = document.getElementById("events-body");
+  const announcementsBody = document.getElementById("announcements-body");
+
+  // Function to set loading state
+  function setLoading(element) {
+    element.innerHTML = `<div class="flex justify-center items-center w-full py-10">
+      <svg class="animate-spin h-10 w-10 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 019.293-7.293 1 1 0 01.707 1.707A6 6 0 106 12H4z"></path>
+      </svg>
+    </div>`;
+  }
+
+  // Function to handle errors
+  function setError(element, message) {
+    element.innerHTML = `<li class="text-center py-3 text-red-500">${message}</li>`;
+  }
+
+  // Apply loading state to both sections
+  setLoading(eventsBody);
+  setLoading(announcementsBody);
+
+  // Fetch event data
   fetch(eventsUrl)
     .then((response) => response.json())
     .then((data) => {
-      const eventsBody = document.getElementById("events-body");
-      eventsBody.innerHTML = ""; // Clear existing content
+      eventsBody.innerHTML = "";
+
+      if (data.length === 0) {
+        setError(eventsBody, "No upcoming events.");
+        return;
+      }
 
       data.forEach((event) => {
-        // Format date and time
         const eventDate = new Date(event.date);
         const formattedDate = eventDate.toLocaleDateString();
         const formattedTime = eventDate.toLocaleTimeString([], {
@@ -20,7 +45,6 @@ document.addEventListener("DOMContentLoaded", function () {
           minute: "2-digit",
         });
 
-        // Create a list item for each event
         const eventRow = ` 
           <li class="bg-gray-50">
               <div class="flex items-center px-4 py-3">
@@ -36,21 +60,26 @@ document.addEventListener("DOMContentLoaded", function () {
           </li>
         `;
 
-        // Insert event row into the events list
         eventsBody.insertAdjacentHTML("beforeend", eventRow);
       });
     })
-    .catch((error) => console.error("Error fetching event data:", error));
+    .catch((error) => {
+      console.error("Error fetching event data:", error);
+      setError(eventsBody, "Failed to load events.");
+    });
 
-  // Fetch announcement data from API
+  // Fetch announcement data
   fetch(announcementsUrl)
     .then((response) => response.json())
     .then((data) => {
-      const announcementsBody = document.getElementById("announcements-body");
-      announcementsBody.innerHTML = ""; // Clear existing content
+      announcementsBody.innerHTML = ""; // Clear loading state
+
+      if (data.length === 0) {
+        setError(announcementsBody, "No announcements available.");
+        return;
+      }
 
       data.forEach((announcement) => {
-        // Create a list item for each announcement
         const announcementRow = ` 
           <li class="bg-gray-50">
               <div class="flex items-center px-4 py-3">
@@ -66,11 +95,12 @@ document.addEventListener("DOMContentLoaded", function () {
           </li>
         `;
 
-        // Insert announcement row into the announcements list
         announcementsBody.insertAdjacentHTML("beforeend", announcementRow);
       });
     })
-    .catch((error) =>
-      console.error("Error fetching announcement data:", error)
-    );
+    .catch((error) => {
+      console.error("Error fetching announcement data:", error);
+      setError(announcementsBody, "Failed to load announcements.");
+    });
 });
+
