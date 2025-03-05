@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Title -->
-    <title>Teachers Management || Verbum</title>
+    <title>Parents Management || Verbum Dei Management System</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="/assets/images/fav.png">
@@ -15,32 +15,8 @@
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
-<style>
-    .modal {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 50;
-    }
-
-    .close-modal {
-        cursor: pointer;
-        /* Change cursor to pointer */
-        font-size: 1.5rem;
-        /* Adjust font size as needed */
-    }
-
-    .hidden {
-        display: none;
-    }
-</style>
 
 <body>
     <!-- ========== HEADER ========== -->
@@ -59,7 +35,7 @@
             <div class="w-full flex items-center justify-end ms-auto md:justify-between gap-x-1 md:gap-x-3">
                 <div class="hidden md:block">
                     <p class="font-medium text-sm text-gray-600">Home / Dashboard</p>
-                    <h3 class="text-md md:text-xl text-blue-600 font-bold">Teachers Management</h3>
+                    <h3 class="text-md md:text-xl text-blue-600 font-bold">Parents Management</h3>
                 </div>
 
 
@@ -167,7 +143,7 @@
                         </svg>
                     </li>
                     <li class="text-sm font-semibold text-gray-800 truncate" aria-current="page"></li>
-                    Teachers
+                    Parents
                     </li>
                 </ol>
                 <!-- End Breadcrumb -->
@@ -213,7 +189,7 @@
                             </li>
 
                             <li>
-                                <a class="flex items-center gap-x-3.5 py-2 font-medium px-2.5 hover:bg-gray-100 text-sm text-gray-500 rounded-lg focus:outline-none"
+                                <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
                                     href="students.html">
                                     <i class="fa fa-graduation-cap text-gray-500"></i>
                                     <span>Student Management</span>
@@ -221,17 +197,17 @@
                             </li>
 
                             <li>
-                                <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white rounded-lg bg-blue-600"
+                                <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
                                     href="teachers.html">
-                                    <i class="fa fa-chalkboard-user text-white"></i>
+                                    <i class="fa fa-chalkboard-user text-gray-500"></i>
                                     Teacher Management
                                 </a>
                             </li>
 
                             <li>
-                                <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
+                                <a class="flex items-center gap-x-3.5 font-medium py-2 px-2.5 text-sm text-white rounded-lg bg-[#007BFF] focus:outline-none focus:bg-gray-100"
                                     href="parents.html">
-                                    <i class="fa fa-user text-gray-500"></i>
+                                    <i class="fa fa-user text-white"></i>
                                     Parents Management
                                 </a>
                             </li>
@@ -259,6 +235,15 @@
                                     Library Management
                                 </a>
                             </li> -->
+
+                            <li>
+                                <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
+                                    href="term.html">
+                                    <i class="fa fa-sitemap text-gray-500"></i>
+                                    Term
+                                </a>
+                            </li>
+
                             <li>
                                 <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
                                     href="events.html">
@@ -282,126 +267,169 @@
     <!-- End Sidebar -->
 
     <!-- Content -->
+    <!-- Content -->
     <div class="w-full lg:ps-64">
         <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
             <!-- your content goes here ... -->
-            <div class="grid gap-4 grid-cols-2">
-                <div class="relative">
-                    <div class="absolute inset-y-0 start-0 flex items-center pointer-events-none z-20 ps-3.5">
-                        <svg class="shrink-0 size-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24"
-                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="11" cy="11" r="8" />
-                            <path d="m21 21-4.3-4.3" />
-                        </svg>
-                    </div>
-                    <input type="text"
-                        class="py-2 ps-10 pe-16 block w-full bg-gray-50 border-gray-200 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-                        placeholder="Search teachers list...">
-                </div>
-
-                <div class="flex items-center space-x-3">
-                    <div class="hs-dropdown hs-dropdown-example relative inline-flex">
-                        <button id="hs-dropdown-example" type="button"
-                            class="hs-dropdown-toggle inline-flex items-center gap-x-2 text-sm px-3 py-2 rounded-md border border-blue-600 bg-blue-600 hover:bg-blue-700 hover:border-blue-700 duration-300"
-                            aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
-                            <div class="flex space-x-2 items-center">
-                                <span class="font-medium text-white text-sm">Create teacher</span>
-                                <i class="fa fa-chevron-down text-white"></i>
-                            </div>
-                        </button>
-
-                        <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 w-56 hidden z-10 mt-2 min-w-60 bg-white shadow-md rounded-lg p-2"
-                            role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-example">
-                            <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
-                                href="#">
-                                Import CSV
-                            </a>
-                            <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
-                                href="enroll-teacher.html">
-                                Enroll now
-                            </a>
-                        </div>
-                    </div>
-                    <a href="#" type="button"
-                        class="text-center text-sm px-3 py-2 rounded-md border border-blue-600 bg-blue-600 hover:bg-blue-700 hover:border-blue-700 duration-300"
-                        onclick="openModal('classModal')">
-                        <span class="font-medium text-white text-sm">Create subject</span>
-                    </a>
+    
+            <div id="no-results" class="no-results" style="display: none;">
+                <div class="bg-white w-[95%] md:w-[70%] text-center my-3 px-3 py-6 rounded-lg mx-auto">
+                    <img src="/assets/images/sleepy.png" alt="sleepy icon" class="w-95% md:w-[55%] lg:w-[45%] mx-auto">
+                    <h3 class="mt-8 font-semibold text-lg md:text-xl">No parents at this time</h3>
+                    <p class="font-medium text-sm mb-4">Parents will appear after they are enrolled.</p>
+                    <a href="enroll-student.html"
+                        class="mt-4 bg-blue-600 text-white text-sm px-4 py-3 rounded-lg font-medium hover:bg-blue-700 duration-150">Enroll
+                        now</a>
                 </div>
             </div>
-
-            <div class="grid gap-4 grid-cols-2 md:grid-cols-4" id="teacher-frame">
-
-            </div>
-
-        </div>
-
-    </div>
-    <!-- Modal Structure -->
-    <div id="classModal"
-        class="modal hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-        <div
-            class="formbox bg-white border border-gray-300 rounded-lg px-3 py-8 w-[95%] md:w-[55%] lg:w-[45%] mx-auto relative">
-            <h3 class="font-semibold text-lg text-center">Create new subject</h3>
-
-            <form id="subject-creation">
-                <div id="first-form">
-                    <div class="space-y-4">
-                        <div class="max-w-sm mx-auto space-y-3">
-                            <div>
-                                <label for="name" class="block text-sm font-medium mb-2">Subject name</label>
-                                <div class="relative">
-                                    <input type="text" id="subject-name" name="name"
-                                        class="py-3 px-4 ps-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-                                        placeholder="e.g Mathematics">
-                                    <div
-                                        class="absolute inset-y-0 start-0 flex items-center pointer-events-none z-20 ps-4">
-                                        <i class="fa fa-book text-gray-300"></i>
+    
+    
+            <div class="flex flex-col bg-white rounded-lg px-3 py-6">
+                <div class="overflow-x-auto ">
+                    <div class="min-w-full inline-block align-middle">
+                        <div data-hs-datatable='{
+                        "pageLength": 10,
+                        "pagingOptions": {
+                          "pageBtnClasses": "min-w-[40px] flex justify-center items-center text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 py-2.5 text-sm rounded-full disabled:opacity-50 disabled:pointer-events-none"
+                        },
+                        "selecting": true,
+                        "rowSelectingOptions": {
+                          "selectAllSelector": "#hs-table-search-checkbox-all"
+                        },
+                        "language": {
+                          "zeroRecords": "<div class=\"py-10 px-5 flex flex-col justify-center items-center text-center\"><svg class=\"shrink-0 size-6 text-gray-500" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"11\" cy=\"11\" r=\"8\"/><path d=\"m21 21-4.3-4.3\"/></svg><div class=\"max-w-sm mx-auto\"><p class=\"mt-2 text-sm text-gray-600">No search results</p></div></div>"
+                        }
+                      }'>
+                            <div class="py-3">
+                                <div class="relative max-w-xs">
+                                    <label for="hs-table-input-search" class="sr-only">Search</label>
+                                    <input type="text" name="hs-table-search" id="parent-search"
+                                        class="py-2 px-3 ps-9 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                                        placeholder="Search for parents" data-hs-datatable-search="">
+                                    <div class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-3">
+                                        <svg class="size-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="11" cy="11" r="8"></circle>
+                                            <path d="m21 21-4.3-4.3"></path>
+                                        </svg>
                                     </div>
                                 </div>
                             </div>
+    
+                            <div class="overflow-hidden">
+                                <table class="min-w-full">
+                                    <thead class="border-y border-gray-200">
+                                        <tr>
+                                            <th scope="col"
+                                                class="py-1 pl-3 group text-start text-sm font-semibold focus:outline-none">
+                                                Parent name
+                                            </th>
+                                            <th scope="col"
+                                                class="py-1 group text-start text-sm font-semibold focus:outline-none">
+                                                Email
+                                            </th>
+    
+                                            <th scope="col"
+                                                class="py-1 group text-start text-sm font-semibold focus:outline-none">
+                                                Phone number
+                                            </th>
+    
+                                            <!-- <th scope="col"
+                                                class="py-1 group text-start text-sm font-semibold focus:outline-none">
+                                                Phone number 2
+                                            </th> -->
+    
+                                            <th scope="col"
+                                                class="py-1 group text-start text-sm font-semibold focus:outline-none">
+                                                Home address
+                                            </th>
+    
+                                            <th scope="col"
+                                                class="py-1 group text-start text-sm font-semibold focus:outline-none">
+                                                Code
+                                            </th>
+                                            <th scope="col" class="py-1 group text-start text-sm font-semibold focus:outline-none">
+                                                Action
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="parent-table-body" class="divide-y divide-gray-200">
+                                        <!-- Data will be inserted here -->
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="max-w-sm mx-auto mt-6">
-                        <button type="submit"
-                            class="w-full px-3 py-3 bg-blue-600 hover:bg-blue-700 duration-200 text-sm font-medium text-white rounded-lg">Create</button>
+                </div>
+    
+                <div class="flex items-center justify-between mt-6">
+                    <p id="pagination-info" class="text-sm font-medium"></p>
+                    <div class="pagination inline-flex items-center space-x-1">
+                        <a href="#"
+                            class="px-3 py-2 text-sm text-gray-500 bg-white border border-gray-200 rounded hover:bg-gray-100 hover:text-gray-700">
+                            <i class="fa fa-chevron-left"></i>
+                        </a>
+    
+                        <a href="#" aria-current="page"
+                            class="px-3 py-2 text-sm text-white bg-blue-600 border border-blue-600 rounded hover:bg-blue-700">
+                            1
+                        </a>
+                        <a href="#"
+                            class="px-3 py-2 text-sm text-gray-500 bg-white border border-gray-200 rounded hover:bg-gray-100 hover:text-gray-700">
+                            2
+                        </a>
+                        <span class="px-3 py-2 text-sm text-gray-500">...</span>
+                        <a href="#"
+                            class="px-3 py-2 text-sm text-gray-500 bg-white border border-gray-200 rounded hover:bg-gray-100 hover:text-gray-700">
+                            10
+                        </a>
+    
+                        <a href="#"
+                            class="px-3 py-2 text-sm text-gray-500 bg-white border border-gray-200 rounded hover:bg-gray-100 hover:text-gray-700">
+                            <i class="fa fa-chevron-right"></i>
+                        </a>
                     </div>
                 </div>
-            </form>
 
-            <!-- Close Button -->
-            <button class="close-modal absolute top-2 right-2 text-gray-400 hover:text-gray-600"
-                onclick="closeModal('classModal')">&times;</button>
+                <!-- Modal -->
+                <div id="parentModal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+                    <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+                        <!-- Background overlay -->
+                        <div class="fixed inset-0 transition-opacity bg-black bg-opacity-50" aria-hidden="true"></div>
+                
+                        <!-- Modal content -->
+                        <div
+                            class="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white rounded-lg shadow-xl sm:align-middle sm:max-w-lg">
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="text-lg font-medium leading-6 text-gray-900">Parent Details</h3>
+                                <button id="closeModal" class="text-gray-500 hover:text-gray-700">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="mt-2 space-y-4">
+                                <p class="text-md text-gray-500"><strong>Name:</strong> <span id="modalParentName"></span></p>
+                                <p class="text-md text-gray-500"><strong>Email:</strong> <span id="modalParentEmail"></span></p>
+                                <p class="text-md text-gray-500"><strong>Phone Numbers:</strong> <span id="modalParentPhone"></span></p>
+                                <p class="text-md text-gray-500"><strong>Address:</strong> <span id="modalParentAddress"></span></p>
+                                <p class="text-md text-gray-500"><strong>Code:</strong> <span id="modalParentCode"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
         </div>
     </div>
     <script src="/assets/js/logout.js"></script>
-    <script type="module" src="/assets/js/index.js"></script>
-    <script type="module" src="/assets/js/getteachers.js"></script>
-    <script type="module" src="/assets/js/dashboard.js"></script>
     <script type="module" src="/assets/js/auth.js"></script>
-    <script type="module" src="/assets/js/createsubject.js"></script>
-    <script>
-        function openModal(modalId) {
-            const modal = document.getElementById(modalId);
-            modal.classList.remove('hidden');
-        }
+    <script type="module" src="/assets/js/getParents.js"></script>
+    <script type="module" src="/assets/js/index.js"></script>
 
-        function closeModal(modalId) {
-            const modal = document.getElementById(modalId);
-            modal.classList.add('hidden');
-        }
-
-        // Close the modal when clicking outside of it
-        window.addEventListener('click', function (event) {
-            const modal = document.getElementById('classModal');
-            if (event.target === modal) {
-                closeModal('classModal');
-            }
-        });
-
-    </script>
 </body>
 
 </html>

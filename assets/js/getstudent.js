@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let studentsData = [];
   const tableBody = document.getElementById("student-table-body");
   const searchInput = document.getElementById("hs-table-input-search");
+  const info = document.getElementById('pagination-info')
 
   function fetchStudents() {
     tableBody.innerHTML = `
@@ -41,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((data) => {
         studentsData = data;
         renderTable();
+        info.textContent = `Showing 1 to 10 of ${studentsData.length}`
       })
       .catch((error) => {
         console.error("Error fetching student data:", error);
@@ -123,15 +125,15 @@ document.addEventListener("DOMContentLoaded", function () {
     for (let i = 1; i <= totalPages; i++) {
       if (
         i === 1 || 
-        i === totalPages ||  // Last page
-        i === totalPages - 1 || // Second to last page
-        (i >= currentPage - 1 && i <= currentPage + 1) // Show current, previous, and next
+        i === totalPages || 
+        i === totalPages - 1 ||
+        (i >= currentPage - 1 && i <= currentPage + 1)
       ) {
         paginationContainer.innerHTML += createPageButton(i);
       } else if (
         i === currentPage - 2 || i === currentPage + 2
       ) {
-        paginationContainer.innerHTML += `<span class="mx-1">...</span>`; // Ellipsis for skipped pages
+        paginationContainer.innerHTML += `<span class="mx-1">...</span>`;
       }
     }
 
@@ -171,8 +173,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   fetchStudents();
 });
-
-
 
 
 document.addEventListener("DOMContentLoaded", function () {
