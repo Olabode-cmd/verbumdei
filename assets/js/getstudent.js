@@ -14,17 +14,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function fetchStudents() {
     tableBody.innerHTML = `
-  <tr>
-    <td colspan="8" class="text-center py-4">
-      <div class="flex items-center justify-center gap-2">
-        <svg class="animate-spin h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 019.293-7.293 1 1 0 01.707 1.707A6 6 0 106 12H4z"></path>
-        </svg>
-        <span class="text-gray-600 animate-pulse">Loading...</span>
-      </div>
-    </td>
-  </tr>`;
+    <tr>
+      <td colspan="8" class="text-center py-4">
+        <div class="flex items-center justify-center gap-2">
+          <svg class="animate-spin h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 019.293-7.293 1 1 0 01.707 1.707A6 6 0 106 12H4z"></path>
+          </svg>
+          <span class="text-gray-600 animate-pulse">Loading...</span>
+        </div>
+      </td>
+    </tr>`;
 
     fetch(`${api}/student/students/`, {
       method: "GET",
@@ -209,7 +209,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ).textContent = `${student.first_name} ${student.other_name} ${student.last_name}`;
     document.querySelector(".student-id").textContent = student.registration_id;
     document.querySelector(".student-profile-image").src =
-      student.img_url || "assets/images/default-profile.png";
+      student.img_url || `https://avatar.iran.liara.run/public/${student.gender == 'male' ? "boy" : "girl"}`;
     document.querySelector(".age").textContent = `${student.date_of_birth} (${
       new Date().getFullYear() - new Date(student.date_of_birth).getFullYear()
     })`;
@@ -263,7 +263,7 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    paymentHistoryTable.innerHTML = ""; // Clear the table before adding new rows
+    paymentHistoryTable.innerHTML = "";
 
     if (payments.length === 0) {
       const row = `<tr><td colspan="5">No payment history found</td></tr>`;

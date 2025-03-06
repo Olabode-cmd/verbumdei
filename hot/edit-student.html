@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Title -->
-    <title>Student Profile || Verbum</title>
+    <title>Edit Student || Verbum</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="/assets/images/fav.png">
@@ -227,13 +227,13 @@
                                 </a>
                             </li>
 
-                            <!-- <li>
+                            <li>
                                 <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
                                     href="library.html">
                                     <i class="fa fa-book text-gray-500"></i>
                                     Library Management
                                 </a>
-                            </li> -->
+                            </li>
 
                             <!-- <li>
                                 <a class="w-full flex items-center gap-x-3.5 py-2 font-medium px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
@@ -263,9 +263,7 @@
                 </div>
 
                 <div class="mt-6">
-
                     <hr class="mb-2" />
-
                 </div>
             </div>
         </div>
@@ -277,243 +275,141 @@
     <div class="w-full lg:ps-64">
         <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
             <!-- your content goes here ... -->
-
-            <!-- <div class="w-full flex items-center justify-end ms-auto md:justify-between gap-x-1 md:gap-x-3">
-                <a class='flex items-center space-x-0 md:space-x-2 px-2 py-2 md:px-3 md:py-2 rounded-md border border-gray-300 bg-white hover:bg-gray-100 duration-300'
-                    href='/admin/transactions'>
-                    <i class="fa fa-chevron-left"></i>
-                    <span class="font-medium text-sm me-2 md:me-0">Back</span>
-                </a>
-            </div> -->
-
-            <div class="bg-white px-6 py-10 rounded-lg">
-                <div class="flex items-start justify-between">
-                    <div
-                        class="w-[95px] h-[95px] md:w-[125px] md:h-[125px] rounded-full overflow-hidden border border-blue-600 border-4">
-                        <img src="" alt="pfp" class="w-full h-full object-cover student-profile-image">
-                    </div>
-
-                    <div>
-                        <img src="/assets/images/dots.svg" alt="dots">
-                    </div>
+            <div class="bg-white rounded-lg overflow-hidden">
+                <div class="bg-gray-100 px-3 py-2">
+                    <p class="text-md lg:text-lg font-semibold">Student details</p>
                 </div>
 
-                <div class="flex items-end justify-between">
-                    <div class="pl-2 mt-3">
-                        <div class="flex items-center space-x-2">
-                            <h1 class="text-xl md:text-2xl font-bold student-name"> </h1>
-
-                        </div>
-                        <div class="flex items-center space-x-2 cursor-pointer mt-1">
-                            <p class="text-gray-800 font-medium text-sm student-id"></p>
-                        </div>
-                        <p class="mt-2 text-gray-500 font-bold text-sm uppercase status"></p>
-                    </div>
-
-                    <a id="edit-student-btn"
-                        class="cursor-pointer mt-4 bg-blue-600 text-white text-sm px-4 py-2 rounded-lg font-medium hover:bg-blue-700 duration-150 flex space-x-2 items-center">
-                        <i class="fa fa-pencil"></i>
-                        <span>Edit data</span>
-                    </a>
-                </div>
-
-                <div class="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-4">
-                    <div>
-                        <p class="text-gray-500 font-medium text-md mb-2">Age</p>
-                        <div class="flex items-center space-x-2">
-                            <i class="fa fa-calendar-days bg-blue-600 text-white px-3 py-3 rounded-full"></i>
-                            <p class="text-md font-semibold age"></p>
-                        </div>
-                    </div>
-
-                    <div>
-                        <p class="text-gray-500 font-medium text-md mb-2">Gender</p>
-                        <div class="flex items-center space-x-2">
-                            <i class="fa fa-user bg-blue-600 text-white px-3 py-2.5 rounded-full"></i>
-                            <p class="text-md font-semibold gender"></p>
-                        </div>
-                    </div>
-
-                    <div>
-                        <p class="text-gray-500 font-medium text-md mb-2">Date of registration</p>
-                        <div class="flex items-center space-x-2">
-                            <i class="fa fa-calendar bg-blue-600 text-white px-3 py-3 rounded-full"></i>
-                            <p class="text-md font-semibold registration-date"></p>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="text-gray-500 font-medium text-md mb-2">Parents</p>
-                        <div class="flex items-center space-x-2">
-                            <i class="fa fa-user bg-blue-600 text-white px-3 py-3 rounded-full"></i>
-                            <p class="text-md font-semibold parent"></p>
-                        </div>
-                    </div>
-
-                    <div class="col-span-2">
-                        <p class="text-gray-500 font-medium text-md mb-2">Address</p>
-                        <div class="flex items-center space-x-2">
-                            <i class="fa fa-graduation-cap bg-blue-600 text-white px-3 py-3 rounded-full"></i>
-                            <p class="text-md font-semibold home-address"></p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="bg-white px-6 py-8 rounded-lg">
-                <h3 class="mb-4 font-semibold text-lg">
-                    View and Download Result
-                </h3>
-                <div class="flex flex-col">
-                    <div class="-m-1.5 overflow-x-auto">
-                        <div class="flex flex-wrap items-center gap-5 bg-gray-100 p-4 rounded-lg">
-                            <select name="Term" id="term"
-                                class="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring focus:ring-blue-500 focus:outline-none">
-                                <option value="">Term</option>
-                                <!-- Add term options here -->
-                            </select>
-
-                            <div class="flex items-center space-x-3">
-                                <a id="midTermLink"
-                                    class="cursor-pointer filter-button px-4 py-2 bg-blue-600 text-white text-sm rounded-lg font-medium hover:bg-blue-700 duration-150 focus:ring focus:ring-blue-500 focus:outline-none">
-                                    Midterm Result
-                                </a>
-
-                                <a id="resultLink"
-                                    class="cursor-pointer filter-button px-4 py-2 bg-blue-600 text-white text-sm rounded-lg font-medium hover:bg-blue-700 duration-150 focus:ring focus:ring-blue-500 focus:outline-none">
-                                    End of Term Result
-                                </a>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="bg-white px-6 py-8 rounded-lg">
-                <h3 class="mb-4 font-semibold text-lg">
-                    Payment history
-                </h3>
-                <div class="flex flex-col">
-                    <div class="-m-1.5 overflow-x-auto">
-                        <div class="p-1.5 min-w-full inline-block align-middle">
-                            <div class="overflow-hidden">
-                                <table class="min-w-full divide-y divide-gray-200" id="payment-history-table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col"
-                                                class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
-                                                Payment ID
-                                            </th>
-                                            <th scope="col"
-                                                class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
-                                                Date</th>
-                                            <th scope="col"
-                                                class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
-                                                Amount</th>
-                                            <th scope="col"
-                                                class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
-                                                Balance</th>
-                                            <th scope="col"
-                                                class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
-                                                Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="payment-history-table-body">
-                                        <!-- Payment history rows will be dynamically added here -->
-                                    </tbody>
-                                </table>
+                <!-- student enrollment -->
+                <div class="px-3 py-6">
+                    <form id="editStudentForm">
+                        <div class="grid gap-4 grid-cols-1 md:grid-cols-3">
+                            <div>
+                                <label for="profilePhoto" class="mb-1 block font-medium text-sm">Choose profile
+                                    photo*</label>
+                                <div id="imageUploadContainer"
+                                    class="cursor-pointer p-12 flex justify-center bg-white border border-dashed border-gray-300 rounded-xl">
+                                    <div class="text-center">
+                                        <svg id="uploadIcon" class="w-16 text-gray-400 mx-auto" width="70" height="46"
+                                            viewBox="0 0 70 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <!-- SVG path data remains the same -->
+                                        </svg>
+                                        <img id="imagePreview" class="max-w-full max-h-64 mx-auto hidden"
+                                            alt="Uploaded image preview">
+                                        <div class="mt-4 flex flex-wrap justify-center text-sm leading-6 text-gray-600">
+                                            <span class="pe-1 font-medium text-gray-800">Drop your file here or</span>
+                                            <label for="fileInput"
+                                                class="bg-white font-semibold text-blue-600 hover:text-blue-700 rounded-lg decoration-2 hover:underline focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-600 focus-within:ring-offset-2 cursor-pointer">
+                                                browse
+                                            </label>
+                                            <input id="imageInput" accept="image/*" name="profilePhoto" type="file" accept="image/*"
+                                                class="hidden">
+                                        </div>
+                                        <p class="mt-1 text-xs text-gray-400">Pick a photo up to 5MB.</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+
+                        <div class="grid gap-4 grid-cols-1 md:grid-cols-3 mt-4">
+                            <div>
+                                <label for="studentType" class="block text-sm font-medium mb-2">Student type</label>
+                                <select id="studentType" name="studentType"
+                                    class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                    <option value="">Select Type</option>
+                                    <option value="DAY">Day student</option>
+                                    <option value="BOARDER">Boarding student</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="firstName" class="block text-sm font-medium mb-2">First name</label>
+                                <input type="text" id="firstName" name="firstName"
+                                    class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                            </div>
+                            <div>
+                                <label for="otherName" class="block text-sm font-medium mb-2">Other name</label>
+                                <input type="text" id="otherName" name="otherName"
+                                    class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                            </div>
+                            <div>
+                                <label for="lastName" class="block text-sm font-medium mb-2">Last name</label>
+                                <input type="text" id="lastName" name="lastName"
+                                    class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                            </div>
+                            <div>
+                                <label for="dateOfBirth" class="block text-sm font-medium mb-2">Date of birth</label>
+                                <input type="date" id="dateOfBirth" name="dateOfBirth"
+                                    class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                            </div>
+                            <div>
+                                <label for="gender" class="block text-sm font-medium mb-2">Gender</label>
+                                <select id="gender" name="gender"
+                                    class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                    <option value="">Select gender</option>
+                                    <option value="MALE">Male</option>
+                                    <option value="FEMALE">Female</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="parent_select" class="block text-sm font-medium mb-2">Parent</label>
+                                <select id="parent_select" name="parent_id"
+                                    class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                    <option value="">Select a parent</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="religion" class="block text-sm font-medium mb-2">Religion</label>
+                                <input type="text" id="religion" name="religion"
+                                    class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                            </div>
+                            <div>
+                                <label for="homeAddress" class="block text-sm font-medium mb-2">Home Address</label>
+                                <input type="text" id="homeAddress" name="homeAddress"
+                                    class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                            </div>
+                            <div>
+                                <label for="lga" class="block text-sm font-medium mb-2">Local Government Area
+                                    (LGA)</label>
+                                <input type="text" id="lga" name="lga"
+                                    class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                            </div>
+                            <div>
+                                <label for="parent_select" class="block text-sm font-medium mb-2">Class</label>
+                                <select id="class-add" name="parent_id"
+                                    class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                    <option value="">Select Class</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="stateOfOrigin" class="block text-sm font-medium mb-2">State of
+                                    Origin</label>
+                                <input type="text" id="stateOfOrigin" name="stateOfOrigin"
+                                    class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                            </div>
+                            <div>
+                                <label for="nationality" class="block text-sm font-medium mb-2">Nationality</label>
+                                <input type="text" id="nationality" name="nationality"
+                                    class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                            </div>
+                        </div>
+
+                        <div class="flex justify-end mt-4">
+                            <button type="submit" id="submit-btn"
+                                class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg font-medium hover:bg-blue-700 duration-150">Proceed</button>
+                        </div>
+                    </form>
                 </div>
+
+
             </div>
-
-
         </div>
 
     </div>
-
-    <script>
-        document.getElementById('resultLink').addEventListener('click', function (event) {
-            event.preventDefault(); // Prevent the default link behavior
-            generateLink(); // Call the function to generate the link and redirect
-        });
-
-        document.getElementById('midTermLink').addEventListener('click', function (event) {
-            event.preventDefault(); // Prevent the default link behavior
-            generateMidTermLink(); // Call the function to generate the link and redirect
-        });
-
-        document.getElementById('edit-student-btn').addEventListener('click', (e) => {
-            e.preventDefault();
-            routeToEdit();
-        })
-
-        function generateMidTermLink() {
-            const studentID = getQueryParam('studentID');
-            const termSelect = document.getElementById("term");
-            const term = termSelect.value;
-
-            if (!term) {
-                alert("Please select a term.");
-                return;
-            }
-
-            if (!studentID) {
-                alert("Student ID not found in the URL.");
-                return;
-            }
-
-            const encodedTerm = encodeURIComponent(term);
-            const link = `midterm-result.html?studentID=${studentID}&term=${encodedTerm}`;
-
-            // Redirect to the generated link
-            window.location.href = link;
-        }
-
-        function generateLink() {
-            const studentID = getQueryParam('studentID');
-            const termSelect = document.getElementById("term");
-            const term = termSelect.value;
-
-            if (!term) {
-                alert("Please select a term.");
-                return;
-            }
-
-            if (!studentID) {
-                alert("Student ID not found in the URL.");
-                return;
-            }
-
-            const encodedTerm = encodeURIComponent(term);
-            const link = `print-result.html?studentID=${studentID}&term=${encodedTerm}`;
-
-            // Redirect to the generated link
-            window.location.href = link;
-        }
-
-
-        function routeToEdit() {
-            const studentID = getQueryParam('studentID');
-            const editButton = document.getElementById('edit-student-btn');
-            const link = `edit-student.html?studentID=${studentID}`;
-
-            window.location.href = link;
-        }
-        // Function to get query parameter by name from the URL
-        function getQueryParam(param) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(param);
-        }
-    </script>
-    <script src="/assets/js/logout.js"></script>
     <script type="module" src="/assets/js/auth.js"></script>
     <script type="module" src="/assets/js/index.js"></script>
+    <script type="module" src="/assets/js/editStudent.js"></script>
     <script type="module" src="/assets/js/dashboard.js"></script>
-    <script type="module" src="/assets/js/getstudent.js"></script>
+    <script src="/assets/js/logout.js"></script>
 </body>
 
 </html>
