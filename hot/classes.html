@@ -362,9 +362,18 @@
                                 <p class="text-gray-800 font-medium text-xs teacher-id">Teacher ID</p>
                             </div>
 
-                            <a id="view-teacher-details" href="#"
-                                class="mt-4 block font-semibold underline text-blue-600 text-xs">View teacher's
-                                details</a>
+                            <div class="mt-4 flex justify-center space-x-4">
+                                <a id="view-teacher-details" href="#"
+                                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-blue-600 bg-blue-50 rounded-md hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                    <i class="fa fa-eye mr-2"></i>
+                                    View Details
+                                </a>
+                                <button id="reassign-teacher" type="button"
+                                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                    <i class="fa fa-exchange-alt mr-2"></i>
+                                    Reassign
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -439,6 +448,7 @@
     <script type="module" src="/assets/js/index.js"></script>
     <script type="module" src="/assets/js/auth.js"></script>
     <script type="module" src="/assets/js/addtoclass.js"></script>
+    <script type="module" src="/assets/js/reassign-teacher.js"></script>
     <script>
         function openModal(modalId) {
             document.getElementById(modalId).classList.remove('hidden');

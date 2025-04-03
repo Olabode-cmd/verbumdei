@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
           </td>
           <td class="p-3 whitespace-nowrap text-sm font-medium text-gray-800">
-            <img src="${student.upload}" alt="${student.first_name} ${student.last_name}" class="w-10 h-10 rounded-full">
+            <img src="${student.img_url}" alt="${student.first_name} ${student.last_name}" class="w-10 h-10 rounded-full">
           </td>
           <td class="p-3 whitespace-nowrap text-sm font-medium text-gray-800">
             ${student.first_name} ${student.last_name} ${student.other_name || ""}

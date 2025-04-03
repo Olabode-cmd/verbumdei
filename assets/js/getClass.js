@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     .then((data) => {
       populateClassDropdown(data);
+      console.log(data)
     })
     .catch((error) => console.error("Error fetching class data:", error));
 
@@ -208,7 +209,6 @@ var options = {
     },
   },
 };
-
 // var chart = new ApexCharts(
 //   document.querySelector("#attendance-chart"),
 //   options
