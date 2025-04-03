@@ -62,7 +62,6 @@ document
       });
 
       if (response.ok) {
-        const data = await response.json();
         alert("Class created successfully!");
         document.getElementById("class-creation").reset(); // Reset the form on success
       } else {
