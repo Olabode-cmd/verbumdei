@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
           </td>
           <td class="p-3 whitespace-nowrap text-sm font-medium text-gray-800">
-            <img src="${student.img_url}" alt="${student.first_name} ${student.last_name}" class="w-10 h-10 rounded-full">
+            <img src="${student.upload}" alt="${student.first_name} ${student.last_name}" class="w-10 h-10 rounded-full">
           </td>
           <td class="p-3 whitespace-nowrap text-sm font-medium text-gray-800">
             ${student.first_name} ${student.last_name} ${student.other_name || ""}
@@ -204,31 +204,34 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function renderStudentDetails(student) {
-    document.querySelector(
-      ".student-name"
-    ).textContent = `${student.first_name} ${student.other_name} ${student.last_name}`;
+    document.querySelector(".student-name").textContent = `${student.first_name} ${student.other_name} ${student.last_name}`;
     document.querySelector(".student-id").textContent = student.registration_id;
-    document.querySelector(".student-profile-image").src =
-      student.img_url || `https://avatar.iran.liara.run/public/${student.gender == 'male' ? "boy" : "girl"}`;
-    document.querySelector(".age").textContent = `${student.date_of_birth} (${
-      new Date().getFullYear() - new Date(student.date_of_birth).getFullYear()
-    })`;
+    
+    // Handle profile image
+    const profileImage = document.querySelector(".student-profile-image");
+    if (student.img_url) {
+      profileImage.src = student.img_url;
+    } else {
+      // Fallback to default avatar based on gender
+      profileImage.src = `https://avatar.iran.liara.run/public/${student.gender === 'MALE' ? "boy" : "girl"}`;
+    }
+    
+    // Calculate age from date of birth
+    const dob = new Date(student.date_of_birth);
+    const age = new Date().getFullYear() - dob.getFullYear();
+    document.querySelector(".age").textContent = `${age} years`;
+    
     document.querySelector(".gender").textContent = student.gender;
-    document.querySelector(".registration-date").textContent = new Date(
-      student.registration_date
-    ).toLocaleDateString();
+    document.querySelector(".registration-date").textContent = new Date(student.registration_date).toLocaleDateString();
     document.querySelector(".parent").textContent = student.parent;
     document.querySelector(".home-address").textContent = student.home_address;
+    document.querySelector(".status").textContent = student.type;
 
     // for the report sheet
-    document.querySelector(
-      ".fullname"
-    ).textContent = `NAME: ${student.first_name} ${student.other_name} ${student.last_name}`;
+    document.querySelector(".fullname").textContent = `NAME: ${student.first_name} ${student.other_name} ${student.last_name}`;
     document.querySelector(".studentid").textContent = `REGISTRATION ID: ${student.registration_id}`;
-    document.querySelector(".dob").textContent = `AGE: ${new Date().getFullYear() - new Date(student.date_of_birth).getFullYear()
-    }`;
+    document.querySelector(".dob").textContent = `AGE: ${age} years`;
     document.querySelector(".sex").textContent = `GENDER: ${student.gender}`;
-  
   }
   
   function fetchPaymentHistory(registrationID) {

@@ -28,11 +28,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function populateClassDropdown(classes) {
     const classSelect = document.getElementById("class");
+    // const classSelect2 = document.getElementById("class-add")
+
     classes.forEach((classData) => {
       const option = document.createElement("option");
       option.value = classData.id;
       option.textContent = classData.name;
       classSelect.appendChild(option);
+      // classSelect2.appendChild(option);
     });
 
     classSelect.addEventListener("change", function () {
@@ -41,6 +44,13 @@ document.addEventListener("DOMContentLoaded", function () {
         fetchClassDetails(selectedClassId);
       }
     });
+
+    // classSelect2.addEventListener("change", function () {
+    //   const selectedClassId = this.value;
+    //   if (selectedClassId) {
+    //     fetchClassDetails(selectedClassId);
+    //   }
+    // });
   }
 
   function fetchClassDetails(classId) {
@@ -199,8 +209,8 @@ var options = {
   },
 };
 
-var chart = new ApexCharts(
-  document.querySelector("#attendance-chart"),
-  options
-);
-chart.render();
+// var chart = new ApexCharts(
+//   document.querySelector("#attendance-chart"),
+//   options
+// );
+// chart.render();

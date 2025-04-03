@@ -10,11 +10,23 @@ let parents = [];
 let filteredParents = [];
 let currentPage = 1;
 
+// Edit Modal Elements
+const editModal = document.getElementById("editParentModal");
+const editForm = document.getElementById("editParentForm");
+const editSubmitButton = document.getElementById("editSubmitButton");
+
 document.addEventListener("DOMContentLoaded", async () => {
     await getParents();
     searchInput.addEventListener("input", () => {
         filterParents();
         renderTable();
+    });
+
+    // Handle edit form submission
+    editForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const parentId = editForm.dataset.parentId;
+        await updateParent(parentId);
     });
 });
 
@@ -56,7 +68,7 @@ const renderTable = () => {
         return;
     }
 
-    tableBody.innerHTML = ""; // Clear the table body before rendering new rows
+    tableBody.innerHTML = "";
 
     paginatedParents.forEach((parent) => {
         const row = document.createElement("tr");
@@ -68,20 +80,28 @@ const renderTable = () => {
                 ${parent.home_address.length > 25 ? parent.home_address.substring(0, 25) + "..." : parent.home_address}
             </td>
             <td class='px-3 py-2 text-sm text-gray-800'>${parent.code}</td>
-            <td class='px-3 py-2 text-end text-sm font-medium'>
-                <button class='view-btn py-1 px-2 text-sm border rounded bg-white text-gray-800 hover:bg-gray-50'>View</button>
+            <td class='px-3 py-2 text-end text-sm font-medium space-x-2'>
+                <button class='view-btn py-1 px-2 text-sm border rounded bg-white text-gray-800 hover:bg-gray-50'>
+                    <i class="fa fa-eye"></i> View
+                </button>
+                <button class='edit-btn py-1 px-2 text-sm border rounded bg-blue-600 text-white hover:bg-blue-700'>
+                    <i class="fa fa-edit"></i> Edit
+                </button>
             </td>`;
         tableBody.appendChild(row);
 
-        // Add event listener to the "View" button
+        // Add event listeners
         const viewButton = row.querySelector(".view-btn");
+        const editButton = row.querySelector(".edit-btn");
+        
         viewButton.addEventListener("click", () => showParentModal(parent));
+        editButton.addEventListener("click", () => showEditModal(parent));
     });
 
     updatePagination(filteredParents.length);
 };
 
-// Function to show the modal with parent details
+// Function to show the view modal with parent details
 const showParentModal = (parent) => {
     const modal = document.getElementById("parentModal");
     const modalParentName = document.getElementById("modalParentName");
@@ -90,25 +110,93 @@ const showParentModal = (parent) => {
     const modalParentAddress = document.getElementById("modalParentAddress");
     const modalParentCode = document.getElementById("modalParentCode");
 
-    // Populate modal with parent details
     modalParentName.textContent = parent.parent_name;
     modalParentEmail.textContent = parent.email;
     modalParentPhone.textContent = `${parent.phone_number_1}, ${parent.phone_number_2 || ""}`;
     modalParentAddress.textContent = parent.home_address;
     modalParentCode.textContent = parent.code;
 
-    // Show the modal
     modal.classList.remove("hidden");
 };
 
-// Close modal when clicking the close button or outside the modal
-const closeModal = () => {
-    const modal = document.getElementById("parentModal");
-    modal.classList.add("hidden");
+// Function to show the edit modal
+const showEditModal = (parent) => {
+    editForm.dataset.parentId = parent.id;
+    document.getElementById("editParentName").value = parent.parent_name;
+    document.getElementById("editParentEmail").value = parent.email;
+    document.getElementById("editParentPhone1").value = parent.phone_number_1;
+    document.getElementById("editParentPhone2").value = parent.phone_number_2 || "";
+    document.getElementById("editParentAddress").value = parent.home_address;
+    // document.getElementById("editParentCode").value = parent.code;
+
+    editModal.classList.remove("hidden");
 };
 
+// Function to update parent data
+const updateParent = async (parentId) => {
+    setEditLoadingState(true);
+    try {
+        const formData = new FormData(editForm);
+        const data = {
+            parent_name: formData.get("parent_name"),
+            email: formData.get("email"),
+            phone_number_1: formData.get("phone_number_1"),
+            phone_number_2: formData.get("phone_number_2"),
+            home_address: formData.get("home_address"),
+            // code: formData.get("code")
+        };
+
+        const response = await fetch(`${api}/parent/${parentId}/`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) throw new Error("Failed to update parent");
+
+        alert("Parent updated successfully!");
+        closeEditModal();
+        await getParents(); // Refresh the table
+    } catch (error) {
+        console.error("Error updating parent:", error);
+        alert("Failed to update parent. Please try again.");
+    } finally {
+        setEditLoadingState(false);
+    }
+};
+
+// Loading state for edit form
+const setEditLoadingState = (isLoading) => {
+    editSubmitButton.disabled = isLoading;
+    editSubmitButton.innerHTML = isLoading ? `
+        <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        Updating...
+    ` : 'Update';
+};
+
+// Close modals
+const closeModal = () => {
+    document.getElementById("parentModal").classList.add("hidden");
+};
+
+const closeEditModal = () => {
+    editModal.classList.add("hidden");
+};
+
+// Event listeners for closing modals
 document.getElementById("closeModal").addEventListener("click", closeModal);
-document.querySelector(".bg-black.bg-opacity-50").addEventListener("click", closeModal);
+document.getElementById("closeEditModal").addEventListener("click", closeEditModal);
+document.querySelector(".bg-black.bg-opacity-50").addEventListener("click", (e) => {
+    if (e.target === e.currentTarget) {
+        closeModal();
+        closeEditModal();
+    }
+});
 
 const filterParents = () => {
     const query = searchInput.value.toLowerCase().trim();
