@@ -116,6 +116,9 @@ const showParentModal = (parent) => {
     modalParentAddress.textContent = parent.home_address;
     modalParentCode.textContent = parent.code;
 
+    // Store the parent ID for deletion
+    modal.dataset.parentId = parent.id;
+
     modal.classList.remove("hidden");
 };
 
@@ -179,6 +182,40 @@ const setEditLoadingState = (isLoading) => {
     ` : 'Update';
 };
 
+// Function to show the delete confirmation modal
+const showDeleteConfirmModal = (parentId) => {
+    const confirmModal = document.getElementById("deleteConfirmModal");
+    confirmModal.dataset.parentId = parentId;
+    confirmModal.classList.remove("hidden");
+};
+
+// Function to delete a parent
+const deleteParent = async (parentId) => {
+    console.log(`${api}/parent/${parentId}/`)
+    try {
+        const response = await fetch(`${api}/parent/${parentId}/`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("authToken")}`
+            }
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.detail || "Failed to delete parent");
+        }
+
+        alert("Parent deleted successfully!");
+        closeDeleteConfirmModal();
+        closeModal();
+        await getParents(); // Refresh the table
+    } catch (error) {
+        console.error("Error deleting parent:", error);
+        alert(`Failed to delete parent: ${error.message}`);
+    }
+};
+
 // Close modals
 const closeModal = () => {
     document.getElementById("parentModal").classList.add("hidden");
@@ -188,13 +225,36 @@ const closeEditModal = () => {
     editModal.classList.add("hidden");
 };
 
+const closeDeleteConfirmModal = () => {
+    document.getElementById("deleteConfirmModal").classList.add("hidden");
+};
+
 // Event listeners for closing modals
 document.getElementById("closeModal").addEventListener("click", closeModal);
+document.getElementById("closeModalBtn").addEventListener("click", closeModal);
 document.getElementById("closeEditModal").addEventListener("click", closeEditModal);
+document.getElementById("closeDeleteModal").addEventListener("click", closeDeleteConfirmModal);
+
+// Event listener for delete button
+document.getElementById("deleteParentBtn").addEventListener("click", function() {
+    const parentId = document.getElementById("parentModal").dataset.parentId;
+    showDeleteConfirmModal(parentId);
+});
+
+// Event listener for cancel delete button
+document.getElementById("cancelDeleteBtn").addEventListener("click", closeDeleteConfirmModal);
+
+// Event listener for confirm delete button
+document.getElementById("confirmDeleteBtn").addEventListener("click", function() {
+    const parentId = document.getElementById("deleteConfirmModal").dataset.parentId;
+    deleteParent(parentId);
+});
+
 document.querySelector(".bg-black.bg-opacity-50").addEventListener("click", (e) => {
     if (e.target === e.currentTarget) {
         closeModal();
         closeEditModal();
+        closeDeleteConfirmModal();
     }
 });
 
