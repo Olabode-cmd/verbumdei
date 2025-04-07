@@ -20,7 +20,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./empty-dir/
           server-dir: public_html/  # Ensure this ends with a slash
-          exclude: '**'  # Exclude all files to perform a delete operation
+          exclude: '**'  
           dangerous-clean-slate: true
 
       - name: Upload New Files
