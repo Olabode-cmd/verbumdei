@@ -13,15 +13,15 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Remove Existing Files on Server
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        uses: StephanThierry/ftp-delete-action@v2.1
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
+          host: ${{ secrets.FTP_SERVER }}
+          user: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./empty-dir/
-          server-dir: public_html/
-          exclude: '**' # Exclude all files to perform a delete operation
-          dangerous-clean-slate: true
+          remoteFiles: "*"  # Deletes all files in the root directory
+          remoteDirectories: "public_html/*"  # Deletes all files and subdirectories within public_html
+          workingDir: "/public_html"
+          ignoreSSL: "1"
 
       - name: Upload New Files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
