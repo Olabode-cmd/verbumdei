@@ -111,6 +111,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   session.textContent = `${sessionYear} SESSION`
   term.textContent = `${termCycle}`
 
+  await setTermDates(termName);
 
   if (!studentID || !token || !termName) {
     console.error("Missing student ID, authentication token, or term name.");
@@ -521,3 +522,24 @@ function renderStudentDetails(student, academicResults) {
 //   const maxMarks = academicResults.length * 100;
 //   return (totalMarks / maxMarks) * 100;
 // }
+
+// Fetch and set term dates
+async function setTermDates(termName) {
+  try {
+    const response = await fetch('https://service.verbumdeiportal.com/term/all/');
+    if (!response.ok) throw new Error('Failed to fetch term info');
+    const terms = await response.json();
+    // Find the term object that matches the current term name
+    const termObj = terms.find(t => t.name.toLowerCase() === termName.toLowerCase());
+    if (termObj) {
+      // Set start date
+      const startDateElem = document.getElementById('date');
+      if (startDateElem) startDateElem.textContent = new Date(termObj.start_date).toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' });
+      // Set end date
+      const endDateElem = document.getElementById('term-end-date');
+      if (endDateElem) endDateElem.textContent = new Date(termObj.end_date).toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' });
+    }
+  } catch (err) {
+    // Optionally, handle error or leave as is
+  }
+}
