@@ -8,6 +8,90 @@ async function setStudentDetails() {
   return student;
 }
 
+// --- AGGREGATE SECTION LOGIC ---
+async function fetchTermResults(registrationID, termName, token) {
+  const response = await fetch(
+    `${api}/result/all/${registrationID}/?term=${encodeURIComponent(termName)}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    }
+  );
+  if (!response.ok) throw new Error(`Failed to fetch results for ${termName}`);
+  return response.json();
+}
+
+function getTermNamesForAggregate(termName) {
+  // e.g. 'THIRD TERM 2024/2025' => ['FIRST TERM 2024/2025', 'SECOND TERM 2024/2025', 'THIRD TERM 2024/2025']
+  const match = termName.match(/THIRD TERM (\d{4}\/\d{4})/i);
+  if (!match) return null;
+  const session = match[1];
+  return [
+    `FIRST TERM ${session}`,
+    `SECOND TERM ${session}`,
+    `THIRD TERM ${session}`,
+  ];
+}
+
+async function renderAggregateSectionIfThirdTerm(student, token, currentTermName) {
+  const aggregateSection = document.getElementById('aggregate-section');
+  const aggregateContent = document.getElementById('aggregate-content');
+  const registrationID = student.registration_id;
+  const termNames = getTermNamesForAggregate(currentTermName);
+  if (!termNames) {
+    aggregateSection.classList.add('hidden');
+    return;
+  }
+  // Show loading
+  aggregateSection.classList.remove('hidden');
+  aggregateContent.innerHTML = '<p>Loading annual aggregate data...</p>';
+  const termLabels = ['First Term', 'Second Term', 'Third Term'];
+  let resultsArr = [null, null, null];
+  let errorsArr = [null, null, null];
+  // Fetch all three terms in parallel, but handle errors per-term
+  await Promise.all(termNames.map(async (term, idx) => {
+    try {
+      resultsArr[idx] = await fetchTermResults(registrationID, term, token);
+    } catch (err) {
+      errorsArr[idx] = true;
+    }
+  }));
+  // Compute per-term totals and aggregate
+  let html = '<table class="table-auto border-collapse border border-gray-300 w-full text-xs mb-2">';
+  html += '<thead><tr class="bg-gray-100">';
+  html += '<th class="border border-gray-300 px-2 py-1">Term</th>';
+  html += '<th class="border border-gray-300 px-2 py-1">Total Marks</th>';
+  html += '<th class="border border-gray-300 px-2 py-1">Max Marks</th>';
+  html += '<th class="border border-gray-300 px-2 py-1">Weighted Average (%)</th>';
+  html += '</tr></thead><tbody>';
+  let grandTotal = 0, grandMax = 0, validTermCount = 0;
+  resultsArr.forEach((result, idx) => {
+    if (errorsArr[idx] || !result || !Array.isArray(result.academic_results) || result.academic_results.length === 0) {
+      html += `<tr><td class="border border-gray-300 px-2 py-1">${termLabels[idx]}</td><td colspan="3" class="border border-gray-300 px-2 py-1 text-gray-500">No data available for ${termLabels[idx]}</td></tr>`;
+      return;
+    }
+    const results = result.academic_results;
+    const total = results.reduce((sum, r) => sum + (r.total_marks || 0), 0);
+    const max = results.length * 100;
+    const avg = max ? ((total / max) * 100).toFixed(2) : '0.00';
+    grandTotal += total;
+    grandMax += max;
+    validTermCount++;
+    html += `<tr><td class="border border-gray-300 px-2 py-1">${termLabels[idx]}</td><td class="border border-gray-300 px-2 py-1">${total}</td><td class="border border-gray-300 px-2 py-1">${max}</td><td class="border border-gray-300 px-2 py-1">${avg}%</td></tr>`;
+  });
+  // Aggregate row
+  const grandAvg = grandMax ? ((grandTotal / grandMax) * 100).toFixed(2) : '0.00';
+  html += `<tr class="font-bold bg-blue-50"><td class="border border-gray-300 px-2 py-1">Aggregate</td><td class="border border-gray-300 px-2 py-1">${grandTotal}</td><td class="border border-gray-300 px-2 py-1">${grandMax}</td><td class="border border-gray-300 px-2 py-1">${grandAvg}%</td></tr>`;
+  html += '</tbody></table>';
+  // Optionally, add a summary
+  html += `<div class="text-sm mt-2"><strong>Annual Weighted Average:</strong> ${grandAvg}%</div>`;
+  aggregateContent.innerHTML = html;
+}
+
+
 document.addEventListener("DOMContentLoaded", async function () {
   const token = localStorage.getItem("authToken");
   const urlParams = new URLSearchParams(window.location.search);
@@ -81,6 +165,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     renderRemarks(academicResults);
     renderStudentDetails(student, academicResults);
 
+    // --- AGGREGATE SECTION ---
+    await renderAggregateSectionIfThirdTerm(student, token, termName);
+
   } catch (error) {
     console.error("Error:", error);
   }
@@ -102,6 +189,21 @@ function calculateAge(birthDateString) {
   }
 
   return age;
+}
+
+function calculateWeightedAverage(academicResults) {
+  // Accepts either an array or an object with academic_results property
+  let resultsArray = academicResults;
+  if (academicResults && !Array.isArray(academicResults) && Array.isArray(academicResults.academic_results)) {
+    resultsArray = academicResults.academic_results;
+  }
+  if (!Array.isArray(resultsArray) || resultsArray.length === 0) return 0;
+  const totalMarks = resultsArray.reduce(
+    (total, result) => total + (result.total_marks || 0),
+    0
+  );
+  const maxMarks = resultsArray.length * 100;
+  return maxMarks ? (totalMarks / maxMarks) * 100 : 0;
 }
 
 // Student details
@@ -384,8 +486,8 @@ function renderStudentDetails(student, academicResults) {
   // Populate name, registration ID, class, and age
   const fullName = `${student.first_name} ${student.last_name} ${student.other_name}`;
   // console.log(fullName || 'No data yet')
-  nameElement.textContent = `${fullName}` || "N/A";
-  regIdElement.textContent = `${student.registration_id}` || "N/A";
+  if (nameElement) nameElement.textContent = `${fullName}` || "N/A";
+  if (regIdElement) regIdElement.textContent = `${student.registration_id}` || "N/A";
 
   // Adjust according to actual data field
 
@@ -393,8 +495,8 @@ function renderStudentDetails(student, academicResults) {
   // const grandTotal = calculateGrandTotal(academicResults);
   const weightedAverage = calculateWeightedAverage(academicResults);
 
-  // grandTotalElement.textContent = `Grand Total: ${grandTotal}`;
-  weightedAverageElement.textContent = `Weighted Average: ${weightedAverage.toFixed(
+  // if (grandTotalElement) grandTotalElement.textContent = `Grand Total: ${grandTotal}`;
+  if (weightedAverageElement) weightedAverageElement.textContent = `Weighted Average: ${weightedAverage.toFixed(
     2
   )}%`;
 }
