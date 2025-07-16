@@ -373,3 +373,71 @@ document.getElementById("monthly-button").onclick = () => {
 
 // Call the fetchEvents function on page load
 window.onload = fetchEvents;
+
+// Fetch and display the number of students assigned to this teacher
+async function fetchAndDisplayMyStudentCount() {
+  const person_id = localStorage.getItem("admin_id");
+  const token = localStorage.getItem("authToken");
+  try {
+    const response = await fetch(`${api}/class/classes/`, {
+      method: "GET",
+      headers: {
+        Authorization: `Token ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) throw new Error("Failed to fetch classes");
+    const classes = await response.json();
+    // Filter for classes assigned to this teacher
+    const matchingClasses = classes.filter(
+      (classItem) => classItem.teacher.staff_id === person_id
+    );
+    // Count all students in these classes
+    let studentCount = 0;
+    matchingClasses.forEach((classItem) => {
+      if (Array.isArray(classItem.students)) {
+        studentCount += classItem.students.length;
+      }
+    });
+    // Set the dashboard value
+    const countElement = document.getElementById("total-students-display");
+    if (countElement) {
+      countElement.textContent = studentCount;
+    }
+  } catch (err) {
+    // Optionally, handle error or leave as is
+  }
+}
+
+// Call this on page load
+fetchAndDisplayMyStudentCount();
+
+// Fetch and display the teacher's assigned class name beside the greeting
+async function displayTeacherClassName() {
+  const person_id = localStorage.getItem("admin_id");
+  const token = localStorage.getItem("authToken");
+  try {
+    const response = await fetch(`${api}/class/classes/`, {
+      method: "GET",
+      headers: {
+        Authorization: `Token ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) throw new Error("Failed to fetch classes");
+    const classes = await response.json();
+    // Find the class assigned to this teacher
+    const myClass = classes.find(
+      (classItem) => classItem.teacher && classItem.teacher.staff_id === person_id
+    );
+    // Update the greeting
+    const fullnameElement = document.getElementById("user-fullname");
+    if (fullnameElement && myClass && myClass.name) {
+      fullnameElement.textContent += ` | ${myClass.name}`;
+    }
+  } catch (err) {
+    // Optionally, handle error or leave as is
+  }
+}
+
+displayTeacherClassName();
